@@ -85,7 +85,7 @@ class AppController extends Controller {
                 $this->request->data['created_by'] = $this->Auth->user('id');
             }
             if ($this->request->params['action'] == 'edit') {
-                $this->request->data['modified_by'] = $this->Auth->user('id');
+                $this->request->data['created_by'] = $this->Auth->user('id');
             }
             
         }
