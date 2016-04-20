@@ -50,8 +50,6 @@ $userRoles = [1 => 'Admin', 'Project Manager', 'Employee'];
 
 <script>
     $(function () {
-
-
         $('.datepicker').datepicker({
             format: "yyyy-mm-dd"
         });

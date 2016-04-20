@@ -1,36 +1,53 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $user->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]
-            )
-        ?></li>
-        <li><?= $this->Html->link(__('List Users'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Employee Salaries'), ['controller' => 'EmployeeSalaries', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Employee Salary'), ['controller' => 'EmployeeSalaries', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Teams'), ['controller' => 'Teams', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Team'), ['controller' => 'Teams', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="users form large-9 medium-8 columns content">
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Edit User</h3>
+    </div><!-- /.box-header -->
+    <!-- form start -->
     <?= $this->Form->create($user) ?>
-    <fieldset>
-        <legend><?= __('Edit User') ?></legend>
-        <?php
-            echo $this->Form->input('role');
-            echo $this->Form->input('username');
-            echo $this->Form->input('password');
-            echo $this->Form->input('email');
-            echo $this->Form->input('first_name');
-            echo $this->Form->input('last_name');
-            echo $this->Form->input('designation');
-            echo $this->Form->input('status');
-            echo $this->Form->input('created_at');
-            echo $this->Form->input('created_by');
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
-</div>
+    <div class="box-body">
+        <div class="form-group">
+            <?php echo $this->Form->input('role',['class' => 'form-control']);?>
+        </div>
+        <div class="form-group">
+            <?php echo $this->Form->input('username', ['class' => 'form-control']); ?>
+        </div>
+        <div class="form-group">
+            <?php echo $this->Form->input('password', ['class' => 'form-control']); ?>
+        </div>
+        <div class="form-group">
+            <?php echo $this->Form->input('email', ['class' => 'form-control']); ?>
+        </div>
+        <div class="form-group">
+            <?php echo $this->Form->input('first_name', ['class' => 'form-control']); ?>
+        </div>
+        <div class="form-group">
+            <?php echo $this->Form->input('last_name', ['class' => 'form-control']); ?>
+        </div>
+        <div class="form-group">
+            <?php echo $this->Form->input('designation', ['class' => 'form-control']); ?>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </div>
+                <?php echo $this->Form->input('joindate',['class' => 'form-control pull-right datepicker1']);?>
+            </div>
+        </div>
+        <div class="form-group">
+            <?php echo $this->Form->input('status', ['class' => 'form-control']); ?>
+        </div>
+    </div><!-- /.box-body -->
+
+    <div class="box-footer">
+        <?= $this->Form->button(__('Submit'), array('class' => 'btn btn-primary')); ?>
+    </div>
+</div><!-- /.box -->
+<script>
+    $(function () {
+        $('.datepicker1').datepicker({
+            format: "yyyy-mm-dd"
+        });
+
+    });
+</script>
