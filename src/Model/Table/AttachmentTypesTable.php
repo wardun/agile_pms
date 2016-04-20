@@ -50,14 +50,14 @@ class AttachmentTypesTable extends Table
             ->requirePresence('title', 'create')
             ->notEmpty('title');
 
-        $validator
-            ->dateTime('created_at')
-            ->requirePresence('created_at', 'create')
-            ->notEmpty('created_at');
-
-        $validator
-            ->integer('created_by')
-            ->allowEmpty('created_by');
+//        $validator
+//            ->dateTime('created_at')
+//            ->requirePresence('created_at', 'create')
+//            ->notEmpty('created_at');
+//
+//        $validator
+//            ->integer('created_by')
+//            ->allowEmpty('created_by');
 
         return $validator;
     }

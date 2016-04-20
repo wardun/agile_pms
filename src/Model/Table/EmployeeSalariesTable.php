@@ -60,14 +60,14 @@ class EmployeeSalariesTable extends Table
             ->decimal('last_increment_amount')
             ->allowEmpty('last_increment_amount');
 
-        $validator
-            ->dateTime('created_at')
-            ->requirePresence('created_at', 'create')
-            ->notEmpty('created_at');
-
-        $validator
-            ->integer('created_by')
-            ->allowEmpty('created_by');
+//        $validator
+//            ->dateTime('created_at')
+//            ->requirePresence('created_at', 'create')
+//            ->notEmpty('created_at');
+//
+//        $validator
+//            ->integer('created_by')
+//            ->allowEmpty('created_by');
 
         return $validator;
     }

@@ -48,15 +48,15 @@ class NoticesTable extends Table
         $validator
             ->allowEmpty('notice_description');
 
-        $validator
-            ->dateTime('created_at')
-            ->requirePresence('created_at', 'create')
-            ->notEmpty('created_at');
-
-        $validator
-            ->integer('created_by')
-            ->requirePresence('created_by', 'create')
-            ->notEmpty('created_by');
+//        $validator
+//            ->dateTime('created_at')
+//            ->requirePresence('created_at', 'create')
+//            ->notEmpty('created_at');
+//
+//        $validator
+//            ->integer('created_by')
+//            ->requirePresence('created_by', 'create')
+//            ->notEmpty('created_by');
 
         return $validator;
     }

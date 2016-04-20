@@ -69,20 +69,20 @@ class ProjectsTable extends Table
         $validator
             ->allowEmpty('description');
 
-        $validator
-            ->dateTime('start_date')
-            ->requirePresence('start_date', 'create')
-            ->notEmpty('start_date');
-
-        $validator
-            ->dateTime('end_date')
-            ->requirePresence('end_date', 'create')
-            ->notEmpty('end_date');
-
-        $validator
-            ->dateTime('actual_end_date')
-            ->requirePresence('actual_end_date', 'create')
-            ->notEmpty('actual_end_date');
+//        $validator
+//            ->date('start_date')
+//            ->requirePresence('start_date', 'create')
+//            ->notEmpty('start_date');
+//
+//        $validator
+//            ->date('end_date')
+//            ->requirePresence('end_date', 'create')
+//            ->notEmpty('end_date');
+//
+//        $validator
+//            ->date('actual_end_date')
+//            ->requirePresence('actual_end_date', 'create')
+//            ->notEmpty('actual_end_date');
 
         $validator
             ->decimal('amount')
@@ -103,14 +103,14 @@ class ProjectsTable extends Table
             ->integer('achieve_status')
             ->allowEmpty('achieve_status');
 
-        $validator
-            ->dateTime('created_at')
-            ->requirePresence('created_at', 'create')
-            ->notEmpty('created_at');
-
-        $validator
-            ->integer('created_by')
-            ->allowEmpty('created_by');
+//        $validator
+//            ->dateTime('created_at')
+//            ->requirePresence('created_at', 'create')
+//            ->notEmpty('created_at');
+//
+//        $validator
+//            ->integer('created_by')
+//            ->allowEmpty('created_by');
 
         return $validator;
     }

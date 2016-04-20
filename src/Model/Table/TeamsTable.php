@@ -50,14 +50,14 @@ class TeamsTable extends Table
             ->integer('id')
             ->allowEmpty('id', 'create');
 
-        $validator
-            ->dateTime('cretaed_at')
-            ->requirePresence('cretaed_at', 'create')
-            ->notEmpty('cretaed_at');
-
-        $validator
-            ->integer('created_by')
-            ->allowEmpty('created_by');
+//        $validator
+//            ->dateTime('cretaed_at')
+//            ->requirePresence('cretaed_at', 'create')
+//            ->notEmpty('cretaed_at');
+//
+//        $validator
+//            ->integer('created_by')
+//            ->allowEmpty('created_by');
 
         return $validator;
     }

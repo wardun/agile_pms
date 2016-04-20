@@ -12,6 +12,11 @@
             <?php echo $this->Form->input('client_name', ['class' => 'form-control']); ?>
         </div>
         <div class="form-group">
+            <?php // echo $this->Form->input('description', ['class' => 'form-control']); ?>
+            <label>Description</label>
+            <textarea name="description" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
             <label>Start Date:</label>
             <div class="input-group">
                 <div class="input-group-addon">
