@@ -9,9 +9,6 @@
             <?php echo $this->Form->input('title', ['class' => 'form-control', 'empty' => true]); ?>
         </div>
         <div class="form-group">
-            <?php echo $this->Form->input('user_id', ['class' => 'form-control','options' => $users, 'empty' => true]); ?>
-        </div>
-        <div class="form-group">
             <?php echo $this->Form->input('cretaed_at', ['class' => 'form-control']); ?>
         </div>
         <div class="form-group">

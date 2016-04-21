@@ -62,8 +62,8 @@ class TeamsController extends AppController
             }
         }
         //$projects = $this->Teams->Projects->find('list', ['limit' => 200]);
-        $users = $this->Teams->Users->find('list', ['limit' => 200]);
-        $this->set(compact('team', 'projects', 'users'));
+        //$users = $this->Teams->Users->find('list', ['limit' => 200]);
+        $this->set(compact('team'));
         $this->set('_serialize', ['team']);
     }
 
