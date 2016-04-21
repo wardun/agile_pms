@@ -30,7 +30,7 @@ $userRoles = [1 => 'Admin', 'Project Manager', 'Employee'];
             <?php echo $this->Form->input('designation', ['class' => 'form-control']); ?>
         </div>
         <div class="form-group">
-            <label>Date range:</label>
+            <label>Join Date:</label>
             <div class="input-group">
                 <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>

@@ -1,30 +1,25 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $sprint->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $sprint->id)]
-            )
-        ?></li>
-        <li><?= $this->Html->link(__('List Sprints'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Projects'), ['controller' => 'Projects', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Project'), ['controller' => 'Projects', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Tasks'), ['controller' => 'Tasks', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Task'), ['controller' => 'Tasks', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="sprints form large-9 medium-8 columns content">
-    <?= $this->Form->create($sprint) ?>
-    <fieldset>
-        <legend><?= __('Edit Sprint') ?></legend>
-        <?php
-            echo $this->Form->input('sprint');
-            echo $this->Form->input('project_id', ['options' => $projects]);
-            echo $this->Form->input('task_id', ['options' => $tasks]);
-            echo $this->Form->input('is_completed');
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
-</div>
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Edit Sprint</h3>
+    </div><!-- /.box-header -->
+    <!-- form start -->
+   <?= $this->Form->create($sprint) ?>
+    <div class="box-body">
+        <div class="form-group">
+            <?php echo $this->Form->input('sprint',['class' => 'form-control']);?>
+        </div>
+        <div class="form-group">
+            <?php echo $this->Form->input('project_id', ['class' => 'form-control']); ?>
+        </div>
+        <div class="form-group">
+            <?php echo $this->Form->input('task_id', ['class' => 'form-control']); ?>
+        </div>
+        <div class="form-group">
+            <?php echo $this->Form->input('is_completed', ['class' => 'form-control']); ?>
+        </div>
+    </div><!-- /.box-body -->
+
+    <div class="box-footer">
+        <?= $this->Form->button(__('Submit'), array('class' => 'btn btn-primary')); ?>
+    </div>
+</div><!-- /.box -->

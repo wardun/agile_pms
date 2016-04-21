@@ -27,11 +27,12 @@
             <?php echo $this->Form->input('designation', ['class' => 'form-control']); ?>
         </div>
         <div class="form-group">
+             <label>Join Date:</label>
             <div class="input-group">
                 <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                 </div>
-                <?php echo $this->Form->input('joindate',['class' => 'form-control pull-right datepicker1']);?>
+                <?php echo $this->Form->input('joindate',['class' => 'form-control pull-right datepicker']);?>
             </div>
         </div>
         <div class="form-group">
@@ -45,7 +46,7 @@
 </div><!-- /.box -->
 <script>
     $(function () {
-        $('.datepicker1').datepicker({
+        $('.datepicker').datepicker({
             format: "yyyy-mm-dd"
         });
 
