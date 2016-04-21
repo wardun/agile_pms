@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Controller\AppController;
 use Cake\Event\Event;
 use Cake\Network\Exception\NotFoundException;
+use Cake\ORM\TableRegistry;
 
 /**
  * Users Controller
@@ -15,7 +16,7 @@ class UsersController extends AppController {
 
     public function beforeFilter(Event $event) {
         parent::beforeFilter($event);
-        
+
         $this->Auth->allow(['login', 'logout']);
     }
 
@@ -55,8 +56,20 @@ class UsersController extends AppController {
     public function add() {
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
+//            debug($this->request->data);
+//            exit;
             $user = $this->Users->patchEntity($user, $this->request->data);
             if ($this->Users->save($user)) {
+                $userId = $user->id;
+                if ($this->request->data['salary']) {
+                    $this->loadModel('EmployeeSalaries');
+                    $employeeData = TableRegistry::get('EmployeeSalaries');
+                    $employeeData = $employeeData->newEntity();
+                    $employeeData->user_id = $user->id;
+                    $employeeData->current_salaty = $this->request->data['salary'];
+
+                    $this->EmployeeSalaries->save($employeeData);
+                }
                 $this->Flash->success(__('The user has been saved.'));
                 return $this->redirect(['action' => 'index']);
             } else {

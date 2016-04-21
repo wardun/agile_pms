@@ -1,5 +1,10 @@
 <?php
 $userRoles = [1 => 'Admin', 'Project Manager', 'Employee'];
+if (isset($_POST['joindate'])) {
+    $joinData = $_POST['joindate'];
+} else {
+    $joinData = '';
+}
 ?>
 <div class="box box-primary">
     <div class="box-header with-border">
@@ -35,12 +40,15 @@ $userRoles = [1 => 'Admin', 'Project Manager', 'Employee'];
                 <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                 </div>
-                <input type="text" name="joindate" class="form-control pull-right datepicker">
+                <input type="text" name="joindate" value="<?php echo $joinData?>" class="form-control pull-right datepicker">
             </div>
         </div>
         <div class="form-group">
-            <?php echo $this->Form->input('status', ['class' => 'form-control']); ?>
+            <?php echo $this->Form->input('salary', ['class' => 'form-control']); ?>
         </div>
+        <!--        <div class="form-group">
+        <?php // echo $this->Form->input('status', ['class' => 'form-control']);  ?>
+                </div>-->
     </div><!-- /.box-body -->
 
     <div class="box-footer">
