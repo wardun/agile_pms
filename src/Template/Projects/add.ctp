@@ -6,7 +6,15 @@
     <?= $this->Form->create($project) ?>
     <div class="box-body">
         <div class="form-group">
-            <?php echo $this->Form->input('managerid', ['type' => 'text', 'class' => 'form-control']); ?>
+            <?php echo $this->Form->input('title', ['label' => 'Project Name','type' => 'text', 'class' => 'form-control']); ?>
+        </div>
+        <div class="form-group">
+            <label>Manager</label>
+            <?php echo $this->Form->select('managerid', $managers, ['label' => 'Select Manager', 'class' => 'form-control']); ?>
+        </div>
+        <div class="form-group">
+            <label>Select Team</label>
+            <?php echo $this->Form->select('team_id', $managers, ['label' => 'Select Team', 'class' => 'form-control']); ?>
         </div>
         <div class="form-group">
             <?php echo $this->Form->input('client_name', ['class' => 'form-control']); ?>

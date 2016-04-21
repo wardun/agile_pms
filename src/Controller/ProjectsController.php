@@ -59,7 +59,16 @@ class ProjectsController extends AppController
                 $this->Flash->error(__('The project could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('project'));
+        $this->loadModel('Users');
+        $users = $this->Users->find('all')->where(['role !=' => 1])->select(['id', 'username']);
+        if($users){
+            foreach ($users as $user){
+                $managers[$user->id] = $user->username;
+            }
+            unset($user);
+        }
+        
+        $this->set(compact('project', 'managers'));
         $this->set('_serialize', ['project']);
     }
 
