@@ -41,9 +41,9 @@ class ProjectsTable extends Table
         $this->hasMany('Tasks', [
             'foreignKey' => 'project_id'
         ]);
-        $this->hasMany('Teams', [
-            'foreignKey' => 'project_id'
-        ]);
+//        $this->hasMany('Teams', [
+//            'foreignKey' => 'project_id'
+//        ]);
     }
 
     /**

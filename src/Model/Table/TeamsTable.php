@@ -30,12 +30,12 @@ class TeamsTable extends Table
         $this->displayField('id');
         $this->primaryKey('id');
 
-        $this->belongsTo('Projects', [
-            'foreignKey' => 'project_id'
-        ]);
-        $this->belongsTo('Users', [
-            'foreignKey' => 'user_id'
-        ]);
+//        $this->belongsTo('Projects', [
+//            'foreignKey' => 'project_id'
+//        ]);
+//        $this->belongsTo('Users', [
+//            'foreignKey' => 'user_id'
+//        ]);
     }
 
     /**

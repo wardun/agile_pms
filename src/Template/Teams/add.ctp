@@ -6,7 +6,7 @@
     <?= $this->Form->create($team) ?>
     <div class="box-body">
         <div class="form-group">
-            <?php echo $this->Form->input('project_id', ['class' => 'form-control','options' => $projects, 'empty' => true]); ?>
+            <?php echo $this->Form->input('title', ['class' => 'form-control', 'empty' => true]); ?>
         </div>
         <div class="form-group">
             <?php echo $this->Form->input('user_id', ['class' => 'form-control','options' => $users, 'empty' => true]); ?>

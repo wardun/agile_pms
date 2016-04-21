@@ -48,13 +48,13 @@ class EmployeeSalariesTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->decimal('current_salaty')
+            ->integer('current_salaty')
             ->allowEmpty('current_salaty');
 
         $validator
             ->dateTime('last_increment_date')
             ->requirePresence('last_increment_date', 'create')
-            ->notEmpty('last_increment_date');
+            ->allowEmpty('last_increment_date');
 
         $validator
             ->decimal('last_increment_amount')

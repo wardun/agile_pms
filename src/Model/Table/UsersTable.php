@@ -33,9 +33,9 @@ class UsersTable extends Table
         $this->hasMany('EmployeeSalaries', [
             'foreignKey' => 'user_id'
         ]);
-        $this->hasMany('Teams', [
-            'foreignKey' => 'user_id'
-        ]);
+//        $this->hasMany('Teams', [
+//            'foreignKey' => 'user_id'
+//        ]);
     }
 
     /**
