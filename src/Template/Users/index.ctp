@@ -12,9 +12,7 @@
                     <th><?= $this->Paginator->sort('email') ?></th>
                     <th><?= $this->Paginator->sort('first_name') ?></th>
                     <th><?= $this->Paginator->sort('last_name') ?></th>
-                    <th><?= $this->Paginator->sort('status') ?></th>
-                    <th><?= $this->Paginator->sort('created_at') ?></th>
-                    <th><?= $this->Paginator->sort('created_by') ?></th>
+                    <th><?= $this->Paginator->sort('joindate') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
@@ -27,9 +25,7 @@
                         <td><?= h($user->email) ?></td>
                         <td><?= h($user->first_name) ?></td>
                         <td><?= h($user->last_name) ?></td>
-                        <td><?= $this->Generic->userLabel($user->status) ?></td>
-                        <td><?= h($user->created_at) ?></td>
-                        <td><?= $this->Number->format($user->created_by) ?></td>
+                        <td><?= h($user->joindate) ?></td>
                         <td class="actions">
                             <?php echo $this->Html->link('<i class="fa fa-eye"></i>', array('action' => 'view', '', $user->id), array('class' => 'btn btn-small btn-success view', 'title' => 'View', 'escape' => false)); ?>
                             <?php echo $this->Html->link('<i class="fa fa-pencil"></i>', array('action' => 'edit', '', $user->id), array('class' => 'btn btn-sm btn-warning', 'title' => 'Edit', 'escape' => false)); ?>
