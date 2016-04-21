@@ -29,6 +29,10 @@ class TeamsTable extends Table
         $this->table('teams');
         $this->displayField('id');
         $this->primaryKey('id');
+        
+        $this->hasMany('TeamDetails', [
+            'foreignKey' => 'team_id'
+        ]);
 
 //        $this->belongsTo('Projects', [
 //            'foreignKey' => 'project_id'
@@ -69,10 +73,10 @@ class TeamsTable extends Table
      * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
      * @return \Cake\ORM\RulesChecker
      */
-    public function buildRules(RulesChecker $rules)
-    {
-        $rules->add($rules->existsIn(['project_id'], 'Projects'));
-        $rules->add($rules->existsIn(['user_id'], 'Users'));
-        return $rules;
-    }
+//    public function buildRules(RulesChecker $rules)
+//    {
+//        $rules->add($rules->existsIn(['project_id'], 'Projects'));
+//        $rules->add($rules->existsIn(['user_id'], 'Users'));
+//        return $rules;
+//    }
 }

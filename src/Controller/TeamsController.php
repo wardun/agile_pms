@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\ORM\TableRegistry;
 
 /**
  * Teams Controller
@@ -19,11 +20,21 @@ class TeamsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Projects', 'Users']
+//            'contain' => ['Projects', 'Users']
+            'contain' => ['TeamDetails']
         ];
+        
+        $this->loadModel('Users');
+        $users = $this->Users->find('all')->where(['role !=' => 1])->select(['id', 'username']);
+        if($users){
+            foreach ($users as $user){
+                $userList[$user->id] = $user->username;
+            }
+            unset($user);
+        }
         $teams = $this->paginate($this->Teams);
 
-        $this->set(compact('teams'));
+        $this->set(compact('teams', 'userList'));
         $this->set('_serialize', ['teams']);
     }
 
@@ -37,7 +48,7 @@ class TeamsController extends AppController
     public function view($id = null)
     {
         $team = $this->Teams->get($id, [
-            'contain' => ['Projects', 'Users']
+            //'contain' => ['Projects', 'Users']
         ]);
 
         $this->set('team', $team);
@@ -53,8 +64,18 @@ class TeamsController extends AppController
     {
         $team = $this->Teams->newEntity();
         if ($this->request->is('post')) {
+//            debug($this->request->data);exit;
             $team = $this->Teams->patchEntity($team, $this->request->data);
             if ($this->Teams->save($team)) {
+                foreach ($this->request->data['user_id'] as $user){
+                    $this->loadModel('TeamDetails');
+                    $teamDetailData = TableRegistry::get('TeamDetails');
+                    $teamDetailData = $teamDetailData->newEntity();
+                    $teamDetailData->team_id = $team->id;
+                    $teamDetailData->user_id = $user;
+
+                    $this->TeamDetails->save($teamDetailData);
+                }
                 $this->Flash->success(__('The team has been saved.'));
                 return $this->redirect(['action' => 'index']);
             } else {
@@ -62,9 +83,11 @@ class TeamsController extends AppController
             }
         }
         //$projects = $this->Teams->Projects->find('list', ['limit' => 200]);
-        //$users = $this->Teams->Users->find('list', ['limit' => 200]);
-        $this->set(compact('team'));
-        $this->set('_serialize', ['team']);
+        $this->loadModel('Users');
+        $users = $this->Users->find('all')->where(['role !=' => 1])->select(['id', 'username']);
+        
+        $this->set(compact('team', 'users'));
+        //$this->set('_serialize', ['team']);
     }
 
     /**

@@ -35,6 +35,8 @@ $pageTitle = isset($pageTitle) ? $pageTitle : $this->fetch('title');
         <link rel="stylesheet" href="<?php echo $this->request->webroot ?>assets/plugins/daterangepicker/daterangepicker-bs3.css">
         <!-- bootstrap wysihtml5 - text editor -->
         <link rel="stylesheet" href="<?php echo $this->request->webroot ?>assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+        <!-- Select2 -->
+        <link rel="stylesheet" href="<?php echo $this->request->webroot ?>assets/plugins/select2/select2.min.css">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -43,8 +45,8 @@ $pageTitle = isset($pageTitle) ? $pageTitle : $this->fetch('title');
             <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
 
-    <!-- jQuery 2.1.4 -->
-    <script src="<?php echo $this->request->webroot ?>assets/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+        <!-- jQuery 2.1.4 -->
+        <script src="<?php echo $this->request->webroot ?>assets/plugins/jQuery/jQuery-2.1.4.min.js"></script>
 
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
@@ -98,6 +100,9 @@ $pageTitle = isset($pageTitle) ? $pageTitle : $this->fetch('title');
     <script src="<?php echo $this->request->webroot ?>assets/plugins/slimScroll/jquery.slimscroll.min.js"></script>
     <!-- FastClick -->
     <script src="<?php echo $this->request->webroot ?>assets/plugins/fastclick/fastclick.min.js"></script>
+     <!-- Select2 -->
+    <script src="<?php echo $this->request->webroot ?>assets/plugins/select2/select2.full.min.js"></script>
+    
     <!-- AdminLTE App -->
     <script src="<?php echo $this->request->webroot ?>assets/dist/js/app.min.js"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
