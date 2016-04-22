@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use App\Controller\AppController;
@@ -8,16 +9,14 @@ use App\Controller\AppController;
  *
  * @property \App\Model\Table\ProjectsTable $Projects
  */
-class ProjectsController extends AppController
-{
+class ProjectsController extends AppController {
 
     /**
      * Index method
      *
      * @return \Cake\Network\Response|null
      */
-    public function index()
-    {
+    public function index() {
         $projects = $this->paginate($this->Projects);
 
         $this->set(compact('projects'));
@@ -31,8 +30,7 @@ class ProjectsController extends AppController
      * @return \Cake\Network\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
-    {
+    public function view($id = null) {
         $project = $this->Projects->get($id, [
             'contain' => ['Attachments', 'Sprints', 'Tasks', 'Teams']
         ]);
@@ -46,8 +44,7 @@ class ProjectsController extends AppController
      *
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
      */
-    public function add()
-    {
+    public function add() {
         $project = $this->Projects->newEntity();
         if ($this->request->is('post')) {
 //            debug($this->request->data);exit;
@@ -60,14 +57,14 @@ class ProjectsController extends AppController
             }
         }
         $this->loadModel('Users');
-        $users = $this->Users->find('all')->where(['role !=' => 1])->select(['id', 'username']);
-        if($users){
-            foreach ($users as $user){
+        $users = $this->Users->find('all')->where(['role' => 2])->select(['id', 'username']);
+        if ($users) {
+            foreach ($users as $user) {
                 $managers[$user->id] = $user->username;
             }
             unset($user);
         }
-        
+
         $this->set(compact('project', 'managers'));
         $this->set('_serialize', ['project']);
     }
@@ -79,8 +76,7 @@ class ProjectsController extends AppController
      * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
-    public function edit($id = null)
-    {
+    public function edit($id = null) {
         $project = $this->Projects->get($id, [
             'contain' => []
         ]);
@@ -104,8 +100,7 @@ class ProjectsController extends AppController
      * @return \Cake\Network\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function delete($id = null)
-    {
+    public function delete($id = null) {
         $this->request->allowMethod(['post', 'delete']);
         $project = $this->Projects->get($id);
         if ($this->Projects->delete($project)) {
@@ -115,4 +110,19 @@ class ProjectsController extends AppController
         }
         return $this->redirect(['action' => 'index']);
     }
+
+    public function teams() {
+        $managerId = $this->request->data['managerId'];
+        $this->loadModel('TeamDetails');
+        $teams = $this->TeamDetails->find()->where(['user_id' => $managerId])->group(['team_id'])->contain(['Teams']);
+        if ($teams) {
+            foreach ($teams as $t) {
+                echo '<option value="' . $t->team->id . '">' . $t->team->title . '</option>';
+            }
+            unset($t);
+        }
+        exit;
+//$this->set(compact('teams'));
+    }
+
 }

@@ -10,11 +10,11 @@
         </div>
         <div class="form-group">
             <label>Manager</label>
-            <?php echo $this->Form->select('managerid', $managers, ['label' => 'Select Manager', 'class' => 'form-control']); ?>
+            <?php echo $this->Form->select('managerid', $managers, ['label' => 'Select Manager', 'class' => 'form-control manager-id']); ?>
         </div>
         <div class="form-group">
             <label>Select Team</label>
-            <?php echo $this->Form->select('team_id', $managers, ['label' => 'Select Team', 'class' => 'form-control']); ?>
+            <?php echo $this->Form->select('team_id', '', ['label' => 'Select Team', 'class' => 'form-control team']); ?>
         </div>
         <div class="form-group">
             <?php echo $this->Form->input('client_name', ['class' => 'form-control']); ?>
@@ -71,6 +71,20 @@
         $('.datepicker').datepicker({
             format: "yyyy-mm-dd"
         });
+        
+        $('.manager-id').on('change', function(){
+            var managerId = $(this).val();
+            alert(managerId);
+             $.post("<?php echo $this->Url->build(["controller" => "projects", "action" => "teams"]) ?>", {_csrfToken : '<?=$this->request->param('_csrfToken')?>', managerId: managerId}, function (resp) {
+                //alert(resp);
+            }).done(function (data) {
+                $('.team').html(data);
+                //$('#sub-categoryid').trigger("chosen:updated");
+            }).fail(function () {
+                //alert("error");
+            }).always(function(){
+            });
+        }).change();
 
     });
 </script>
