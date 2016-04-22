@@ -42,7 +42,7 @@
                 <input type="text" name="end_date" class="form-control pull-right datepicker">
             </div>
         </div>
-        <div class="form-group">
+<!--        <div class="form-group">
             <label>Actual End Date:</label>
             <div class="input-group">
                 <div class="input-group-addon">
@@ -50,7 +50,7 @@
                 </div>
                 <input type="text" name="actual_end_date" class="form-control pull-right datepicker">
             </div>
-        </div>
+        </div>-->
         <div class="form-group">
             <?php echo $this->Form->input('amount', ['class' => 'form-control']); ?>
         </div>
@@ -74,7 +74,6 @@
         
         $('.manager-id').on('change', function(){
             var managerId = $(this).val();
-            alert(managerId);
              $.post("<?php echo $this->Url->build(["controller" => "projects", "action" => "teams"]) ?>", {_csrfToken : '<?=$this->request->param('_csrfToken')?>', managerId: managerId}, function (resp) {
                 //alert(resp);
             }).done(function (data) {

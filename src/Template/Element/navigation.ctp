@@ -65,15 +65,10 @@
                 </ul>
             </li>
              <li class="treeview <?php echo ($this->request->params['controller']) == 'Settings' ? 'active' : ''; ?>">
-                <a href="#">
+                <a href="<?php echo $this->Url->build(["controller" => "settings", "action" => "index"]) ?>">
                     <i class="fa fa-gear"></i>
                     <span>Settings</span>
-                    <i class="fa fa-angle-left pull-right"></i>
                 </a>
-                <ul class="treeview-menu">
-                    <li><a href="<?php echo $this->Url->build(["controller" => "settings", "action" => "add"]) ?>">Add Settings</a></li>
-                    <li><a href="<?php echo $this->Url->build(["controller" => "settings", "action" => "index"]) ?>">Settings</a></li>
-                </ul>
             </li>
              <li class="treeview <?php echo ($this->request->params['controller']) == 'Sprints' ? 'active' : ''; ?>">
                 <a href="#">
