@@ -6,16 +6,15 @@
     <?= $this->Form->create($team) ?>
     <div class="box-body">
         <div class="form-group">
-            <?php echo $this->Form->input('project_id',['class' => 'form-control']);?>
+            <?php echo $this->Form->input('title', ['label' => 'Title', 'class' => 'form-control', 'empty' => true]); ?>
         </div>
         <div class="form-group">
-            <?php echo $this->Form->input('user_id', ['class' => 'form-control']); ?>
-        </div>
-        <div class="form-group">
-            <?php echo $this->Form->input('cretaed_at', ['class' => 'form-control']); ?>
-        </div>
-        <div class="form-group">
-            <?php echo $this->Form->input('created_by', ['class' => 'form-control']); ?>
+            <?php
+           if($team->team_details){
+                echo $this->Form->input('' . $team->team_details->user_id . '', ['label' => 'Users', 'class' => 'form-control']);
+                //echo '<option value="'.$user->id.'">'.$user->username.'</option>';
+            }
+            ?>
         </div>
     </div><!-- /.box-body -->
 

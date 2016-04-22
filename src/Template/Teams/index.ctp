@@ -6,8 +6,8 @@
         <table class="table table-bordered table-striped" cellpadding="0" cellspacing="0">
             <thead>
                 <tr>
-                    <th><?= $this->Paginator->sort('id') ?></th>
-                    <th><?= $this->Paginator->sort('title') ?></th>
+                    <th><?= $this->Paginator->sort('Id') ?></th>
+                    <th><?= $this->Paginator->sort('Title') ?></th>
                     <th><?= $this->Paginator->sort('user_id') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
