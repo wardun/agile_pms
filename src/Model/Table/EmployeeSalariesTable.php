@@ -52,7 +52,7 @@ class EmployeeSalariesTable extends Table
             ->allowEmpty('current_salaty');
 
         $validator
-            ->dateTime('last_increment_date')
+            ->date('last_increment_date')
             ->requirePresence('last_increment_date', 'create')
             ->allowEmpty('last_increment_date');
 

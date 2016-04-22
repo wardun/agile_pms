@@ -91,16 +91,29 @@ class UsersController extends AppController {
         $user = $this->Users->get($id, [
             'contain' => []
         ]);
+        $this->loadModel('EmployeeSalaries');
+        $salaryInfo = $this->EmployeeSalaries->find()->where(['user_id' => $id])->first();
         if ($this->request->is(['patch', 'post', 'put'])) {
             $user = $this->Users->patchEntity($user, $this->request->data);
             if ($this->Users->save($user)) {
+                if ($this->request->data['salary']) {
+                    $employeeData = TableRegistry::get('EmployeeSalaries');
+                    $employeeData = $employeeData->newEntity();
+                    $employeeData->id = $salaryInfo->id;
+                    $employeeData->user_id = $id;
+                    $employeeData->current_salaty = $this->request->data['salary'];
+                    $employeeData->last_increment_date = $this->request->data['last_increment_date'];
+                    $employeeData->last_increment_amount = $this->request->data['last_increment_amount'];
+
+                    $this->EmployeeSalaries->save($employeeData);
+                }
                 $this->Flash->success(__('The user has been saved.'));
                 return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('The user could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('user'));
+        $this->set(compact('user', 'salaryInfo'));
         $this->set('_serialize', ['user']);
     }
 
