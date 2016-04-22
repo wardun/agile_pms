@@ -11,9 +11,9 @@
         <div class="form-group">
             <?php echo $this->Form->input('username', ['class' => 'form-control']); ?>
         </div>
-        <div class="form-group">
+<!--        <div class="form-group">
             <?php echo $this->Form->input('password', ['class' => 'form-control']); ?>
-        </div>
+        </div>-->
         <div class="form-group">
             <?php echo $this->Form->input('email', ['class' => 'form-control']); ?>
         </div>
@@ -37,6 +37,14 @@
         </div>
         <div class="form-group">
             <?php echo $this->Form->input('status', ['class' => 'form-control']); ?>
+        </div>
+        <div class="form-group">
+                 <?php
+                   if ($user->employee_salaries){
+                    echo $this->Form->input(''.$user->employee_salaries->current_salaty.'', ['label' => 'Salary', 'class' => 'form-control']);
+                        //echo '<option value="'.$user->id.'">'.$user->username.'</option>';
+                }
+                ?>
         </div>
     </div><!-- /.box-body -->
 
