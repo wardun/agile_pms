@@ -5,7 +5,6 @@
     <!-- form start -->
     <?= $this->Form->create($team) ?>
     <div class="box-body">
-<<<<<<< HEAD
         <div class="form-group">
             <?php echo $this->Form->input('title', ['label' => 'Title', 'class' => 'form-control', 'empty' => true]); ?>
         </div>
@@ -16,19 +15,6 @@
                 //echo '<option value="'.$user->id.'">'.$user->username.'</option>';
             }
             ?>
-=======
-<!--        <div class="form-group">
-            <?php echo $this->Form->input('project_id',['class' => 'form-control']);?>
-        </div>
-        <div class="form-group">
-            <?php echo $this->Form->input('user_id', ['class' => 'form-control']); ?>
-        </div>-->
-        <div class="form-group">
-            <?php echo $this->Form->input('cretaed_at', ['class' => 'form-control']); ?>
-        </div>
-        <div class="form-group">
-            <?php echo $this->Form->input('created_by', ['class' => 'form-control']); ?>
->>>>>>> 97efe3f0d17736b5a7ef43f38812e0cac1ccd00f
         </div>
     </div><!-- /.box-body -->
 
