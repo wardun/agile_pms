@@ -64,23 +64,19 @@ class TasksTable extends Table
 
         $validator
             ->integer('assgined_to')
-            ->requirePresence('assgined_to', 'create')
-            ->notEmpty('assgined_to');
+            ->allowEmpty('assgined_to');
 
         $validator
-            ->dateTime('start_date')
-            ->requirePresence('start_date', 'create')
-            ->notEmpty('start_date');
+            ->date('start_date')
+            ->allowEmpty('start_date');
 
         $validator
-            ->dateTime('end_date')
-            ->requirePresence('end_date', 'create')
-            ->notEmpty('end_date');
+            ->date('end_date')
+            ->allowEmpty('end_date', 'create');
 
         $validator
-            ->dateTime('actual_end_date')
-            ->requirePresence('actual_end_date', 'create')
-            ->notEmpty('actual_end_date');
+            ->date('actual_end_date')
+            ->allowEmpty('actual_end_date', 'create');
 
 //        $validator
 //            ->dateTime('created_at')
