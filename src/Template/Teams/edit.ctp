@@ -5,12 +5,12 @@
     <!-- form start -->
     <?= $this->Form->create($team) ?>
     <div class="box-body">
-        <div class="form-group">
+<!--        <div class="form-group">
             <?php echo $this->Form->input('project_id',['class' => 'form-control']);?>
         </div>
         <div class="form-group">
             <?php echo $this->Form->input('user_id', ['class' => 'form-control']); ?>
-        </div>
+        </div>-->
         <div class="form-group">
             <?php echo $this->Form->input('cretaed_at', ['class' => 'form-control']); ?>
         </div>
