@@ -22,6 +22,9 @@ if(isset($_POST['detail'])){
             <label>Task Detail</label>
             <textarea name="detail" class="form-control"><?=$details?></textarea>
         </div>
+         <div class="form-group">
+            <?php echo $this->Form->input('task_duration', ['class' => 'form-control']); ?>
+        </div>
 <!--        <div class="form-group">
             <?php //echo $this->Form->input('assgined_to', ['class' => 'form-control']); ?>
         </div>

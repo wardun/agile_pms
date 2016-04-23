@@ -114,10 +114,11 @@ class TasksController extends AppController {
     }
 
     public function assignTask($id = null) {
-        $task = $this->Tasks->get($id);
-        $projects = $this->Tasks->Projects->get($task->project_id);
+        $sprint = '';
+        $tasks = $this->Tasks->get($id);
+        $projects = $this->Tasks->Projects->get($tasks->project_id);
         $teamId = $projects->team_id;
-        
+
         $users = [];
         $connection = ConnectionManager::get('default');
         $teamMembers = $connection->execute('
@@ -126,15 +127,42 @@ class TasksController extends AppController {
                                 INNER JOIN users b
                                 ON a.`user_id` = b.`id`
                                 WHERE a.`team_id` = 1')
-                              ->fetchAll('assoc');
-        if($teamMembers){
-            foreach ($teamMembers as $member){
+                ->fetchAll('assoc');
+        if ($teamMembers) {
+            foreach ($teamMembers as $member) {
                 $users[$member['id']] = $member['username'];
             }
         }
 
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $tasks['start_date'] = $this->request->data['assign_date'] . ' ' . $this->request->data['start_time'];
+            $tasks['end_date'] = $this->request->data['delivery_date'] . ' ' . $this->request->data['end_time'];
+            $tasks = $this->Tasks->patchEntity($tasks, $this->request->data);
+            if ($this->Tasks->save($tasks)) {
+                // sprint calculation start
+                $this->loadModel('Sprints');
+                $sprint = $this->Sprints->newEntity();
+                
+                $check_empty = $this->Sprints->find()->where(['project_id' => $tasks->project_id]);
+                if (empty($check_empty->first())) {
+                    //first entry
+                    $sprint->sprint = 1;
+                    $sprint->project_id = $tasks->project_id;
+                    $sprint->task_id = $id;
+                    $sprint = $this->Sprints->patchEntity($sprint, $this->request->data);
+                    $this->Sprints->save($sprint);
+                }else{
+                    
+                }
 
-        $this->set(compact('task', 'users'));
+                $this->Flash->success(__('The task has been saved.'));
+                return $this->redirect(['action' => 'index']);
+            } else {
+                $this->Flash->error(__('The task could not be saved. Please, try again.'));
+            }
+        }
+
+        $this->set(compact('tasks', 'users'));
     }
 
 }
