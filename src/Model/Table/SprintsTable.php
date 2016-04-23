@@ -52,10 +52,10 @@ class SprintsTable extends Table
             ->integer('id')
             ->allowEmpty('id', 'create');
 
-        $validator
-            ->integer('sprint')
-            ->requirePresence('sprint', 'create')
-            ->notEmpty('sprint');
+//        $validator
+//            ->integer('sprint')
+//            ->requirePresence('sprint', 'create')
+//            ->notEmpty('sprint');
 
         $validator
             ->integer('is_completed')

@@ -114,7 +114,6 @@ class TasksController extends AppController {
     }
 
     public function assignTask($id = null) {
-        $sprint = '';
         $tasks = $this->Tasks->get($id);
         $projects = $this->Tasks->Projects->get($tasks->project_id);
         $teamId = $projects->team_id;
@@ -141,18 +140,25 @@ class TasksController extends AppController {
             if ($this->Tasks->save($tasks)) {
                 // sprint calculation start
                 $this->loadModel('Sprints');
-                $sprint = $this->Sprints->newEntity();
-                
-                $check_empty = $this->Sprints->find()->where(['project_id' => $tasks->project_id]);
-                if (empty($check_empty->first())) {
-                    //first entry
-                    $sprint->sprint = 1;
-                    $sprint->project_id = $tasks->project_id;
-                    $sprint->task_id = $id;
-                    $sprint = $this->Sprints->patchEntity($sprint, $this->request->data);
-                    $this->Sprints->save($sprint);
-                }else{
-                    
+                $check_project_task = $this->Sprints->find()->where(['project_id' => $tasks->project_id, 'task_id' => $id]);
+                if (empty($check_project_task->first())) {
+                    $check_empty = $this->Sprints->find()->where(['project_id' => $tasks->project_id]);
+                    if (empty($check_empty->first())) {
+                        //first entry
+                        $sprint = $this->Sprints->newEntity();
+                        $sprint->sprint = 1;
+                        $sprint->project_id = $tasks->project_id;
+                        $sprint->task_id = $id;
+                        $sprint = $this->Sprints->patchEntity($sprint, $this->request->data);
+                        $this->Sprints->save($sprint);
+                    } else {
+                        $sprint = $this->Sprints->newEntity();
+                        $sprint->sprint = $this->get_sprint_info($tasks->project_id, $tasks->task_duration);
+                        $sprint->project_id = $tasks->project_id;
+                        $sprint->task_id = $id;
+                        $sprint = $this->Sprints->patchEntity($sprint, $this->request->data);
+                        $this->Sprints->save($sprint);
+                    }
                 }
 
                 $this->Flash->success(__('The task has been saved.'));
@@ -163,6 +169,24 @@ class TasksController extends AppController {
         }
 
         $this->set(compact('tasks', 'users'));
+    }
+
+    function get_sprint_info($project_id = null, $hour = null) {
+        $connection = ConnectionManager::get('default');
+        $query = $connection->execute('
+                                SELECT  a.`sprint` sprint, a.`project_id`,SUM(b.`task_duration`) total_hour, (SELECT `sprint_duration`  FROM settings) sprint_duration
+                                FROM sprints a
+                                INNER JOIN tasks b
+                                ON a.`task_id` = b.`id`
+                                WHERE a.`project_id` = ' . $project_id . ' AND a.`sprint` = sprint')
+                ->fetchAll('assoc');
+        if ($query[0]['sprint_duration'] >= ($query[0]['total_hour'] + $hour)) {
+            $sprintInfo = $query[0]['sprint'];
+        } else {
+            $sprintInfo = $query[0]['sprint'] + 1;
+        }
+
+        return ($sprintInfo);
     }
 
 }
