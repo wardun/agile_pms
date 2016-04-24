@@ -61,8 +61,15 @@ class AttachmentsController extends AppController
                 $this->Flash->error(__('The attachment could not be saved. Please, try again.'));
             }
         }
+        $projects = [];
         $attachmentTypes = $this->Attachments->AttachmentTypes->find('list', ['limit' => 200]);
-        $projects = $this->Attachments->Projects->find('list', ['limit' => 200]);
+        $projectLists = $this->Attachments->Projects->find('all', ['limit' => 200]);
+        if($projectLists){
+            foreach ($projectLists as $project){
+                $projects[$project->id] = $project->title;
+            }
+            unset($project);
+        }
         $tasks = $this->Attachments->Tasks->find('list', ['limit' => 200]);
         $this->set(compact('attachment', 'attachmentTypes', 'projects', 'tasks'));
         $this->set('_serialize', ['attachment']);
