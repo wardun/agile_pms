@@ -2,7 +2,7 @@
     <div class="box-header">
         <h3 class="box-title" style="text-align:center!important;">User Story</h3>
     </div><!-- /.box-header -->
-    <?= $this->Form->create() ?>
+    <?//= $this->Form->create() ?>
     <div class="box-body">
         <div class="row">
             <div class="col-lg-4">
@@ -33,6 +33,10 @@
             </div>
         </div>
     </div><!-- /.box-body -->
+    
+    <div class="box-body">
+        <div id="user-story-data"></div>
+    </div>
 </div>
 
 <script>
@@ -63,13 +67,12 @@
             $.post("<?php echo $this->Url->build(["controller" => "sprints", "action" => "getTasksofSprint"]) ?>", {_csrfToken: '<?= $this->request->param('_csrfToken') ?>', sprintId: sprintId, projectId: projectId}, function (resp) {
                 //alert(resp);
             }).done(function (data) {
-                $('#sprints').html(data);
-                //$('#sub-categoryid').trigger("chosen:updated");
+                $('#user-story-data').html(data);
             }).fail(function () {
                 //alert("error");
             }).always(function () {
             });
-        }).change();
+        })
 
 
     });

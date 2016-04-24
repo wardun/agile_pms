@@ -1,26 +1,26 @@
 <?php
+
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Datasource\ConnectionManager;
 
 /**
  * Sprints Controller
  *
  * @property \App\Model\Table\SprintsTable $Sprints
  */
-class SprintsController extends AppController
-{
+class SprintsController extends AppController {
 
     /**
      * Index method
      *
      * @return \Cake\Network\Response|null
      */
-    public function index()
-    {
+    public function index() {
         $this->loadModel('Projects');
         $projects = $this->Projects->find('all')->select(['id', 'title']);
-        
+
         $this->set(compact('sprints', 'projects'));
     }
 
@@ -31,8 +31,7 @@ class SprintsController extends AppController
      * @return \Cake\Network\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
-    {
+    public function view($id = null) {
         $sprint = $this->Sprints->get($id, [
             'contain' => ['Projects', 'Tasks']
         ]);
@@ -46,8 +45,7 @@ class SprintsController extends AppController
      *
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
      */
-    public function add()
-    {
+    public function add() {
         $sprint = $this->Sprints->newEntity();
         if ($this->request->is('post')) {
             $sprint = $this->Sprints->patchEntity($sprint, $this->request->data);
@@ -71,8 +69,7 @@ class SprintsController extends AppController
      * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
-    public function edit($id = null)
-    {
+    public function edit($id = null) {
         $sprint = $this->Sprints->get($id, [
             'contain' => []
         ]);
@@ -98,8 +95,7 @@ class SprintsController extends AppController
      * @return \Cake\Network\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function delete($id = null)
-    {
+    public function delete($id = null) {
         $this->request->allowMethod(['post', 'delete']);
         $sprint = $this->Sprints->get($id);
         if ($this->Sprints->delete($sprint)) {
@@ -109,68 +105,72 @@ class SprintsController extends AppController
         }
         return $this->redirect(['action' => 'index']);
     }
-    
-     public function tasks() {
+
+    public function tasks() {
         $projectId = $this->request->data['projectId'];
         $this->loadModel('Sprints');
-        $sprints = $this->Sprints->find('all')->where(['project_id' => $projectId ])->group(['sprint'])->select(['id', 'sprint']);
-         
-        $tasks = 'SELECT a.`sprint` sprint, a.`project_id`,b.task_name,b.task_name ,b.id FROM sprints a INNER JOIN tasks b ON a.`task_id` = b.`id` WHERE a.`project_id` = 1 ORDER BY a.sprint '; 
-         
+        $sprints = $this->Sprints->find('all')->where(['project_id' => $projectId])->group(['sprint'])->select(['id', 'sprint']);
+
+        $tasks = 'SELECT a.`sprint` sprint, a.`project_id`,b.task_name,b.task_name ,b.id FROM sprints a INNER JOIN tasks b ON a.`task_id` = b.`id` WHERE a.`project_id` = 1 ORDER BY a.sprint ';
+
         if ($sprints) {
             foreach ($sprints as $t) {
-                echo '<div id="sprints" ' . $t->id . '"> Sprints' . $t->sprint . ':</div><div>'.$t->sprint.'</div>';
+                echo '<div id="sprints" ' . $t->id . '"> Sprints' . $t->sprint . ':</div><div>' . $t->sprint . '</div>';
             }
             unset($t);
         }
         exit;
     }
-    
-    public function userStories(){
+
+    public function userStories() {
         $this->loadModel('Projects');
         $projects = $this->Projects->find('all')->select(['id', 'title']);
-        
-         $this->loadModel('Sprints');
-         $sprints = $this->Sprints->find('all')->where(['project_id' => 1 ])->group(['sprint'])->select(['id', 'sprint']);
-         
-         $tasks = 'SELECT a.`sprint` sprint, a.`project_id`,b.task_name as Tname,b.task_name ,b.id FROM sprints a INNER JOIN tasks b ON a.`task_id` = b.`id` WHERE a.`project_id` = 1 ORDER BY a.sprint '; 
-         
-         $this->set(compact('sprints', 'projects'));
-         //$this->set(compact('sprints', 'sprints'));
+
+        $this->loadModel('Sprints');
+        $sprints = $this->Sprints->find('all')->where(['project_id' => 1])->group(['sprint'])->select(['id', 'sprint']);
+
+        $tasks = 'SELECT a.`sprint` sprint, a.`project_id`,b.task_name as Tname,b.task_name ,b.id FROM sprints a INNER JOIN tasks b ON a.`task_id` = b.`id` WHERE a.`project_id` = 1 ORDER BY a.sprint ';
+
+        $this->set(compact('sprints', 'projects'));
+        //$this->set(compact('sprints', 'sprints'));
     }
-    
-    public function getProjectSprint(){
+
+    public function getProjectSprint() {
         $projectId = $this->request->data['projectId'];
         $sprints = $this->Sprints->find()->where(['project_id' => $projectId])->select(['sprint'])->group('sprint');
-        if($sprints){
-            foreach ($sprints as $sprint){
-                echo '<option value="'.$sprint->sprint.'"> Sprint '.$sprint->sprint.'</option>';
+        if ($sprints) {
+            foreach ($sprints as $sprint) {
+                echo '<option value="' . $sprint->sprint . '"> Sprint ' . $sprint->sprint . '</option>';
             }
             unset($sprint);
         }
         exit;
     }
-     public function getTasksofSprint(){
+
+    public function getTasksofSprint() {
         $projectId = $this->request->data['projectId'];
         $sprintId = $this->request->data['sprintId'];
-        $tasks = 'SELECT b.`sprint`, a.`task_name` tname, a.`detail` details FROM tasks a INNER JOIN sprints b ON a.`id` = b.`task_id` AND a.`project_id` = b.`project_id` WHERE b.`sprint` = '.$sprintId.' and a.`project_id` ='.$projectId.''; 
-        if($tasks){
-            foreach ($tasks as $task){
-                echo '<table class="table table-bordered table-striped" cellpadding="0" cellspacing="0">
+        $connection = ConnectionManager::get('default');
+        $tasks = $connection->execute('SELECT b.`sprint`, a.`task_name` tname, a.`detail` details FROM tasks a INNER JOIN sprints b ON a.`id` = b.`task_id` AND a.`project_id` = b.`project_id` WHERE b.`sprint` = ' . $sprintId . ' and a.`project_id` =' . $projectId)
+                ->fetchAll('assoc');
+        
+        if ($tasks) {
+            echo '<table class="table table-bordered table-striped" cellpadding="0" cellspacing="0">
                     <thead>
                 <tr>
                     <th>Task Name</th>
                     <th>Task Details</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>'.$task->tname.'</td>
-                    <td>'.$task->details.'</td>
-                </tr>
-            </tbody></table>';
+            <tbody>';
+            foreach ($tasks as $task) {
+                echo '<tr>
+                    <td>' . $task['tname'] . '</td>
+                    <td>' . $task['details'] . '</td>
+                </tr>';
             }
             unset($task);
+            echo '</tbody></table>';
         }
         exit;
     }
