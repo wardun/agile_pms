@@ -78,6 +78,17 @@
                     <span>User Story</span>
                 </a>
             </li>
+            <li class="treeview <?php echo ($this->request->params['controller']) == 'Attachments' ? 'active' : ''; ?>">
+                <a href="#">
+                    <i class="glyphicon glyphicon-folder-open"></i>
+                    <span>Meeting Information</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="<?php echo $this->Url->build(["controller" => "attachments", "action" => "add"]) ?>">Upload Information</a></li>
+                    <li><a href="<?php echo $this->Url->build(["controller" => "attachments", "action" => "index"]) ?>">View All Information</a></li>
+                </ul>
+            </li>
         </ul>
     </section>
     <!-- /.sidebar -->
