@@ -18,13 +18,10 @@ class SprintsController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Projects', 'Tasks']
-        ];
-        $sprints = $this->paginate($this->Sprints);
-
-        $this->set(compact('sprints'));
-        $this->set('_serialize', ['sprints']);
+        $this->loadModel('Projects');
+        $projects = $this->Projects->find('all')->select(['id', 'title']);
+        
+        $this->set(compact('sprints', 'projects'));
     }
 
     /**
@@ -112,4 +109,21 @@ class SprintsController extends AppController
         }
         return $this->redirect(['action' => 'index']);
     }
+    
+     public function tasks() {
+        $projectId = $this->request->data['projectId'];
+        $this->loadModel('Sprints');
+        $sprints = $this->Sprints->find('all')->where(['project_id' => $projectId ])->group(['sprint'])->select(['id', 'sprint']);
+         
+        $tasks = 'SELECT a.`sprint` sprint, a.`project_id`,b.task_name,b.task_name ,b.id FROM sprints a INNER JOIN tasks b ON a.`task_id` = b.`id` WHERE a.`project_id` = 1 ORDER BY a.sprint '; 
+         
+        if ($sprints) {
+            foreach ($sprints as $t) {
+                echo '<div id="sprints" ' . $t->id . '"> Sprints' . $t->sprint . ':</div><div>'.$t->sprint.'</div>';
+            }
+            unset($t);
+        }
+        exit;
+    }
+
 }
