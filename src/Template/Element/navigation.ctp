@@ -72,8 +72,8 @@
                     <span>Sprints</span>
                 </a>
             </li>
-             <li class="treeview <?php echo ($this->request->params['controller']) == 'Homes' ? 'active' : ''; ?>">
-                <a href="<?php echo $this->Url->build(["controller" => "homes", "action" => "index"]) ?>">
+             <li class="treeview <?php echo ($this->request->params['controller']) == 'Sprints' ? 'active' : ''; ?>">
+                <a href="<?php echo $this->Url->build(["controller" => "sprints", "action" => "userStories"]) ?>">
                     <i class="fa fa-book"></i>
                     <span>User Story</span>
                 </a>
