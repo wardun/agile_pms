@@ -138,5 +138,17 @@ class SprintsController extends AppController
          $this->set(compact('sprints', 'projects'));
          //$this->set(compact('sprints', 'sprints'));
     }
+    
+    public function getProjectSprint(){
+        $projectId = $this->request->data['projectId'];
+        $sprints = $this->Sprints->find()->where(['project_id' => $projectId])->select(['sprint'])->group('sprint');
+        if($sprints){
+            foreach ($sprints as $sprint){
+                echo '<option value="'.$sprint->sprint.'"> Sprint '.$sprint->sprint.'</option>';
+            }
+            unset($sprint);
+        }
+        exit;
+    }
 
 }
