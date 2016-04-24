@@ -150,5 +150,29 @@ class SprintsController extends AppController
         }
         exit;
     }
+     public function getTasksofSprint(){
+        $projectId = $this->request->data['projectId'];
+        $sprintId = $this->request->data['sprintId'];
+        $tasks = 'SELECT b.`sprint`, a.`task_name` tname, a.`detail` details FROM tasks a INNER JOIN sprints b ON a.`id` = b.`task_id` AND a.`project_id` = b.`project_id` WHERE b.`sprint` = '.$sprintId.' and a.`project_id` ='.$projectId.''; 
+        if($tasks){
+            foreach ($tasks as $task){
+                echo '<table class="table table-bordered table-striped" cellpadding="0" cellspacing="0">
+                    <thead>
+                <tr>
+                    <th>Task Name</th>
+                    <th>Task Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>'.$task->tname.'</td>
+                    <td>'.$task->details.'</td>
+                </tr>
+            </tbody></table>';
+            }
+            unset($task);
+        }
+        exit;
+    }
 
 }
