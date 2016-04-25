@@ -51,9 +51,21 @@ class AttachmentsController extends AppController
      */
     public function add()
     {
+        //$sprint_file = '';
         $attachment = $this->Attachments->newEntity();
         if ($this->request->is('post')) {
+             if(!empty($this->request->data['file']['file_name'])){
+                $fileName = $this->request->data['file']['file_name'];
+                $sprint_file = $this->request->data['file']['sprint_file']['type'];
+                 if(move_uploaded_file($this->request->data['file']['tmp_name'],$sprint_file)){
+                     
             $attachment = $this->Attachments->patchEntity($attachment, $this->request->data);
+            $attachment->file_name = $fileName;
+            $attachment->file_name = $sprint_file;
+//            debug($this->request->data);
+//            exit;
+             }
+             }
             if ($this->Attachments->save($attachment)) {
                 $this->Flash->success(__('The attachment has been saved.'));
                 return $this->redirect(['action' => 'index']);
@@ -71,6 +83,7 @@ class AttachmentsController extends AppController
             unset($project);
         }
         $tasks = $this->Attachments->Tasks->find('list', ['limit' => 200]);
+        
         $this->set(compact('attachment', 'attachmentTypes', 'projects', 'tasks'));
         $this->set('_serialize', ['attachment']);
     }

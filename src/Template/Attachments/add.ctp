@@ -2,7 +2,7 @@
     <div class="box-header with-border">
         <h3 class="box-title">Upload Meeting Information</h3>
     </div><!-- /.box-header -->
-
+<?=$this->Form->create($attachment,['type' => 'file']) ?>
     <div class="box-body">
         <div class="form-group">
             <?php echo $this->Form->input('attachment_type_id', ['options' => $attachmentTypes, 'class' => 'form-control']); ?>
