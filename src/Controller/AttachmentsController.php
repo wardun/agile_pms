@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use App\Controller\AppController;
@@ -8,16 +9,14 @@ use App\Controller\AppController;
  *
  * @property \App\Model\Table\AttachmentsTable $Attachments
  */
-class AttachmentsController extends AppController
-{
+class AttachmentsController extends AppController {
 
     /**
      * Index method
      *
      * @return \Cake\Network\Response|null
      */
-    public function index()
-    {
+    public function index() {
         $this->paginate = [
             'contain' => ['AttachmentTypes', 'Projects', 'Tasks']
         ];
@@ -34,8 +33,7 @@ class AttachmentsController extends AppController
      * @return \Cake\Network\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
-    {
+    public function view($id = null) {
         $attachment = $this->Attachments->get($id, [
             'contain' => ['AttachmentTypes', 'Projects', 'Tasks']
         ]);
@@ -49,41 +47,39 @@ class AttachmentsController extends AppController
      *
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
      */
-    public function add()
-    {
+    public function add() {
         //$sprint_file = '';
         $attachment = $this->Attachments->newEntity();
         if ($this->request->is('post')) {
-             if(!empty($this->request->data['file']['file_name'])){
-                $fileName = $this->request->data['file']['file_name'];
-                $sprint_file = $this->request->data['file']['sprint_file']['type'];
-                 if(move_uploaded_file($this->request->data['file']['tmp_name'],$sprint_file)){
-                     
-            $attachment = $this->Attachments->patchEntity($attachment, $this->request->data);
-            $attachment->file_name = $fileName;
-            $attachment->file_name = $sprint_file;
 //            debug($this->request->data);
 //            exit;
-             }
-             }
-            if ($this->Attachments->save($attachment)) {
-                $this->Flash->success(__('The attachment has been saved.'));
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The attachment could not be saved. Please, try again.'));
+            if (!empty($this->request->data['sprint_file']['tmp_name'])) {
+                $filename = 
+                $this->request->data['file_type'] = strtolower(substr(strrchr($this->request->data['sprint_file']['name'], "."), 1));
+                $this->request->data['origiginal_file_name'] = $this->request->data['sprint_file']['name'];
+                if (move_uploaded_file($this->request->data['sprint_file']['tmp_name'], 'sprint_files/' . $this->request->data['origiginal_file_name'])) {
+                    $attachment = $this->Attachments->patchEntity($attachment, $this->request->data);
+//                    debug($attachment);exit;
+                    if ($this->Attachments->save($attachment)) {
+                        $this->Flash->success(__('The attachment has been saved.'));
+                        return $this->redirect(['action' => 'index']);
+                    } else {
+                        $this->Flash->error(__('The attachment could not be saved. Please, try again.'));
+                    }
+                }
             }
         }
         $projects = [];
         $attachmentTypes = $this->Attachments->AttachmentTypes->find('list', ['limit' => 200]);
         $projectLists = $this->Attachments->Projects->find('all', ['limit' => 200]);
-        if($projectLists){
-            foreach ($projectLists as $project){
+        if ($projectLists) {
+            foreach ($projectLists as $project) {
                 $projects[$project->id] = $project->title;
             }
             unset($project);
         }
         $tasks = $this->Attachments->Tasks->find('list', ['limit' => 200]);
-        
+
         $this->set(compact('attachment', 'attachmentTypes', 'projects', 'tasks'));
         $this->set('_serialize', ['attachment']);
     }
@@ -95,8 +91,7 @@ class AttachmentsController extends AppController
      * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
-    public function edit($id = null)
-    {
+    public function edit($id = null) {
         $attachment = $this->Attachments->get($id, [
             'contain' => []
         ]);
@@ -123,8 +118,7 @@ class AttachmentsController extends AppController
      * @return \Cake\Network\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function delete($id = null)
-    {
+    public function delete($id = null) {
         $this->request->allowMethod(['post', 'delete']);
         $attachment = $this->Attachments->get($id);
         if ($this->Attachments->delete($attachment)) {
@@ -134,4 +128,5 @@ class AttachmentsController extends AppController
         }
         return $this->redirect(['action' => 'index']);
     }
+
 }
