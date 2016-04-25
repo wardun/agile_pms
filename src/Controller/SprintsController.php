@@ -18,10 +18,40 @@ class SprintsController extends AppController {
      * @return \Cake\Network\Response|null
      */
     public function index() {
+        $projectId = '';
+        $sprintHtml = '';
+        
         $this->loadModel('Projects');
         $projects = $this->Projects->find('all')->select(['id', 'title']);
+        if (isset($this->request->query['project_id'])) {
+            $projectId = $this->request->query['project_id'];
+            $sprintId = $this->request->query['sprint_id'];
 
-        $this->set(compact('sprints', 'projects'));
+            $sprints = $this->Sprints->find()->where(['project_id' => $projectId])->select(['sprint'])->group('sprint');
+            if ($sprints) {
+                foreach ($sprints as $sprint) {
+                    $selected = ($sprintId == $sprint->sprint) ? 'selected = selected' : '';
+                    $sprintHtml.='<option value="' . $sprint->sprint . '" '.$selected.'> Sprint ' . $sprint->sprint . '</option>';
+                }
+                unset($sprint);
+            }
+            
+            // check sprint started or not
+            $connection = ConnectionManager::get('default');
+            $sprintQuery = $connection->execute(
+                    "SELECT a.`sprint` , DATE(b.`start_date`) sprint_start, IF(b.`start_date` < NOW(),'started','not_yet_started') sprint_status
+                    FROM sprints a
+                    INNER JOIN tasks b
+                    ON a.`project_id` = b.`project_id` AND a.`task_id` = b.`id`
+                    WHERE a.`project_id` = $projectId AND a.`sprint` = $sprintId
+                    ORDER BY b.`start_date` ASC
+                    LIMIT 1"
+                    )
+                ->fetchAll('assoc');
+            
+            $sprintCheck = $sprintQuery[0];
+        }
+        $this->set(compact('sprints', 'projects', 'sprintHtml', 'projectId', 'sprintCheck'));
     }
 
     /**
@@ -128,7 +158,6 @@ class SprintsController extends AppController {
 
 //        $this->loadModel('Sprints');
 //        $sprints = $this->Sprints->find('all')->where(['project_id' => 1])->group(['sprint'])->select(['id', 'sprint']);
-
         //$tasks = 'SELECT a.`sprint` sprint, a.`project_id`,b.task_name as Tname,b.task_name ,b.id FROM sprints a INNER JOIN tasks b ON a.`task_id` = b.`id` WHERE a.`project_id` = 1 ORDER BY a.sprint ';
 
         $this->set(compact('projects'));
@@ -153,7 +182,7 @@ class SprintsController extends AppController {
         $connection = ConnectionManager::get('default');
         $tasks = $connection->execute('SELECT b.`sprint`, a.`task_name` tname, a.`detail` details FROM tasks a INNER JOIN sprints b ON a.`id` = b.`task_id` AND a.`project_id` = b.`project_id` WHERE b.`sprint` = ' . $sprintId . ' and a.`project_id` =' . $projectId)
                 ->fetchAll('assoc');
-        
+
         if ($tasks) {
             echo '<table class="table table-bordered table-striped" cellpadding="0" cellspacing="0">
                     <thead>
