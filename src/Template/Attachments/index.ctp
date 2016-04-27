@@ -25,8 +25,9 @@
                 <td><?= h($attachment->created_at) ?></td>
                 <td><?= $this->Number->format($attachment->created_by) ?></td>
                         <td class="actions">
-                            <?php echo $this->Html->link('<i class="fa fa-eye"></i>', array('action' => 'view', '', $attachment->id), array('class' => 'btn btn-small btn-success view', 'title' => 'View', 'escape' => false)); ?>
+                            <?php echo $this->Html->link('<i class="fa fa-eye"></i>', array('action' => 'view', '', $attachment->id), array('class' => 'btn btn-sm btn-success view', 'title' => 'View', 'escape' => false)); ?>
                             <?php echo $this->Html->link('<i class="fa fa-pencil"></i>', array('action' => 'edit', '', $attachment->id), array('class' => 'btn btn-sm btn-warning', 'title' => 'Edit', 'escape' => false)); ?>
+                             <?php echo $this->Html->link('<i class="fa fa-download"></i>', array('action' => 'edit', '', $attachment->id), array('class' => 'btn btn-sm btn-warning', 'title' => 'Edit', 'escape' => false)); ?>
                             <?= $this->Form->postLink($this->Html->tag('i', '', array('class' => 'fa fa-times')), ['action' => 'delete', $attachment->id], ['class' => 'btn btn-sm btn-danger delete', 'title' => 'Delete', 'escape' => false, 'confirm' => __('Are you sure you want to delete # {0}?', $attachment->first_name)]); ?>
 
                         </td>
