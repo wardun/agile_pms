@@ -3,7 +3,7 @@
 ?>
 <div class="box box-primary">
     <div class="box-header with-border">
-        <h3 class="box-title">Sprints</h3>
+        <h5 class="box-title">Sprints</h5>
     </div><!-- /.box-header -->
 
     <!-- form start -->
@@ -53,8 +53,23 @@
         <?php } else { ?>
             <div class="box-body">
                 <div class="row">
+                    <div class="color-palette-set">
+                        <div class="col-lg-4">
+                            <div class="bg-navy color-palette center p10">Sprint Start Date: 2016-04-15</div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="bg-navy color-palette center p10">Sprint End Date: 2016-04-30</div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="bg-navy color-palette center p10">Remaining Days: 05 Days</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="box-body">
+                <div class="row">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Current Status</h3>
+                        <h5 class="box-title">Current Status</h5>
                     </div>
                     <div class="box-body">
                         <div class="col-lg-6">
@@ -63,8 +78,205 @@
                             </div>
                         </div>
                         <div class="col-lg-6 text-center">
-                            <input type="text" class="knob" value="70" data-width="90" data-height="230" data-fgColor="#f56954">
+                            <input type="text" class="knob" value="65" data-width="90" data-height="230" data-fgColor="#f56954">
                             <div class="knob-label">Bounce Rate</div>
+                        </div>
+                    </div><!-- /.box-body -->
+                </div>
+            </div>
+
+            <div class="box-body">
+                <div class="row">
+                    <div class="box-header with-border">
+                        <h5 class="box-title">Sprint Details</h5>
+                    </div>
+                    <div class="box-body">
+                        <div class="col-lg-12">
+                            <table class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Task</th>
+                                        <th>Assigned Date</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Task 1</td>
+                                        <td>2016-04-15</td>
+                                        <td>Completed</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Task 1</td>
+                                        <td>2016-04-15</td>
+                                        <td>Completed</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Task 1</td>
+                                        <td>2016-04-15</td>
+                                        <td>Completed</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div><!-- /.box-body -->
+                </div>
+            </div>
+
+            <div class="box-body">
+                <div class="row">
+                    <div class="box-header with-border">
+                        <h5 class="box-title">User wise Tasks Information</h5>
+                    </div>
+                    <div class="box-body">
+                        <div class="col-lg-4">
+                            <h5>Developer 1</h5>
+                            <table class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Task</th>
+                                        <th>Assigned</th>
+                                        <th>Hours</th>
+                                        <th>Bugs</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Task 1</td>
+                                        <td>2016-04-15</td>
+                                        <td>6 hours</td>
+                                        <td>0</td>
+                                        <td>Completed</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Task 1</td>
+                                        <td>2016-04-15</td>
+                                        <td>6 hours</td>
+                                        <td>0</td>
+                                        <td>Completed</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Task 1</td>
+                                        <td>2016-04-15</td>
+                                        <td>6 hours</td>
+                                        <td>0</td>
+                                        <td>Completed</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-lg-4">
+                            <h5>Developer 2</h5>
+                            <table class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Task</th>
+                                        <th>Assigned</th>
+                                        <th>Hours</th>
+                                        <th>Bugs</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Task 1</td>
+                                        <td>2016-04-15</td>
+                                        <td>6 hours</td>
+                                        <td>0</td>
+                                        <td>Completed</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Task 1</td>
+                                        <td>2016-04-15</td>
+                                        <td>6 hours</td>
+                                        <td>0</td>
+                                        <td>Completed</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Task 1</td>
+                                        <td>2016-04-15</td>
+                                        <td>6 hours</td>
+                                        <td>0</td>
+                                        <td>Completed</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-lg-4">
+                            <h5>Developer 3</h5>
+                            <table class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Task</th>
+                                        <th>Assigned</th>
+                                        <th>Hours</th>
+                                        <th>Bugs</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Task 1</td>
+                                        <td>2016-04-15</td>
+                                        <td>6 hours</td>
+                                        <td>0</td>
+                                        <td>Completed</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Task 1</td>
+                                        <td>2016-04-15</td>
+                                        <td>6 hours</td>
+                                        <td>0</td>
+                                        <td>Completed</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Task 1</td>
+                                        <td>2016-04-15</td>
+                                        <td>6 hours</td>
+                                        <td>0</td>
+                                        <td>Completed</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div><!-- /.box-body -->
+                </div>
+            </div>
+
+            <div class="box-body">
+                <div class="row">
+                    <div class="box-header with-border">
+                        <h5 class="box-title">Daily Scrum Meeting Reports</h5>
+                    </div>
+                    <div class="box-body">
+                        <div class="col-lg-12">
+                            <table class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Date</th>
+                                        <th>Download</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Task 1</td>
+                                        <td>2016-04-15</td>
+                                        <td>Completed</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Task 1</td>
+                                        <td>2016-04-15</td>
+                                        <td>Completed</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Task 1</td>
+                                        <td>2016-04-15</td>
+                                        <td>Completed</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div><!-- /.box-body -->
                 </div>
@@ -98,7 +310,7 @@
         //-------------
 
         var areaChartData = {
-            labels: ["Total", "Completed", "Not Yet Completed"],
+            labels: ["Total", "Completed", "Sprint Plan", "Not Yet Completed"],
             datasets: [
                 {
                     label: "Tasks",
@@ -108,7 +320,7 @@
                     pointStrokeColor: "#c1c7d1",
                     pointHighlightFill: "#fff",
                     pointHighlightStroke: "rgba(220,220,220,1)",
-                    data: [65, 59, 80]
+                    data: [20, 11, 13, 9]
                 }
             ]
         };

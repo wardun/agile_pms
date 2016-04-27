@@ -1,3 +1,9 @@
 .navbar-nav > .user-menu > .dropdown-menu > li.user-header > p {
   color: #000 !important;
 }
+.center {
+  text-align: center;
+}
+.p10{
+    padding: 10px;
+}
