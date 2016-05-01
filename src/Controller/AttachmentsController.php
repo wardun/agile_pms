@@ -128,26 +128,16 @@ class AttachmentsController extends AppController {
         return $this->redirect(['action' => 'index']);
     }
 
-//    public function download($id = null) {
-//        $filePath = WWW_ROOT . 'files' . DS . $id;
-//        $this->response->file($filePath, array('download' => true, 'name' => 'file name'));
-//    }
-
     public function download($id = null) {
-        //$this->viewClass = 'Media';
         $query = $this->Attachments->find()->where(['id' => $id]);
         $fileInfo = $query->first();
         $filePath = WWW_ROOT . 'sprint_files' . DS . $fileInfo['origiginal_file_name'];
-//        $filePath = 'sprint_files\tables.docx';
-        //$this->response->file($filePath, array('download' => true, 'name' => 'ss'));
 
         $this->response->file(
                $filePath, ['download' => true, 'name' => $fileInfo['file_name']]
         );
         
         return $this->response;
-
-        //$this->set($params);
     }
 
 }
