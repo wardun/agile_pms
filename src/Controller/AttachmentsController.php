@@ -54,8 +54,7 @@ class AttachmentsController extends AppController {
 //            debug($this->request->data);
 //            exit;
             if (!empty($this->request->data['sprint_file']['tmp_name'])) {
-                $filename = 
-                $this->request->data['file_type'] = strtolower(substr(strrchr($this->request->data['sprint_file']['name'], "."), 1));
+                $filename = $this->request->data['file_type'] = strtolower(substr(strrchr($this->request->data['sprint_file']['name'], "."), 1));
                 $this->request->data['origiginal_file_name'] = $this->request->data['sprint_file']['name'];
                 if (move_uploaded_file($this->request->data['sprint_file']['tmp_name'], 'sprint_files/' . $this->request->data['origiginal_file_name'])) {
                     $attachment = $this->Attachments->patchEntity($attachment, $this->request->data);
@@ -127,6 +126,28 @@ class AttachmentsController extends AppController {
             $this->Flash->error(__('The attachment could not be deleted. Please, try again.'));
         }
         return $this->redirect(['action' => 'index']);
+    }
+
+//    public function download($id = null) {
+//        $filePath = WWW_ROOT . 'files' . DS . $id;
+//        $this->response->file($filePath, array('download' => true, 'name' => 'file name'));
+//    }
+
+    public function download($id = null) {
+        //$this->viewClass = 'Media';
+        $query = $this->Attachments->find()->where(['id' => $id]);
+        $fileInfo = $query->first();
+        $filePath = WWW_ROOT . 'sprint_files' . DS . $fileInfo['origiginal_file_name'];
+//        $filePath = 'sprint_files\tables.docx';
+        //$this->response->file($filePath, array('download' => true, 'name' => 'ss'));
+
+        $this->response->file(
+               $filePath, ['download' => true, 'name' => $fileInfo['file_name']]
+        );
+        
+        return $this->response;
+
+        //$this->set($params);
     }
 
 }
