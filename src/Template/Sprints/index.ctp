@@ -55,13 +55,13 @@
                 <div class="row">
                     <div class="color-palette-set">
                         <div class="col-lg-4">
-                            <div class="bg-navy color-palette center p10">Sprint Start Date: 2016-04-15</div>
+                            <div class="bg-navy color-palette center p10">Sprint Start Date: <?php echo $singleValues['sprint_start']?></div>
                         </div>
                         <div class="col-lg-4">
-                            <div class="bg-navy color-palette center p10">Sprint End Date: 2016-04-30</div>
+                            <div class="bg-navy color-palette center p10">Sprint End Date: <?php echo $singleValues['sprint_end']?></div>
                         </div>
                         <div class="col-lg-4">
-                            <div class="bg-navy color-palette center p10">Remaining Days: 05 Days</div>
+                            <div class="bg-navy color-palette center p10">Remaining Days: <?php echo ($singleValues['remaining_days'] > 0) ? $singleValues['remaining_days'] : 0?> Days</div>
                         </div>
                     </div>
                 </div>

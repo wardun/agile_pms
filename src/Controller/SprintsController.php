@@ -20,7 +20,7 @@ class SprintsController extends AppController {
     public function index() {
         $projectId = '';
         $sprintHtml = '';
-        
+
         $this->loadModel('Projects');
         $projects = $this->Projects->find('all')->select(['id', 'title']);
         if (isset($this->request->query['project_id'])) {
@@ -31,15 +31,15 @@ class SprintsController extends AppController {
             if ($sprints) {
                 foreach ($sprints as $sprint) {
                     $selected = ($sprintId == $sprint->sprint) ? 'selected = selected' : '';
-                    $sprintHtml.='<option value="' . $sprint->sprint . '" '.$selected.'> Sprint ' . $sprint->sprint . '</option>';
+                    $sprintHtml.='<option value="' . $sprint->sprint . '" ' . $selected . '> Sprint ' . $sprint->sprint . '</option>';
                 }
                 unset($sprint);
             }
-            
+
             // check sprint started or not
             $connection = ConnectionManager::get('default');
             $sprintQuery = $connection->execute(
-                    "SELECT a.`sprint` , DATE(b.`start_date`) sprint_start, IF(b.`start_date` < NOW(),'started','not_yet_started') sprint_status
+                            "SELECT a.`sprint` , DATE(MIN(b.`start_date`)) sprint_start, DATE(MAX(b.`end_date`)) sprint_end, IF(b.`start_date` < NOW(),'started','not_yet_started') sprint_status
                     FROM sprints a
                     INNER JOIN tasks b
                     ON a.`project_id` = b.`project_id` AND a.`task_id` = b.`id`
@@ -47,11 +47,23 @@ class SprintsController extends AppController {
                     ORDER BY b.`start_date` ASC
                     LIMIT 1"
                     )
-                ->fetchAll('assoc');
-            
+                    ->fetchAll('assoc');
+
             $sprintCheck = $sprintQuery[0];
+
+            if ($sprintCheck['sprint_status'] == 'started') {
+                // get info of current sprint
+                $singleValues['sprint_start'] = $sprintCheck['sprint_start'];
+                $singleValues['sprint_end'] = $sprintCheck['sprint_end'];
+
+                $lastDate = new \DateTime($sprintCheck['sprint_end']);
+                $today = new \DateTime();
+                
+                $singleValues['remaining_days'] = $today->diff($lastDate)->format("%R%a");
+                
+            }
         }
-        $this->set(compact('sprints', 'projects', 'sprintHtml', 'projectId', 'sprintCheck'));
+        $this->set(compact('sprints', 'projects', 'sprintHtml', 'projectId', 'sprintCheck', 'singleValues'));
     }
 
     /**
