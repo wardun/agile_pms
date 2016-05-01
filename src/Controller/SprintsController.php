@@ -61,9 +61,21 @@ class SprintsController extends AppController {
                 
                 $singleValues['remaining_days'] = $today->diff($lastDate)->format("%R%a");
                 
+                $taskStatusQuery = $connection->execute("
+                               SELECT COUNT(b.`id`) total,
+                               (SELECT COUNT(id) FROM sprints WHERE is_completed = 1 AND `project_id` = $projectId AND `sprint` = $sprintId) completed,
+                               (SELECT COUNT(*) FROM tasks WHERE end_date BETWEEN DATE(MIN(b.`start_date`)) AND DATE(MAX(b.`end_date`)) AND `project_id` = $projectId) sprint_plan
+                               FROM sprints a
+                               INNER JOIN tasks b
+                               ON a.`project_id` = b.`project_id` AND a.`task_id` = b.`id`
+                               WHERE a.`project_id` = $projectId AND a.`sprint` = $sprintId
+                            ")->fetchAll('assoc');
+                
+                $taskStatus = $taskStatusQuery[0];
+                
             }
         }
-        $this->set(compact('sprints', 'projects', 'sprintHtml', 'projectId', 'sprintCheck', 'singleValues'));
+        $this->set(compact('sprints', 'projects', 'sprintHtml', 'projectId', 'sprintCheck', 'singleValues', 'taskStatus'));
     }
 
     /**

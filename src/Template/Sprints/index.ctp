@@ -78,8 +78,8 @@
                             </div>
                         </div>
                         <div class="col-lg-6 text-center">
-                            <input type="text" class="knob" value="65" data-width="90" data-height="230" data-fgColor="#f56954">
-                            <div class="knob-label">Bounce Rate</div>
+                            <input type="text" class="knob" value="<?php echo ceil(($taskStatus['completed'] * 100) /$taskStatus['total']);?>" data-width="180" data-height="180" data-fgColor="#f56954">
+                            <div class="knob-label">Completed Percentage (%)</div>
                         </div>
                     </div><!-- /.box-body -->
                 </div>
@@ -338,7 +338,7 @@
                         pointStrokeColor: "#c1c7d1",
                         pointHighlightFill: "#fff",
                         pointHighlightStroke: "rgba(220,220,220,1)",
-                        data: [20, 11, 13, 9]
+                        data: [<?=$taskStatus['total']?>, <?=$taskStatus['completed']?>, <?=$taskStatus['sprint_plan']?>, <?=($taskStatus['total'] - $taskStatus['completed'])?>]
                     }
                 ]
             };
