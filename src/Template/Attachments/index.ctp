@@ -2,6 +2,29 @@
     <div class="box-header">
         <h3 class="box-title">View All Attachments</h3>
     </div><!-- /.box-header -->
+    <?//= $this->Form->create() ?>
+    <div class="box-body">
+         <?= $this->Form->create('', ['type' => 'get']) ?>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <?php echo $this->Form->input('attachment_type_id', ['options' => $attachmentTypes, 'class' => 'form-control', 'empty' => '--Select Type--']); ?>
+                </div>
+            </div>
+              <div class="col-lg-4">
+                <div class="form-group">
+                    <div class="form-group">
+                    <?php echo $this->Form->input('project_id', ['options' => $projects, 'class' => 'form-control', 'empty' => '--Select Project--']); ?>
+                </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <input type="button" class="btn" id="submit" value="Submit" style="margin-top: 23px">
+            </div>
+        </div>
+    </div><!-- /.box-body -->
+
+
     <div class="box-body">
         <table class="table table-bordered table-striped" cellpadding="0" cellspacing="0">
             <thead>
@@ -19,9 +42,9 @@
                 <?php foreach ($attachments as $attachment): ?>
                     <tr>
                         <td><?= $this->Number->format($attachment->id) ?></td>
-                        <td><?= $attachment->has('attachment_type') ? $this->Html->link($attachment->attachment_type->title, ['controller' => 'AttachmentTypes', 'action' => 'view', $attachment->attachment_type->id]) : '' ?></td>
-                        <td><?= $attachment->has('project') ? $this->Html->link($attachment->project->id, ['controller' => 'Projects', 'action' => 'view', $attachment->project->id]) : '' ?></td>
-                        <td><?= h($attachment->file_name) ?></td>
+                        <td><?= $attachment->has('attachment_type') ? $attachment->attachment_type->title : '' ?></td>
+                        <td><?= $attachment->has('project') ? $attachment->project->title : '' ?></td>
+                        <td><?= h($attachment->file_name) ? $this->Html->link($attachment->file_name, ['controller' => 'Attachments', 'action' => 'download', $attachment->id]) : ''?></td>
                         <td><?= h($attachment->created_at) ?></td>
                         <td><?= $this->Number->format($attachment->created_by) ?></td>
                         <td class="actions">
@@ -46,3 +69,26 @@
     </div><!-- /.box-body -->
 </div>
 
+<script>
+    $(function () {
+        $(".selectprojall").select();
+        //$(".selectproj2").select();
+//        $("#accordion").accordion();
+
+       /*
+        $('#submit').on('click', function () {
+            var projectId = $('#project-id1').val();
+            var sprintId = $('#attachment_type_id').val();
+            $.post("<?php echo $this->Url->build(["controller" => "sprints", "action" => "getTasksofSprint"]) ?>", {_csrfToken: '<?= $this->request->param('_csrfToken') ?>', sprintId: sprintId, projectId: projectId}, function (resp) {
+                //alert(resp);
+            }).done(function (data) {
+                $('#user-story-data').html(data);
+            }).fail(function () {
+                //alert("error");
+            }).always(function () {
+            });
+        })
+
+*/
+    });
+</script>

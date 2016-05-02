@@ -17,12 +17,23 @@ class AttachmentsController extends AppController {
      * @return \Cake\Network\Response|null
      */
     public function index() {
+               
         $this->paginate = [
             'contain' => ['AttachmentTypes', 'Projects', 'Tasks']
         ];
         $attachments = $this->paginate($this->Attachments);
+        
+        $attachmentTypes = $this->Attachments->AttachmentTypes->find('list', ['limit' => 200]);
+        $projects =[];
+        $projectLists = $this->Attachments->Projects->find('all', ['limit' => 200]);
+        if ($projectLists) {
+            foreach ($projectLists as $project) {
+                $projects[$project->id] = $project->title;
+            }
+            unset($project);
+        }
 
-        $this->set(compact('attachments'));
+        $this->set(compact('attachments', 'attachmentTypes', 'projects'));
         $this->set('_serialize', ['attachments']);
     }
 
@@ -134,7 +145,7 @@ class AttachmentsController extends AppController {
         $filePath = WWW_ROOT . 'sprint_files' . DS . $fileInfo['origiginal_file_name'];
 
         $this->response->file(
-               $filePath, ['download' => true, 'name' => $fileInfo['file_name']]
+               $filePath, ['download' => true, 'name' => $fileInfo['file_name'].$fileInfo['file_type']]
         );
         
         return $this->response;
