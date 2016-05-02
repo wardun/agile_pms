@@ -150,5 +150,45 @@ class AttachmentsController extends AppController {
         
         return $this->response;
     }
+    public function viewAllAttachment(){
+         $projectId = $this->request->data['projectId'];
+         $attachtypeid = $this->request->data['attachtypeid'];
+         //$connection = ConnectionManager::get('default');
+        //$var = 'SELECT a.id, at.title,a.file_name,p.title FROM attachments a INNER JOIN attachment_types at ON a.attachment_type_id = at.id JOIN projects p ON p.id = a.project_id'; 
+        /*
+         $varallattachment = $connection->execute('SELECT a.id, at.title,a.file_name,p.title FROM attachments a INNER JOIN attachment_types at ON a.attachment_type_id ='.$attachtypeid.' JOIN projects p ON a.project_id='.$projectId)
+                ->fetchAll('assoc');*/
+         
+           $varallattachment = 'SELECT a.`id`, at.`title`,a.`file_name`,p.`title` FROM attachments a INNER JOIN attachment_types at ON a.attachment_type_id ='.$attachtypeid.' JOIN projects p ON a.project_id='.$projectId;
+        
+         
+          if ($varallattachment) {
+            echo '<table class="table table-bordered table-striped" cellpadding="0" cellspacing="0">
+                    <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Attachment Type</th>
+                    <th>Project</th>
+                    <th>File Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>';
+            foreach ($varallattachment as $All) {
+                echo '<tr>
+                    <td>' . $All['id'] . '</td>
+                    <td>' . $All['title'] . '</td>
+                    <td>' . $All['title'] . '</td>
+                    <td>' . $All['file_name'] . '</td>
+                    <td>' . $All['file_name'] . '</td>
+                </tr>';
+            }
+            unset($All);
+            echo '</tbody></table>';
+        }
+        exit;
+    }
+    
+    
 
 }
