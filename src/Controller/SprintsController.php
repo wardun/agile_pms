@@ -73,10 +73,30 @@ class SprintsController extends AppController {
                 
                 $taskStatus = $taskStatusQuery[0];
                 
+                //sprint details
                 $sprintTasks = $this->Sprints->find()->where(['Sprints.project_id' => $projectId, 'Sprints.sprint' => $sprintId])->contain(['Tasks']);
+                
+                //user wise info
+                $userTasks = $this->Sprints->find()->where(['Sprints.project_id' => $projectId, 'Sprints.sprint' => $sprintId])->contain(['Tasks'])->select(['Tasks.assgined_to'])->group(['Tasks.assgined_to']);
+                if($userTasks){
+                    $this->loadModel('Users');
+                    foreach ($userTasks as $dev){
+                        $developer [] = $this->Users->get($dev->Tasks->assgined_to);
+                    }
+                    unset($dev);
+                }
+                
+                $userTaskDetail = $connection->execute("
+                                SELECT b.`task_name`, b.`start_date`, b.`assgined_to`, HOUR(b.`actual_end_date` - b.`start_date`) hours, a.`is_completed`, (SELECT COUNT(*) FROM task_bugs WHERE task_id = b.id) bugs
+                                FROM sprints a
+                                INNER JOIN tasks b
+                                ON a.`project_id` = b.`project_id` AND a.`task_id` = b.`id`
+                                WHERE a.`project_id` = $projectId AND a.`sprint` = $sprintId
+                            ")->fetchAll('assoc');
+                
             }
         }
-        $this->set(compact('sprints', 'projects', 'sprintHtml', 'projectId', 'sprintCheck', 'singleValues', 'taskStatus', 'sprintTasks'));
+        $this->set(compact('sprints', 'projects', 'sprintHtml', 'projectId', 'sprintCheck', 'singleValues', 'taskStatus', 'sprintTasks', 'developer', 'userTaskDetail'));
     }
 
     /**

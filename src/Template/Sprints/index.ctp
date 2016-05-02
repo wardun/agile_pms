@@ -106,9 +106,9 @@
                                         foreach ($sprintTasks as $task) {
                                             ?>
                                             <tr>
-                                                <td><?php echo $task->task->task_name?></td>
-                                                <td><?php echo date('Y-m-d', strtotime($task->task->start_date))?></td>
-                                                <td><?php echo empty($task->is_completed) ? 'Not yet completed' : 'Completed'?></td>
+                                                <td><?php echo $task->task->task_name ?></td>
+                                                <td><?php echo date('Y-m-d', strtotime($task->task->start_date)) ?></td>
+                                                <td><?php echo empty($task->is_completed) ? 'Not yet completed' : 'Completed' ?></td>
                                             </tr>
                                             <?php
                                         }
@@ -128,118 +128,117 @@
                         <h5 class="box-title">User wise Tasks Information</h5>
                     </div>
                     <div class="box-body">
-                        <div class="col-lg-4">
-                            <h5>Developer 1</h5>
-                            <canvas id="pieChart" style="height:250px"></canvas>
-                            <table class="table table-striped table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Task</th>
-                                        <th>Assigned</th>
-                                        <th>Hours</th>
-                                        <th>Bugs</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Task 1</td>
-                                        <td>2016-04-15</td>
-                                        <td>6 hours</td>
-                                        <td>0</td>
-                                        <td>Completed</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Task 1</td>
-                                        <td>2016-04-15</td>
-                                        <td>6 hours</td>
-                                        <td>0</td>
-                                        <td>Completed</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Task 1</td>
-                                        <td>2016-04-15</td>
-                                        <td>6 hours</td>
-                                        <td>0</td>
-                                        <td>Completed</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="col-lg-4">
-                            <h5>Developer 2</h5>
-                            <table class="table table-striped table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Task</th>
-                                        <th>Assigned</th>
-                                        <th>Hours</th>
-                                        <th>Bugs</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Task 1</td>
-                                        <td>2016-04-15</td>
-                                        <td>6 hours</td>
-                                        <td>0</td>
-                                        <td>Completed</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Task 1</td>
-                                        <td>2016-04-15</td>
-                                        <td>6 hours</td>
-                                        <td>0</td>
-                                        <td>Completed</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Task 1</td>
-                                        <td>2016-04-15</td>
-                                        <td>6 hours</td>
-                                        <td>0</td>
-                                        <td>Completed</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="col-lg-4">
-                            <h5>Developer 3</h5>
-                            <table class="table table-striped table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Task</th>
-                                        <th>Assigned</th>
-                                        <th>Hours</th>
-                                        <th>Bugs</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Task 1</td>
-                                        <td>2016-04-15</td>
-                                        <td>6 hours</td>
-                                        <td>0</td>
-                                        <td>Completed</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Task 1</td>
-                                        <td>2016-04-15</td>
-                                        <td>6 hours</td>
-                                        <td>0</td>
-                                        <td>Completed</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Task 1</td>
-                                        <td>2016-04-15</td>
-                                        <td>6 hours</td>
-                                        <td>0</td>
-                                        <td>Completed</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                        <?php
+                        if ($developer) {
+                            foreach ($developer as $dev) {
+                                ?>
+                                <div class="col-lg-4">
+                                    <h5><?= $dev->first_name . ' ' . $dev->last_name ?></h5>
+                                    <canvas id="user-tasks-<?=$dev->id?>" style="height:250px"></canvas>
+                                    <table class="table table-striped table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Task</th>
+                                                <th>Assigned</th>
+                                                <th>Hours</th>
+                                                <th>Bugs</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Task 1</td>
+                                                <td>2016-04-15</td>
+                                                <td>6 hours</td>
+                                                <td>0</td>
+                                                <td>Completed</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Task 1</td>
+                                                <td>2016-04-15</td>
+                                                <td>6 hours</td>
+                                                <td>0</td>
+                                                <td>Completed</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Task 1</td>
+                                                <td>2016-04-15</td>
+                                                <td>6 hours</td>
+                                                <td>0</td>
+                                                <td>Completed</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <script>
+                                    $(function () {
+                                        //-------------
+                                        //- PIE CHART -
+                                        //-------------
+                                        // Get context with jQuery - using jQuery's .get() method.
+                                        var pieChartCanvas = $("#user-tasks-<?=$dev->id?>").get(0).getContext("2d");
+                                        var pieChart = new Chart(pieChartCanvas);
+                                        var PieData = [
+                                            {
+                                                value: 8,
+                                                color: "#f56954",
+                                                highlight: "#f56954",
+                                                label: "Total"
+                                            },
+                                            {
+                                                value: 5,
+                                                color: "#00a65a",
+                                                highlight: "#00a65a",
+                                                label: "Timely COmpleted"
+                                            },
+                                            {
+                                                value: 3,
+                                                color: "#f39c12",
+                                                highlight: "#f39c12",
+                                                label: "Pending"
+                                            },
+                                            {
+                                                value: 0,
+                                                color: "#00c0ef",
+                                                highlight: "#00c0ef",
+                                                label: "Bug"
+                                            }
+                                        ];
+                                        var pieOptions = {
+                                            //Boolean - Whether we should show a stroke on each segment
+                                            segmentShowStroke: true,
+                                            //String - The colour of each segment stroke
+                                            segmentStrokeColor: "#fff",
+                                            //Number - The width of each segment stroke
+                                            segmentStrokeWidth: 2,
+                                            //Number - The percentage of the chart that we cut out of the middle
+                                            percentageInnerCutout: 50, // This is 0 for Pie charts
+                                            //Number - Amount of animation steps
+                                            animationSteps: 100,
+                                            //String - Animation easing effect
+                                            animationEasing: "easeOutBounce",
+                                            //Boolean - Whether we animate the rotation of the Doughnut
+                                            animateRotate: true,
+                                            //Boolean - Whether we animate scaling the Doughnut from the centre
+                                            animateScale: false,
+                                            //Boolean - whether to make the chart responsive to window resizing
+                                            responsive: true,
+                                            // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+                                            maintainAspectRatio: true,
+                                            //String - A legend template
+                                            //legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>"
+                                        };
+                //Create pie or douhnut chart
+                // You can switch between pie and douhnut using the method below.
+                                        pieChart.Doughnut(PieData, pieOptions);
+                                    });
+                                </script>
+                                <?php
+                            }
+                            unset($dev);
+                        }
+                        ?>
                     </div><!-- /.box-body -->
                 </div>
             </div>
@@ -357,66 +356,6 @@
 
                         barChartOptions.datasetFill = false;
                         barChart.Bar(barChartData, barChartOptions);
-
-                        //-------------
-        //- PIE CHART -
-        //-------------
-        // Get context with jQuery - using jQuery's .get() method.
-                        var pieChartCanvas = $("#pieChart").get(0).getContext("2d");
-                        var pieChart = new Chart(pieChartCanvas);
-                        var PieData = [
-                            {
-                                value: 8,
-                                color: "#f56954",
-                                highlight: "#f56954",
-                                label: "Total"
-                            },
-                            {
-                                value: 5,
-                                color: "#00a65a",
-                                highlight: "#00a65a",
-                                label: "Timely COmpleted"
-                            },
-                            {
-                                value: 3,
-                                color: "#f39c12",
-                                highlight: "#f39c12",
-                                label: "Pending"
-                            },
-                            {
-                                value: 0,
-                                color: "#00c0ef",
-                                highlight: "#00c0ef",
-                                label: "Bug"
-                            }
-                        ];
-                        var pieOptions = {
-                            //Boolean - Whether we should show a stroke on each segment
-                            segmentShowStroke: true,
-                            //String - The colour of each segment stroke
-                            segmentStrokeColor: "#fff",
-                            //Number - The width of each segment stroke
-                            segmentStrokeWidth: 2,
-                            //Number - The percentage of the chart that we cut out of the middle
-                            percentageInnerCutout: 50, // This is 0 for Pie charts
-                            //Number - Amount of animation steps
-                            animationSteps: 100,
-                            //String - Animation easing effect
-                            animationEasing: "easeOutBounce",
-                            //Boolean - Whether we animate the rotation of the Doughnut
-                            animateRotate: true,
-                            //Boolean - Whether we animate scaling the Doughnut from the centre
-                            animateScale: false,
-                            //Boolean - whether to make the chart responsive to window resizing
-                            responsive: true,
-                            // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
-                            maintainAspectRatio: true,
-                            //String - A legend template
-                            //legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>"
-                        };
-        //Create pie or douhnut chart
-        // You can switch between pie and douhnut using the method below.
-                        pieChart.Doughnut(PieData, pieOptions);
 
         //------------------------------------
 
