@@ -108,7 +108,7 @@ $pageTitle = isset($pageTitle) ? $pageTitle : $this->fetch('title');
     <script src="<?php echo $this->request->webroot ?>assets/dist/js/jquery.timepicker.min.js"></script>
     
     <script src="<?php echo $this->request->webroot ?>assets/plugins/chartjs/Chart.min.js"></script>
-    <script src="../../plugins/knob/jquery.knob.js"></script>
+    <script src="<?php echo $this->request->webroot ?>assets/plugins/knob/jquery.knob.js"></script>
     
     <!-- AdminLTE App -->
     <script src="<?php echo $this->request->webroot ?>assets/dist/js/app.min.js"></script>

@@ -73,9 +73,10 @@ class SprintsController extends AppController {
                 
                 $taskStatus = $taskStatusQuery[0];
                 
+                $sprintTasks = $this->Sprints->find()->where(['Sprints.project_id' => $projectId, 'Sprints.sprint' => $sprintId])->contain(['Tasks']);
             }
         }
-        $this->set(compact('sprints', 'projects', 'sprintHtml', 'projectId', 'sprintCheck', 'singleValues', 'taskStatus'));
+        $this->set(compact('sprints', 'projects', 'sprintHtml', 'projectId', 'sprintCheck', 'singleValues', 'taskStatus', 'sprintTasks'));
     }
 
     /**
