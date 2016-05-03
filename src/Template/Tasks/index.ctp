@@ -2,12 +2,29 @@
     <div class="box-header">
         <h3 class="box-title">Tasks</h3>
     </div><!-- /.box-header -->
+     <?//= $this->Form->create() ?>
     <div class="box-body">
-        <table class="table table-bordered table-striped" cellpadding="0" cellspacing="0">
-            <thead>
+         <?= $this->Form->create('', ['type' => 'get']) ?>
+           <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <div class="form-group">
+                        <?php echo $this->Form->input('project_id', ['options' => $projects, 'class' => 'form-control', 'empty' => '--Select Project--', 'id' => 'project-id']); ?>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <?= $this->Form->button(__('Submit'), array('class' => 'btn btn-primary', 'style' => 'margin-top:25px')); ?>
+            </div>
+        </div>
+    </div>
+      
+ <div class="box-body">
+         <?php if ($tasks): ?>
+            <table class="table table-bordered table-striped" cellpadding="0" cellspacing="0">
+                <thead>
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>
-                    <th><?= $this->Paginator->sort('project_id') ?></th>
                     <th><?= $this->Paginator->sort('task_name') ?></th>
                     <th><?= $this->Paginator->sort('task_duration') ?></th>
                     <th><?= $this->Paginator->sort('assgined_to') ?></th>
@@ -17,12 +34,11 @@
                     <th><?= $this->Paginator->sort('created_at') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($tasks as $task): ?>
-                    <tr>
+                </thead>
+                <tbody>
+                     <?php foreach ($tasks as $task): ?>
+                         <tr>
                         <td><?= $this->Number->format($task->id) ?></td>
-                        <td><?= $task->has('project') ? $this->Html->link($task->project->id, ['controller' => 'Projects', 'action' => 'view', $task->project->id]) : '' ?></td>
                         <td><?= h($task->task_name) ?></td>
                         <td><?= h($task->task_duration) ?></td>
                         <td><?= $this->Number->format($task->assgined_to) ?></td>
@@ -37,16 +53,19 @@
 
                         </td>
                     </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-        <div class="paginator">
-            <ul class="pagination">
-                <?= $this->Paginator->prev('< ' . __('previous')) ?>
-                <?= $this->Paginator->numbers() ?>
-                <?= $this->Paginator->next(__('next') . ' >') ?>
-            </ul>
-            <p><?= $this->Paginator->counter() ?></p>
-        </div>
+                        <?php
+                    endforeach;
+                    ?>
+                </tbody>
+            </table>
+            <div class="paginator">
+                <ul class="pagination">
+                    <?= $this->Paginator->prev('< ' . __('previous')) ?>
+                    <?= $this->Paginator->numbers() ?>
+                    <?= $this->Paginator->next(__('next') . ' >') ?>
+                </ul>
+                <p><?= $this->Paginator->counter() ?></p>
+            </div>
+        <?php endif; ?>
     </div><!-- /.box-body -->
 </div>

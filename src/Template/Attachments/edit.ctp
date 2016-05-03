@@ -43,8 +43,7 @@
     <?= $this->Form->create($attachment) ?>
     <div class="box-body">
         <div class="form-group">
-           
- <?php echo $this->Form->input('title', ['label' => 'Title', 'class' => 'form-control', 'empty' => true]); ?>
+            <?php  echo $this->Form->input('attachment_type_id', ['options' => $attachmentTypes]);?>
         </div>
         <div class="form-group">
             <?php

@@ -18,12 +18,30 @@ class TasksController extends AppController {
      * @return \Cake\Network\Response|null
      */
     public function index() {
-        $this->paginate = [
-            'contain' => ['Projects']
-        ];
-        $tasks = $this->paginate($this->Tasks);
-
-        $this->set(compact('tasks'));
+        $tasks = "";
+        $projects = [];
+         
+         $this->loadModel('Projects');
+         $projectData = $this->Projects->find('all', ['limit' => 200]);
+         if ($projectData) {
+            foreach ($projectData as $project) {
+                $projects[$project->id] = $project->title;
+            }
+            unset($project);
+        }
+      
+        //if submit 
+        if (isset($this->request->query['project_id'])) {
+            $projectId = $this->request->query['project_id'];
+            
+             $this->paginate = [
+                'contain' => ['Projects']
+            ];
+             
+             $tasks = $this->paginate($this->Tasks->find()->where(['Tasks.project_id' =>$projectId]));
+        }
+        
+        $this->set(compact('tasks','projects'));
         $this->set('_serialize', ['tasks']);
     }
 
