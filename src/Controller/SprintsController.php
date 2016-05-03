@@ -110,11 +110,13 @@ class SprintsController extends AppController {
                     unset($u);
                 }
                 
+                $productLogs = $this->Sprints->find()->where(['Sprints.project_id' => $projectId, 'Sprints.sprint' => $sprintId, 'Sprints.is_completed' => 1])->contain(['Tasks']);
+                
             }
         }
         $this->set(compact(
                 'sprints', 'projects', 'sprintHtml', 'projectId', 'sprintCheck', 'singleValues', 'taskStatus', 'sprintTasks', 'developer',
-                'userTaskDetail', 'userTaskCount'
+                'userTaskDetail', 'userTaskCount', 'productLogs'
                 ));
     }
 

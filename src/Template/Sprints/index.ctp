@@ -153,7 +153,7 @@
                                                     ?>
                                                     <tr>
                                                         <td><?=$task['task_name']?></td>
-                                                        <td><?=$task['task_name']?></td>
+                                                        <td><?=date('Y-m-d', strtotime($task['start_date']))?></td>
                                                         <td><?=$task['hours']?></td>
                                                         <td><?=$task['bugs']?></td>
                                                         <td><?=empty($task['is_completed']) ? '-' : 'Completed'?></td>
@@ -243,14 +243,14 @@
                         <h5 class="box-title">Product Backlog (Ready)</h5>
                     </div>
                     <div class="box-body">
-                        <div class="col-lg-3 bg-purple color-palette product-log-box">Module 1</div>
-                        <div class="col-lg-3 bg-purple color-palette product-log-box">Module 2</div>
-                        <div class="col-lg-3 bg-purple color-palette product-log-box">Module 3</div>
-                        <div class="col-lg-3 bg-purple color-palette product-log-box">Module 4</div>
-                        <div class="col-lg-3 bg-purple color-palette product-log-box">Module 5</div>
-                        <div class="col-lg-3 bg-purple color-palette product-log-box">Module 6</div>
-                        <div class="col-lg-3 bg-purple color-palette product-log-box">Module 7</div>
-                        <div class="col-lg-3 bg-purple color-palette product-log-box">Module 8</div>
+                        <?php
+                        if($productLogs){
+                            foreach ($productLogs as $product){
+                                echo '<div class="col-lg-3 bg-purple color-palette product-log-box">'.$product->task->task_name.'</div>';
+                            }
+                            unset($product);
+                        }
+                        ?>
                     </div>
                 </div>
 
