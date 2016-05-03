@@ -17,20 +17,32 @@ class AttachmentsController extends AppController {
      * @return \Cake\Network\Response|null
      */
     public function index() {
-               
-        $this->paginate = [
-            'contain' => ['AttachmentTypes', 'Projects', 'Tasks']
-        ];
-        $attachments = $this->paginate($this->Attachments);
+
+//        $this->paginate = [
+//            'contain' => ['AttachmentTypes', 'Projects', 'Tasks']
+//        ];
+//        $attachments = $this->paginate($this->Attachments);
         
+        $attachments = '';
         $attachmentTypes = $this->Attachments->AttachmentTypes->find('list', ['limit' => 200]);
-        $projects =[];
+        $projects = [];
         $projectLists = $this->Attachments->Projects->find('all', ['limit' => 200]);
         if ($projectLists) {
             foreach ($projectLists as $project) {
                 $projects[$project->id] = $project->title;
             }
             unset($project);
+        }
+
+        //if submit form
+        if (isset($this->request->query['project_id'])) {
+            $projectId = $this->request->query['project_id'];
+            $attachmentId = $this->request->query['attachment_type_id'];
+
+            $this->paginate = [
+                'contain' => ['AttachmentTypes', 'Projects', 'Tasks']
+            ];
+            $attachments = $this->paginate($this->Attachments->find()->where(['Attachments.project_id' =>$projectId, 'Attachments.attachment_type_id' => $attachmentId]));
         }
 
         $this->set(compact('attachments', 'attachmentTypes', 'projects'));
@@ -145,26 +157,26 @@ class AttachmentsController extends AppController {
         $filePath = WWW_ROOT . 'sprint_files' . DS . $fileInfo['origiginal_file_name'];
 
         $this->response->file(
-               $filePath, ['download' => true, 'name' => $fileInfo['file_name'].$fileInfo['file_type']]
+                $filePath, ['download' => true, 'name' => $fileInfo['file_name'] . $fileInfo['file_type']]
         );
-        
+
         return $this->response;
     }
-    public function viewAllAttachment(){
-         $projectId = $this->request->data['projectId'];
-         $attachtypeid = $this->request->data['attachtypeid'];
-          //debug($varallattachment);
-         //exit;
-         
-         //$connection = ConnectionManager::get('default');
+
+    public function viewAllAttachment() {
+        $projectId = $this->request->data['projectId'];
+        $attachtypeid = $this->request->data['attachtypeid'];
+        //debug($varallattachment);
+        //exit;
+        //$connection = ConnectionManager::get('default');
         //$var = 'SELECT a.id, at.title,a.file_name,p.title FROM attachments a INNER JOIN attachment_types at ON a.attachment_type_id = at.id JOIN projects p ON p.id = a.project_id'; 
         /*
-         $varallattachment = $connection->execute('SELECT a.id, at.title,a.file_name,p.title FROM attachments a INNER JOIN attachment_types at ON a.attachment_type_id ='.$attachtypeid.' JOIN projects p ON a.project_id='.$projectId)
-                ->fetchAll('assoc');*/
-         
-           $varallattachment = 'SELECT a.`id`, at.`title`,a.`file_name`,p.`title` FROM attachments a INNER JOIN attachment_types at ON a.attachment_type_id =' . $attachtypeid . ' JOIN projects p ON a.project_id =' . $projectId;
-                
-          if ($varallattachment) {
+          $varallattachment = $connection->execute('SELECT a.id, at.title,a.file_name,p.title FROM attachments a INNER JOIN attachment_types at ON a.attachment_type_id ='.$attachtypeid.' JOIN projects p ON a.project_id='.$projectId)
+          ->fetchAll('assoc'); */
+
+        $varallattachment = 'SELECT a.`id`, at.`title`,a.`file_name`,p.`title` FROM attachments a INNER JOIN attachment_types at ON a.attachment_type_id =' . $attachtypeid . ' JOIN projects p ON a.project_id =' . $projectId;
+
+        if ($varallattachment) {
             echo '<table class="table table-bordered table-striped" cellpadding="0" cellspacing="0">
                     <thead>
                 <tr>
@@ -190,7 +202,5 @@ class AttachmentsController extends AppController {
         }
         exit;
     }
-    
-    
 
 }
