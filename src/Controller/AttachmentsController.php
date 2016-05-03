@@ -153,15 +153,17 @@ class AttachmentsController extends AppController {
     public function viewAllAttachment(){
          $projectId = $this->request->data['projectId'];
          $attachtypeid = $this->request->data['attachtypeid'];
+          //debug($varallattachment);
+         //exit;
+         
          //$connection = ConnectionManager::get('default');
         //$var = 'SELECT a.id, at.title,a.file_name,p.title FROM attachments a INNER JOIN attachment_types at ON a.attachment_type_id = at.id JOIN projects p ON p.id = a.project_id'; 
         /*
          $varallattachment = $connection->execute('SELECT a.id, at.title,a.file_name,p.title FROM attachments a INNER JOIN attachment_types at ON a.attachment_type_id ='.$attachtypeid.' JOIN projects p ON a.project_id='.$projectId)
                 ->fetchAll('assoc');*/
          
-           $varallattachment = 'SELECT a.`id`, at.`title`,a.`file_name`,p.`title` FROM attachments a INNER JOIN attachment_types at ON a.attachment_type_id ='.$attachtypeid.' JOIN projects p ON a.project_id='.$projectId;
-        
-         
+           $varallattachment = 'SELECT a.`id`, at.`title`,a.`file_name`,p.`title` FROM attachments a INNER JOIN attachment_types at ON a.attachment_type_id =' . $attachtypeid . ' JOIN projects p ON a.project_id =' . $projectId;
+                
           if ($varallattachment) {
             echo '<table class="table table-bordered table-striped" cellpadding="0" cellspacing="0">
                     <thead>
