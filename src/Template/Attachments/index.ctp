@@ -46,7 +46,7 @@
                             <td><?= $this->Number->format($attachment->id) ?></td>
                             <td><?= $attachment->has('attachment_type') ? $attachment->attachment_type->title : '' ?></td>
                             <td><?= $attachment->has('project') ? $attachment->project->title : '' ?></td>
-                            <td><?= h($attachment->file_name) ? $this->Html->link($attachment->file_name, ['controller' => 'attachments', 'action' => 'download']) : '' ?></td>
+                            <td><?= h($attachment->file_name) ? $this->Html->link($attachment->file_name, ['controller' => 'attachments', 'action' => 'download/'.$attachment->id]) : '' ?></td>
                             <td><?= h($attachment->created_at) ?></td>
                             <td><?= $this->Number->format($attachment->created_by) ?></td>
                             <td class="actions">
