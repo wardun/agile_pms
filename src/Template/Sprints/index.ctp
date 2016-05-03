@@ -131,10 +131,11 @@
                         <?php
                         if ($developer) {
                             foreach ($developer as $dev) {
+                                $userTasks = json_decode($userTaskCount[$dev->id]);
                                 ?>
                                 <div class="col-lg-4">
                                     <h5><?= $dev->first_name . ' ' . $dev->last_name ?></h5>
-                                    <canvas id="user-tasks-<?=$dev->id?>" style="height:250px"></canvas>
+                                    <canvas id="user-tasks-<?= $dev->id ?>" style="height:250px"></canvas>
                                     <table class="table table-striped table-bordered">
                                         <thead>
                                             <tr>
@@ -146,27 +147,20 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>Task 1</td>
-                                                <td>2016-04-15</td>
-                                                <td>6 hours</td>
-                                                <td>0</td>
-                                                <td>Completed</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Task 1</td>
-                                                <td>2016-04-15</td>
-                                                <td>6 hours</td>
-                                                <td>0</td>
-                                                <td>Completed</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Task 1</td>
-                                                <td>2016-04-15</td>
-                                                <td>6 hours</td>
-                                                <td>0</td>
-                                                <td>Completed</td>
-                                            </tr>
+                                            <?php
+                                            foreach ($userTaskDetail as $task) {
+                                                if ($task['assgined_to'] == $dev->id) {
+                                                    ?>
+                                                    <tr>
+                                                        <td><?=$task['task_name']?></td>
+                                                        <td><?=$task['task_name']?></td>
+                                                        <td><?=$task['hours']?></td>
+                                                        <td><?=$task['bugs']?></td>
+                                                        <td><?=empty($task['is_completed']) ? '-' : 'Completed'?></td>
+                                                    </tr>
+                                                <?php }
+                                            }
+                                            ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -177,23 +171,23 @@
                                         //- PIE CHART -
                                         //-------------
                                         // Get context with jQuery - using jQuery's .get() method.
-                                        var pieChartCanvas = $("#user-tasks-<?=$dev->id?>").get(0).getContext("2d");
+                                        var pieChartCanvas = $("#user-tasks-<?= $dev->id ?>").get(0).getContext("2d");
                                         var pieChart = new Chart(pieChartCanvas);
                                         var PieData = [
                                             {
-                                                value: 8,
+                                                value: <?= $userTasks->total ?>,
                                                 color: "#f56954",
                                                 highlight: "#f56954",
                                                 label: "Total"
                                             },
                                             {
-                                                value: 5,
+                                                value: <?= $userTasks->completed ?>,
                                                 color: "#00a65a",
                                                 highlight: "#00a65a",
-                                                label: "Timely COmpleted"
+                                                label: "Completed"
                                             },
                                             {
-                                                value: 3,
+                                                value: <?= $userTasks->pending ?>,
                                                 color: "#f39c12",
                                                 highlight: "#f39c12",
                                                 label: "Pending"

@@ -94,9 +94,28 @@ class SprintsController extends AppController {
                                 WHERE a.`project_id` = $projectId AND a.`sprint` = $sprintId
                             ")->fetchAll('assoc');
                 
+                $userTaskStatus = $connection->execute("
+                                SELECT b.`assgined_to`, COUNT(*) total,
+                                (SELECT COUNT(*) FROM sprints WHERE a.`project_id` = $projectId AND a.`sprint` = $sprintId AND is_completed = 1) completed
+                                FROM sprints a
+                                INNER JOIN tasks b
+                                ON a.`project_id` = b.`project_id` AND a.`task_id` = b.`id`
+                                WHERE a.`project_id` = $projectId AND a.`sprint` = $sprintId
+                                GROUP BY b.`assgined_to`
+                            ")->fetchAll('assoc');
+                if($userTaskStatus){
+                    foreach ($userTaskStatus as $u){
+                        $userTaskCount[$u['assgined_to']] = json_encode(['total' => $u['total'], 'completed' =>$u['completed'], 'pending' =>($u['total'] - $u['completed'])]);
+                    }
+                    unset($u);
+                }
+                
             }
         }
-        $this->set(compact('sprints', 'projects', 'sprintHtml', 'projectId', 'sprintCheck', 'singleValues', 'taskStatus', 'sprintTasks', 'developer', 'userTaskDetail'));
+        $this->set(compact(
+                'sprints', 'projects', 'sprintHtml', 'projectId', 'sprintCheck', 'singleValues', 'taskStatus', 'sprintTasks', 'developer',
+                'userTaskDetail', 'userTaskCount'
+                ));
     }
 
     /**
