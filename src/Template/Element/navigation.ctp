@@ -20,6 +20,7 @@
                     <i class="fa fa-dashboard"></i> <span>Dashboard</span></i>
                 </a>
             </li>
+            <?php if($userInfo['role'] == 1 || $userInfo['role'] == 2){ // for admin & pm?>
 
             <li class="treeview <?php echo ($this->request->params['controller']) == 'Users' ? 'active' : ''; ?>">
                 <a href="<?php echo $this->Url->build(["controller" => "users", "action" => "index"]) ?>">
@@ -89,6 +90,54 @@
                     <li><a href="<?php echo $this->Url->build(["controller" => "attachments", "action" => "index"]) ?>">View All Information</a></li>
                 </ul>
             </li>
+            <?php }?>
+            
+            <?php if($userInfo['role'] == 3 || $userInfo['role'] == 4){ // for dev?>
+            <li class="treeview <?php echo ($this->request->params['controller']) == 'Tasks' ? 'active' : ''; ?>">
+                <a href="<?php echo $this->Url->build(["controller" => "tasks", "action" => "index"]) ?>">
+                    <i class="fa fa-tasks"></i>
+                    <span>Tasks</span>
+                </a>
+            </li>
+            <li class="treeview <?php echo ($this->request->params['controller']) == 'Sprints' ? 'active' : ''; ?>">
+                <a href="<?php echo $this->Url->build(["controller" => "sprints", "action" => "index"]) ?>">
+                    <i class="fa fa-database"></i>
+                    <span>Sprints</span>
+                </a>
+            </li>
+             <li class="treeview <?php echo ($this->request->params['controller']) == 'Sprints' ? 'active' : ''; ?>">
+                <a href="<?php echo $this->Url->build(["controller" => "sprints", "action" => "userStories"]) ?>">
+                    <i class="fa fa-book"></i>
+                    <span>User Story</span>
+                </a>
+            </li>
+            <?php }?>
+            
+            <?php if($userInfo['role'] == 5){ // for dev?>
+            <li class="treeview <?php echo ($this->request->params['controller']) == 'Attachments' ? 'active' : ''; ?>">
+                <a href="#">
+                    <i class="glyphicon glyphicon-folder-open"></i>
+                    <span>Meeting Information</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="<?php echo $this->Url->build(["controller" => "attachments", "action" => "add"]) ?>">Upload Information</a></li>
+                    <li><a href="<?php echo $this->Url->build(["controller" => "attachments", "action" => "index"]) ?>">View All Information</a></li>
+                </ul>
+            </li>
+            <li class="treeview <?php echo ($this->request->params['controller']) == 'Sprints' ? 'active' : ''; ?>">
+                <a href="<?php echo $this->Url->build(["controller" => "sprints", "action" => "index"]) ?>">
+                    <i class="fa fa-database"></i>
+                    <span>Sprints</span>
+                </a>
+            </li>
+             <li class="treeview <?php echo ($this->request->params['controller']) == 'Sprints' ? 'active' : ''; ?>">
+                <a href="<?php echo $this->Url->build(["controller" => "sprints", "action" => "userStories"]) ?>">
+                    <i class="fa fa-book"></i>
+                    <span>User Story</span>
+                </a>
+            </li>
+            <?php }?>
         </ul>
     </section>
     <!-- /.sidebar -->
