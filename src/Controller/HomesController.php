@@ -60,8 +60,16 @@ class HomesController extends AppController {
         $todaysTasks = $this->Tasks->find()->where(['DATE(Tasks.start_date) <=' => 'DATE(NOW()', 'Tasks.actual_end_date' => '0000-00-00 00:00:00'])->contain(['AssignedUser', 'Projects']);
         
         //todays scrum report
-        $this->loadModel('Attachments');
-        $todaysScrums = $this->Attachments->find()->where(['attachment_type_id' => 3,'DATE(Attachments.created_at) ' => 'DATE(NOW())'])->contain(['Projects']);
+        $todaysScrums = $connection->execute("
+                        SELECT b.`title`, a.`file_name`, a.`origiginal_file_name`,a.`id`
+                        FROM attachments a 
+                          INNER JOIN projects b 
+                            ON b.id = a.project_id 
+                        WHERE a.attachment_type_id = 3 
+                          AND DATE(a.created_at) = DATE(NOW())
+                         ")
+                        ->fetchAll('assoc');
+        
 
         $this->set(compact('totalEmployee', 'runningProjects', 'notices', 'birthdayInfo', 'proejcts', 'sprintStatus', 'todaysTasks', 'todaysScrums'));
     }

@@ -229,7 +229,7 @@
                         <tr>
                             <th>Project</th>
                             <th>Filename</th>
-                            <th>Downlaod</th>
+                            <th>Download</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -238,9 +238,9 @@
                             foreach ($todaysScrums as $scrum) {
                                 ?>
                                 <tr>
-                                    <td><?=$scrum->file_name?></td>
-                                    <td><?=$scrum->file_name?></td>
-                                    <td>Downlaod</td>
+                                    <td><?=$scrum['title']?></td>
+                                    <td><?=$scrum['file_name']?></td>
+                                    <td><?php echo $this->Html->link('<i class="fa fa-download"></i>', array('controller' => 'attachments','action' => 'download', '', $scrum['id']), array('class' => 'btn btn-sm btn-primary ', 'title' => 'Download', 'escape' => false)); ?></td>
                                 </tr>
                                 <?php
                             }
