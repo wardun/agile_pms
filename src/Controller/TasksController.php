@@ -18,7 +18,7 @@ class TasksController extends AppController {
      * @return \Cake\Network\Response|null
      */
     public function index() {
-        $tasks = "";
+       $tasks = "";
         $projects = [];
          
          $this->loadModel('Projects');
@@ -205,6 +205,28 @@ class TasksController extends AppController {
         }
 
         return ($sprintInfo);
+    }
+    
+    public function qa($id = null){
+        /*  $task = $this->Tasks->get($id, [
+            'contain' => ['Projects']
+        ]);*/
+        /*
+        $task = $this->TaskBugs->newEntity();
+        if ($this->request->is('post')) {
+            $task = $this->TaskBugs->patchEntity($task, $this->request->data);
+            if ($this->TaskBugs->save($task)) {
+                //$this->set('is_completed = 0', $this->Sprints->findById($id));
+               // $data = array('id' => $id, 'is_completed' => '0');
+               // $this->Sprints->save($data);
+                $this->Flash->success(__('The task has been saved.'));
+                return $this->redirect(['action' => 'index']);
+            } else {
+                $this->Flash->error(__('The task could not be saved. Please, try again.'));
+            }
+        }
+        
+        $this->set('task', $task);*/
     }
 
 }

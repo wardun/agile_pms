@@ -48,6 +48,7 @@
                         <td><?= h($task->created_at) ?></td>
                         <td class="actions">
                             <?php echo !empty ($task->assgined_to) ? '' : $this->Html->link('<i class="fa fa-tag"></i>', array('action' => 'assign_task', '', $task->id), array('class' => 'btn btn-sm btn-primary', 'title' => 'Assign Task', 'escape' => false)); ?>
+                            <?php echo !empty ($task->assgined_to) ? '' : $this->Html->link('<i class="fa fa-files-o"></i>', array('action' => 'qa', '', $task->id), array('class' => 'btn btn-sm btn-primary', 'title' => 'QA', 'escape' => false)); ?>
                             <?php echo $this->Html->link('<i class="fa fa-pencil"></i>', array('action' => 'edit', '', $task->id), array('class' => 'btn btn-sm btn-warning', 'title' => 'Edit', 'escape' => false)); ?>
                             <?= $this->Form->postLink($this->Html->tag('i', '', array('class' => 'fa fa-times')), ['action' => 'delete', $task->id], ['class' => 'btn btn-sm btn-danger delete', 'title' => 'Delete', 'escape' => false, 'confirm' => __('Are you sure you want to delete # {0}?', $task->id)]); ?>
 
