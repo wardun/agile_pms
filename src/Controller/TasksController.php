@@ -226,7 +226,18 @@ class TasksController extends AppController {
                 $this->Flash->error(__('The task could not be saved. Please, try again.'));
             }
         }
+        /*
+          $Buglists = [];
 
+        $this->loadModel('TaskBugs');
+        $BugData = $this->TaskBugs->find()->where(['Tasks.id' => 'TaskBugs.task_id']);
+        if ($BugData) {
+            foreach ($BugData as $project) {
+                $Buglists[$project->id] = $project->title;
+            }
+            unset($project);
+        }
+*/
         $this->set(compact('task', 'taskBug'));
     }
 

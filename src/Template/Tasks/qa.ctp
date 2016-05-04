@@ -32,6 +32,7 @@
     </div><!-- /.box-body -->
 
     <div class="box-body">
+         <?php if ($Buglists): ?>
         <table class="table table-bordered table-striped" cellpadding="0" cellspacing="0">
             <thead>
                 <tr>
@@ -40,19 +41,24 @@
                 </tr>
             </thead>
             <tbody>
+                 <?php foreach ($Buglists as $task): ?>
                 <tr>
-                    <td>Tasks1</td>
-                    <td>User story UI1</td>
+                    <td><?= h($task->task_name) ?></td>
+                    <td><?= h($task->bug_detail) ?></td>
                 </tr>
-                <tr>
-                    <td>Tasks2</td>
-                    <td>User story UI2</td>
-                </tr>
-                <tr>
-                    <td>Tasks3</td>
-                    <td>User story UI3</td>
-                </tr>
+                <?php
+                    endforeach;
+                    ?>
             </tbody>
         </table>
+            <div class="paginator">
+                <ul class="pagination">
+                    <?= $this->Paginator->prev('< ' . __('previous')) ?>
+                    <?= $this->Paginator->numbers() ?>
+                    <?= $this->Paginator->next(__('next') . ' >') ?>
+                </ul>
+                <p><?= $this->Paginator->counter() ?></p>
+            </div>
+        <?php endif; ?>
     </div><!-- /.box-body -->
 </div>
