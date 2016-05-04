@@ -210,22 +210,21 @@ class TasksController extends AppController {
     public function qa($id = null){
         $task = $this->Tasks->get($id);
         
-        /*
-        $task = $this->TaskBugs->newEntity();
+       /* $taskBug = $this->TaskBugs->newEntity();
         if ($this->request->is('post')) {
-            $task = $this->TaskBugs->patchEntity($task, $this->request->data);
-            if ($this->TaskBugs->save($task)) {
+            $taskbug = $this->TaskBugs->patchEntity($taskBug, $this->request->data);
+            if ($this->TaskBugs->save($taskbug)) {
                 //$this->set('is_completed = 0', $this->Sprints->findById($id));
-               // $data = array('id' => $id, 'is_completed' => '0');
-               // $this->Sprints->save($data);
+                $data = array('id' => $id, 'is_completed' => '0');
+                $this->Sprints->save($data);
                 $this->Flash->success(__('The task has been saved.'));
                 return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('The task could not be saved. Please, try again.'));
             }
         }
-        */
-        $this->set(compact('task'));
+      
+        $this->set(compact('taskbug'));*/
     }
 
 }
