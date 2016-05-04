@@ -10,8 +10,8 @@
                     <th><?= $this->Paginator->sort('role') ?></th>
                     <th><?= $this->Paginator->sort('username') ?></th>
                     <th><?= $this->Paginator->sort('email') ?></th>
-                    <th><?= $this->Paginator->sort('first_name') ?></th>
-                    <th><?= $this->Paginator->sort('last_name') ?></th>
+                    <th><?= $this->Paginator->sort('name') ?></th>
+                    <th><?= $this->Paginator->sort('designation') ?></th>
                     <th><?= $this->Paginator->sort('joindate') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
@@ -20,12 +20,26 @@
                 <?php foreach ($users as $user): ?>
                     <tr>
                         <td><?= $this->Number->format($user->id) ?></td>
-                        <td><?= $this->Number->format($user->role) ?></td>
+                        <td>
+                            <?php
+                            if($user->role == 1){
+                                echo 'Admin';
+                            }else if($user->role == 2){
+                                echo 'Project Manager';
+                            }else if($user->role == 3){
+                                echo 'Developer';
+                            }else if($user->role == 4){
+                                echo 'QA';
+                            }else if($user->role == 5){
+                                echo 'Scrum Master';
+                            }
+                            ?>
+                        </td>
                         <td><?= h($user->username) ?></td>
                         <td><?= h($user->email) ?></td>
-                        <td><?= h($user->first_name) ?></td>
-                        <td><?= h($user->last_name) ?></td>
-                        <td><?= h($user->joindate) ?></td>
+                        <td><?= h($user->first_name.' '.$user->last_name) ?></td>
+                        <td><?= h($user->designation) ?></td>
+                        <td><?= date('Y-m-d', strtotime($user->joindate)) ?></td>
                         <td class="actions">
                            <?php echo $this->Html->link('<i class="fa fa-pencil"></i>', array('action' => 'edit', '', $user->id), array('class' => 'btn btn-sm btn-warning', 'title' => 'Edit', 'escape' => false)); ?>
                            <?php echo $this->Html->link('<i class="fa fa-edit"></i>', array('action' => 'changepassword', '', $user->id), array('class' => 'btn btn-sm btn-success view', 'title' => 'Change Password', 'escape' => false)); ?>

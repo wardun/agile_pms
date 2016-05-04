@@ -93,6 +93,12 @@
             <?php }?>
             
             <?php if($userInfo['role'] == 3 || $userInfo['role'] == 4){ // for dev?>
+            <li class="treeview <?php echo ($this->request->params['controller']) == 'Users' ? 'active' : ''; ?>">
+                <a href="<?php echo $this->Url->build(["controller" => "users", "action" => "index"]) ?>">
+                    <i class="fa fa-user"></i>
+                    <span>My Profile</span>
+                </a>
+            </li>
             <li class="treeview <?php echo ($this->request->params['controller']) == 'Tasks' ? 'active' : ''; ?>">
                 <a href="<?php echo $this->Url->build(["controller" => "tasks", "action" => "index"]) ?>">
                     <i class="fa fa-tasks"></i>
@@ -114,6 +120,12 @@
             <?php }?>
             
             <?php if($userInfo['role'] == 5){ // for dev?>
+            <li class="treeview <?php echo ($this->request->params['controller']) == 'Users' ? 'active' : ''; ?>">
+                <a href="<?php echo $this->Url->build(["controller" => "users", "action" => "index"]) ?>">
+                    <i class="fa fa-user"></i>
+                    <span>My Profile</span>
+                </a>
+            </li>
             <li class="treeview <?php echo ($this->request->params['controller']) == 'Attachments' ? 'active' : ''; ?>">
                 <a href="#">
                     <i class="glyphicon glyphicon-folder-open"></i>

@@ -1,5 +1,5 @@
 <?php
-$userRoles = [1 => 'Admin', 'Project Manager', 'Employee'];
+$userRoles = [1 => 'Admin', 'Project Manager', 'Employee', 'QA', 'Scrum Master'];
 if (isset($_POST['joindate'])) {
     $joinData = $_POST['joindate'];
 } else {
