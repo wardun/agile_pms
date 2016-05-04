@@ -299,7 +299,7 @@
                         //-------------
 
                         var areaChartData = {
-                            labels: ["Total", "Completed", "Sprint Plan", "Not Yet Completed"],
+                            labels: ["Total", "Completed", "Not Yet Completed"],
                             datasets: [
                                 {
                                     label: "Tasks",
@@ -309,7 +309,7 @@
                                     pointStrokeColor: "#c1c7d1",
                                     pointHighlightFill: "#fff",
                                     pointHighlightStroke: "rgba(220,220,220,1)",
-                                    data: [<?= $taskStatus['total'] ?>, <?= $taskStatus['completed'] ?>, <?= $taskStatus['sprint_plan'] ?>, <?= ($taskStatus['total'] - $taskStatus['completed']) ?>]
+                                    data: [<?= $taskStatus['total'] ?>, <?= $taskStatus['completed'] ?>, <?= ($taskStatus['total'] - $taskStatus['completed']) ?>]
                                 }
                             ]
                         };
