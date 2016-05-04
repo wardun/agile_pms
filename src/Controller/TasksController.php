@@ -18,30 +18,30 @@ class TasksController extends AppController {
      * @return \Cake\Network\Response|null
      */
     public function index() {
-       $tasks = "";
+        $tasks = "";
         $projects = [];
-         
-         $this->loadModel('Projects');
-         $projectData = $this->Projects->find('all', ['limit' => 200]);
-         if ($projectData) {
+
+        $this->loadModel('Projects');
+        $projectData = $this->Projects->find('all', ['limit' => 200]);
+        if ($projectData) {
             foreach ($projectData as $project) {
                 $projects[$project->id] = $project->title;
             }
             unset($project);
         }
-      
+
         //if submit 
         if (isset($this->request->query['project_id'])) {
             $projectId = $this->request->query['project_id'];
-            
-             $this->paginate = [
+
+            $this->paginate = [
                 'contain' => ['Projects']
             ];
-             
-             $tasks = $this->paginate($this->Tasks->find()->where(['Tasks.project_id' =>$projectId]));
+
+            $tasks = $this->paginate($this->Tasks->find()->where(['Tasks.project_id' => $projectId]));
         }
-        
-        $this->set(compact('tasks','projects'));
+
+        $this->set(compact('tasks', 'projects'));
         $this->set('_serialize', ['tasks']);
     }
 
@@ -206,25 +206,28 @@ class TasksController extends AppController {
 
         return ($sprintInfo);
     }
-    
-    public function qa($id = null){
+
+    public function qa($id = null) {
         $task = $this->Tasks->get($id);
-        
-       /* $taskBug = $this->TaskBugs->newEntity();
+
+        $this->loadModel('TaskBugs');
+        $taskBug = $this->TaskBugs->newEntity();
         if ($this->request->is('post')) {
             $taskbug = $this->TaskBugs->patchEntity($taskBug, $this->request->data);
             if ($this->TaskBugs->save($taskbug)) {
-                //$this->set('is_completed = 0', $this->Sprints->findById($id));
-                $data = array('id' => $id, 'is_completed' => '0');
-                $this->Sprints->save($data);
+                if(isset($this->request->data['is_completed'])){
+                    $data = array('id' => $id, 'is_completed' => 1);
+                    $this->loadModel('Sprints');
+                    $this->Sprints->save($data);
+                }
                 $this->Flash->success(__('The task has been saved.'));
                 return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('The task could not be saved. Please, try again.'));
             }
         }
-      
-        $this->set(compact('taskbug'));*/
+
+        $this->set(compact('task', 'taskBug'));
     }
 
 }
