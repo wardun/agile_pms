@@ -41,6 +41,13 @@ class TasksTable extends Table
         $this->hasMany('Sprints', [
             'foreignKey' => 'task_id'
         ]);
+        
+        $this->belongsTo('AssignedUser', [
+            'className' => 'Users',
+            'foreignKey' => false,
+            'conditions' => '`Tasks`.`assgined_to` = `AssignedUser`.`id`',
+            'fields' => 'first_name,last_name',
+        ]);
     }
 
     /**

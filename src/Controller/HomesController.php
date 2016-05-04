@@ -54,9 +54,16 @@ class HomesController extends AppController {
                 }
             }
         }
+        
+        //todays tasks
+        $this->loadModel('Tasks');
+        $todaysTasks = $this->Tasks->find()->where(['DATE(Tasks.start_date) <=' => 'DATE(NOW()', 'Tasks.actual_end_date' => '0000-00-00 00:00:00'])->contain(['AssignedUser', 'Projects']);
+        
+        //todays scrum report
+        $this->loadModel('Attachments');
+        $todaysScrums = $this->Attachments->find()->where(['attachment_type_id' => 3,'DATE(Attachments.created_at) ' => 'DATE(NOW())'])->contain(['Projects']);
 
-
-        $this->set(compact('totalEmployee', 'runningProjects', 'notices', 'birthdayInfo', 'proejcts', 'sprintStatus'));
+        $this->set(compact('totalEmployee', 'runningProjects', 'notices', 'birthdayInfo', 'proejcts', 'sprintStatus', 'todaysTasks', 'todaysScrums'));
     }
 
 }

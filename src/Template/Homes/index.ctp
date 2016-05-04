@@ -100,33 +100,34 @@
                         if ($sprintStatus[$proejct->id]) {
                             foreach ($sprintStatus[$proejct->id] as $sprintInfo) {
                                 $sprint = json_decode($sprintInfo);
+                                $completedStatus = ceil(($sprint->completed * 100) / $sprint->total);
                                 ?>
                                 <div class="col-lg-6">
-                                    <h4 class="center">Sprint <?=$sprint->sprint?></h4>
-                                    <canvas id="project<?= $proejct->id ?>s<?=$sprint->sprint?>" style="height:250px"></canvas>
+                                    <h4 class="center">Sprint <?= $sprint->sprint ?></h4>
+                                    <canvas id="project<?= $proejct->id ?>s<?= $sprint->sprint ?>" style="height:250px"></canvas>
                                     <script>
                                         $(function () {
                                             //-------------
                                             //- PIE CHART -
                                             //-------------
                                             // Get context with jQuery - using jQuery's .get() method.
-                                            var pieChartCanvas = $("#project<?= $proejct->id ?>s<?=$sprint->sprint?>").get(0).getContext("2d");
+                                            var pieChartCanvas = $("#project<?= $proejct->id ?>s<?= $sprint->sprint ?>").get(0).getContext("2d");
                                             var pieChart = new Chart(pieChartCanvas);
                                             var PieData = [
                                                 {
-                                                    value: <?=$sprint->total?>,
+                                                    value: <?= $sprint->total ?>,
                                                     color: "#3C8DBC",
                                                     highlight: "#3C8DBC",
                                                     label: "Total"
                                                 },
                                                 {
-                                                    value: <?=$sprint->completed?>,
+                                                    value: <?= $sprint->completed ?>,
                                                     color: "#00a65a",
                                                     highlight: "#00a65a",
                                                     label: "Completed"
                                                 },
                                                 {
-                                                    value: <?=$sprint->pending?>,
+                                                    value: <?= $sprint->pending ?>,
                                                     color: "#f56954",
                                                     highlight: "#f56954",
                                                     label: "Pending"
@@ -193,12 +194,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Project</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>4</td>
-                        </tr>
+                        <?php
+                        if ($todaysTasks) {
+                            foreach ($todaysTasks as $task) {
+                                ?>
+                                <tr>
+                                    <td><?= $task->project->title ?></td>
+                                    <td><?= $task->task_name ?></td>
+                                    <td><?= $task->assigned_user->first_name . ' ' . $task->assigned_user->last_name ?></td>
+                                    <td><?= empty($task->actual_end_date) ? 'In Development' : 'Completed' ?></td>
+                                </tr>
+                                <?php
+                            }
+                            unset($task);
+                        }
+                        ?>
                     </tbody>
                 </table>
             </div>
@@ -218,14 +228,24 @@
                     <thead>
                         <tr>
                             <th>Project</th>
+                            <th>Filename</th>
                             <th>Downlaod</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Project</td>
-                            <td>Downlaod</td>
-                        </tr>
+                        <?php
+                        if ($todaysScrums) {
+                            foreach ($todaysScrums as $scrum) {
+                                ?>
+                                <tr>
+                                    <td><?=$scrum->file_name?></td>
+                                    <td><?=$scrum->file_name?></td>
+                                    <td>Downlaod</td>
+                                </tr>
+                                <?php
+                            }
+                        }
+                        ?>
                     </tbody>
                 </table>
             </div>
