@@ -39,6 +39,8 @@ $pageTitle = isset($pageTitle) ? $pageTitle : $this->fetch('title');
         <link rel="stylesheet" href="<?php echo $this->request->webroot ?>assets/plugins/select2/select2.min.css">
         
         <link rel="stylesheet" href="<?php echo $this->request->webroot ?>assets/dist/css/jquery.timepicker.min.css">
+        
+        <link rel="stylesheet" href="<?php echo $this->request->webroot ?>assets/plugins/fullcalendar/fullcalendar.min.css">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -109,6 +111,8 @@ $pageTitle = isset($pageTitle) ? $pageTitle : $this->fetch('title');
     
     <script src="<?php echo $this->request->webroot ?>assets/plugins/chartjs/Chart.min.js"></script>
     <script src="<?php echo $this->request->webroot ?>assets/plugins/knob/jquery.knob.js"></script>
+    
+    <script src="<?php echo $this->request->webroot ?>assets/plugins/fullcalendar/fullcalendar.min.js"></script>
     
     <!-- AdminLTE App -->
     <script src="<?php echo $this->request->webroot ?>assets/dist/js/app.min.js"></script>

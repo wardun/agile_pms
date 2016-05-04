@@ -1,4 +1,9 @@
 <!-- Small boxes (Stat box) -->
+<style>
+    #calendar .datepicker{
+        display: none !important;
+    }
+</style>
 <div class="row">
 
     <div class="col-lg-3 col-xs-6">
@@ -16,12 +21,12 @@
             <?php endif; ?>
         </div>
     </div><!-- ./col -->
-    
+
     <div class="col-lg-3 col-xs-6">
         <!-- small box -->
         <div class="small-box bg-green">
             <div class="inner">
-                <h3><?=$runningProjects?></h3>
+                <h3><?= $runningProjects ?></h3>
                 <p>Running Projects</p>
             </div>
             <div class="icon">
@@ -37,7 +42,7 @@
         <!-- small box -->
         <div class="small-box bg-aqua">
             <div class="inner">
-                <h3><?=$notices?></h3>
+                <h3><?= $notices ?></h3>
                 <p>New Notices</p>
             </div>
             <div class="icon">
@@ -46,13 +51,13 @@
             <a href="<?php echo $this->Url->build(["controller" => "notices", "action" => "index"]) ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div><!-- ./col -->
-    
+
 
     <div class="col-lg-3 col-xs-6">
         <!-- small box -->
         <div class="small-box bg-red">
             <div class="inner">
-                <h3><?=$birthdayInfo?></h3>
+                <h3><?= $birthdayInfo ?></h3>
                 <p>Birthday</p>
             </div>
             <div class="icon">
@@ -62,368 +67,235 @@
         </div>
     </div><!-- ./col -->
 </div><!-- /.row -->
-<!-- Main row -->
+
 <div class="row">
-    <!-- Left col -->
-    <section class="col-lg-7 connectedSortable">
-        <!-- Custom tabs (Charts with tabs)-->
-        <div class="nav-tabs-custom">
-            <!-- Tabs within a box -->
-            <ul class="nav nav-tabs pull-right">
-                <li class="active"><a href="#revenue-chart" data-toggle="tab">Area</a></li>
-                <li><a href="#sales-chart" data-toggle="tab">Donut</a></li>
-                <li class="pull-left header"><i class="fa fa-inbox"></i> Sales</li>
-            </ul>
-            <div class="tab-content no-padding">
-                <!-- Morris chart - Sales -->
-                <div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 300px;"></div>
-                <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;"></div>
-            </div>
-        </div><!-- /.nav-tabs-custom -->
-
-        <!-- Chat box -->
-        <div class="box box-success">
-            <div class="box-header">
-                <i class="fa fa-comments-o"></i>
-                <h3 class="box-title">Chat</h3>
-                <div class="box-tools pull-right" data-toggle="tooltip" title="Status">
-                    <div class="btn-group" data-toggle="btn-toggle" >
-                        <button type="button" class="btn btn-default btn-sm active"><i class="fa fa-square text-green"></i></button>
-                        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-square text-red"></i></button>
-                    </div>
-                </div>
-            </div>
-            <div class="box-body chat" id="chat-box">
-                <!-- chat item -->
-                <div class="item">
-                    <img src="dist/img/user4-128x128.jpg" alt="user image" class="online">
-                    <p class="message">
-                        <a href="#" class="name">
-                            <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> 2:15</small>
-                            Mike Doe
-                        </a>
-                        I would like to meet you to discuss the latest news about
-                        the arrival of the new theme. They say it is going to be one the
-                        best themes on the market
-                    </p>
-                    <div class="attachment">
-                        <h4>Attachments:</h4>
-                        <p class="filename">
-                            Theme-thumbnail-image.jpg
-                        </p>
-                        <div class="pull-right">
-                            <button class="btn btn-primary btn-sm btn-flat">Open</button>
-                        </div>
-                    </div><!-- /.attachment -->
-                </div><!-- /.item -->
-                <!-- chat item -->
-                <div class="item">
-                    <img src="dist/img/user3-128x128.jpg" alt="user image" class="offline">
-                    <p class="message">
-                        <a href="#" class="name">
-                            <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> 5:15</small>
-                            Alexander Pierce
-                        </a>
-                        I would like to meet you to discuss the latest news about
-                        the arrival of the new theme. They say it is going to be one the
-                        best themes on the market
-                    </p>
-                </div><!-- /.item -->
-                <!-- chat item -->
-                <div class="item">
-                    <img src="dist/img/user2-160x160.jpg" alt="user image" class="offline">
-                    <p class="message">
-                        <a href="#" class="name">
-                            <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> 5:30</small>
-                            Susan Doe
-                        </a>
-                        I would like to meet you to discuss the latest news about
-                        the arrival of the new theme. They say it is going to be one the
-                        best themes on the market
-                    </p>
-                </div><!-- /.item -->
-            </div><!-- /.chat -->
-            <div class="box-footer">
-                <div class="input-group">
-                    <input class="form-control" placeholder="Type message...">
-                    <div class="input-group-btn">
-                        <button class="btn btn-success"><i class="fa fa-plus"></i></button>
-                    </div>
-                </div>
-            </div>
-        </div><!-- /.box (chat box) -->
-
-        <!-- TO DO List -->
+    <section class="col-lg-12 connectedSortable">
         <div class="box box-primary">
             <div class="box-header">
-                <i class="ion ion-clipboard"></i>
-                <h3 class="box-title">To Do List</h3>
-                <div class="box-tools pull-right">
-                    <ul class="pagination pagination-sm inline">
-                        <li><a href="#">&laquo;</a></li>
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">&raquo;</a></li>
-                    </ul>
-                </div>
-            </div><!-- /.box-header -->
-            <div class="box-body">
-                <ul class="todo-list">
-                    <li>
-                        <!-- drag handle -->
-                        <span class="handle">
-                            <i class="fa fa-ellipsis-v"></i>
-                            <i class="fa fa-ellipsis-v"></i>
-                        </span>
-                        <!-- checkbox -->
-                        <input type="checkbox" value="" name="">
-                        <!-- todo text -->
-                        <span class="text">Design a nice theme</span>
-                        <!-- Emphasis label -->
-                        <small class="label label-danger"><i class="fa fa-clock-o"></i> 2 mins</small>
-                        <!-- General tools such as edit or delete-->
-                        <div class="tools">
-                            <i class="fa fa-edit"></i>
-                            <i class="fa fa-trash-o"></i>
-                        </div>
-                    </li>
-                    <li>
-                        <span class="handle">
-                            <i class="fa fa-ellipsis-v"></i>
-                            <i class="fa fa-ellipsis-v"></i>
-                        </span>
-                        <input type="checkbox" value="" name="">
-                        <span class="text">Make the theme responsive</span>
-                        <small class="label label-info"><i class="fa fa-clock-o"></i> 4 hours</small>
-                        <div class="tools">
-                            <i class="fa fa-edit"></i>
-                            <i class="fa fa-trash-o"></i>
-                        </div>
-                    </li>
-                    <li>
-                        <span class="handle">
-                            <i class="fa fa-ellipsis-v"></i>
-                            <i class="fa fa-ellipsis-v"></i>
-                        </span>
-                        <input type="checkbox" value="" name="">
-                        <span class="text">Let theme shine like a star</span>
-                        <small class="label label-warning"><i class="fa fa-clock-o"></i> 1 day</small>
-                        <div class="tools">
-                            <i class="fa fa-edit"></i>
-                            <i class="fa fa-trash-o"></i>
-                        </div>
-                    </li>
-                    <li>
-                        <span class="handle">
-                            <i class="fa fa-ellipsis-v"></i>
-                            <i class="fa fa-ellipsis-v"></i>
-                        </span>
-                        <input type="checkbox" value="" name="">
-                        <span class="text">Let theme shine like a star</span>
-                        <small class="label label-success"><i class="fa fa-clock-o"></i> 3 days</small>
-                        <div class="tools">
-                            <i class="fa fa-edit"></i>
-                            <i class="fa fa-trash-o"></i>
-                        </div>
-                    </li>
-                    <li>
-                        <span class="handle">
-                            <i class="fa fa-ellipsis-v"></i>
-                            <i class="fa fa-ellipsis-v"></i>
-                        </span>
-                        <input type="checkbox" value="" name="">
-                        <span class="text">Check your messages and notifications</span>
-                        <small class="label label-primary"><i class="fa fa-clock-o"></i> 1 week</small>
-                        <div class="tools">
-                            <i class="fa fa-edit"></i>
-                            <i class="fa fa-trash-o"></i>
-                        </div>
-                    </li>
-                    <li>
-                        <span class="handle">
-                            <i class="fa fa-ellipsis-v"></i>
-                            <i class="fa fa-ellipsis-v"></i>
-                        </span>
-                        <input type="checkbox" value="" name="">
-                        <span class="text">Let theme shine like a star</span>
-                        <small class="label label-default"><i class="fa fa-clock-o"></i> 1 month</small>
-                        <div class="tools">
-                            <i class="fa fa-edit"></i>
-                            <i class="fa fa-trash-o"></i>
-                        </div>
-                    </li>
-                </ul>
-            </div><!-- /.box-body -->
-            <div class="box-footer clearfix no-border">
-                <button class="btn btn-default pull-right"><i class="fa fa-plus"></i> Add item</button>
-            </div>
-        </div><!-- /.box -->
-
-        <!-- quick email widget -->
-        <div class="box box-info">
-            <div class="box-header">
-                <i class="fa fa-envelope"></i>
-                <h3 class="box-title">Quick Email</h3>
-                <!-- tools box -->
-                <div class="pull-right box-tools">
-                    <button class="btn btn-info btn-sm" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
-                </div><!-- /. tools -->
+                <i class="fa fa-calendar"></i>
+                <h3 class="box-title">This Month's Calendar</h3>
             </div>
             <div class="box-body">
-                <form action="#" method="post">
-                    <div class="form-group">
-                        <input type="email" class="form-control" name="emailto" placeholder="Email to:">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="subject" placeholder="Subject">
-                    </div>
-                    <div>
-                        <textarea class="textarea" placeholder="Message" style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
-                    </div>
-                </form>
-            </div>
-            <div class="box-footer clearfix">
-                <button class="pull-right btn btn-default" id="sendEmail">Send <i class="fa fa-arrow-circle-right"></i></button>
+                <div id="calendar"></div>
             </div>
         </div>
+    </section>
+</div>
 
-    </section><!-- /.Left col -->
-    <!-- right col (We are only adding the ID to make the widgets sortable)-->
-    <section class="col-lg-5 connectedSortable">
-
-        <!-- Map box -->
-        <div class="box box-solid bg-light-blue-gradient">
-            <div class="box-header">
-                <!-- tools box -->
-                <div class="pull-right box-tools">
-                    <button class="btn btn-primary btn-sm daterange pull-right" data-toggle="tooltip" title="Date range"><i class="fa fa-calendar"></i></button>
-                    <button class="btn btn-primary btn-sm pull-right" data-widget="collapse" data-toggle="tooltip" title="Collapse" style="margin-right: 5px;"><i class="fa fa-minus"></i></button>
-                </div><!-- /. tools -->
-
-                <i class="fa fa-map-marker"></i>
-                <h3 class="box-title">
-                    Visitors
-                </h3>
-            </div>
-            <div class="box-body">
-                <div id="world-map" style="height: 250px; width: 100%;"></div>
-            </div><!-- /.box-body-->
-            <div class="box-footer no-border">
-                <div class="row">
-                    <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
-                        <div id="sparkline-1"></div>
-                        <div class="knob-label">Visitors</div>
-                    </div><!-- ./col -->
-                    <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
-                        <div id="sparkline-2"></div>
-                        <div class="knob-label">Online</div>
-                    </div><!-- ./col -->
-                    <div class="col-xs-4 text-center">
-                        <div id="sparkline-3"></div>
-                        <div class="knob-label">Exists</div>
-                    </div><!-- ./col -->
-                </div><!-- /.row -->
-            </div>
-        </div>
-        <!-- /.box -->
-
-        <!-- solid sales graph -->
-        <div class="box box-solid bg-teal-gradient">
-            <div class="box-header">
-                <i class="fa fa-th"></i>
-                <h3 class="box-title">Sales Graph</h3>
-                <div class="box-tools pull-right">
-                    <button class="btn bg-teal btn-sm" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                    <button class="btn bg-teal btn-sm" data-widget="remove"><i class="fa fa-times"></i></button>
-                </div>
-            </div>
-            <div class="box-body border-radius-none">
-                <div class="chart" id="line-chart" style="height: 250px;"></div>
-            </div><!-- /.box-body -->
-            <div class="box-footer no-border">
-                <div class="row">
-                    <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
-                        <input type="text" class="knob" data-readonly="true" value="20" data-width="60" data-height="60" data-fgColor="#39CCCC">
-                        <div class="knob-label">Mail-Orders</div>
-                    </div><!-- ./col -->
-                    <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
-                        <input type="text" class="knob" data-readonly="true" value="50" data-width="60" data-height="60" data-fgColor="#39CCCC">
-                        <div class="knob-label">Online</div>
-                    </div><!-- ./col -->
-                    <div class="col-xs-4 text-center">
-                        <input type="text" class="knob" data-readonly="true" value="30" data-width="60" data-height="60" data-fgColor="#39CCCC">
-                        <div class="knob-label">In-Store</div>
-                    </div><!-- ./col -->
-                </div><!-- /.row -->
-            </div><!-- /.box-footer -->
-        </div><!-- /.box -->
-
-        <!-- Calendar -->
-        <div class="box box-solid bg-green-gradient">
+<div class="row">
+    <section class="col-lg-12 connectedSortable">
+        <div class="box box-primary">
             <div class="box-header">
                 <i class="fa fa-calendar"></i>
-                <h3 class="box-title">Calendar</h3>
-                <!-- tools box -->
-                <div class="pull-right box-tools">
-                    <!-- button with a dropdown -->
-                    <div class="btn-group">
-                        <button class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i></button>
-                        <ul class="dropdown-menu pull-right" role="menu">
-                            <li><a href="#">Add new event</a></li>
-                            <li><a href="#">Clear events</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">View calendar</a></li>
-                        </ul>
-                    </div>
-                    <button class="btn btn-success btn-sm" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                    <button class="btn btn-success btn-sm" data-widget="remove"><i class="fa fa-times"></i></button>
-                </div><!-- /. tools -->
-            </div><!-- /.box-header -->
-            <div class="box-body no-padding">
-                <!--The calendar -->
-                <div id="calendar" style="width: 100%"></div>
-            </div><!-- /.box-body -->
-            <div class="box-footer text-black">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <!-- Progress bars -->
-                        <div class="clearfix">
-                            <span class="pull-left">Task #1</span>
-                            <small class="pull-right">90%</small>
-                        </div>
-                        <div class="progress xs">
-                            <div class="progress-bar progress-bar-green" style="width: 90%;"></div>
-                        </div>
-
-                        <div class="clearfix">
-                            <span class="pull-left">Task #2</span>
-                            <small class="pull-right">70%</small>
-                        </div>
-                        <div class="progress xs">
-                            <div class="progress-bar progress-bar-green" style="width: 70%;"></div>
-                        </div>
-                    </div><!-- /.col -->
-                    <div class="col-sm-6">
-                        <div class="clearfix">
-                            <span class="pull-left">Task #3</span>
-                            <small class="pull-right">60%</small>
-                        </div>
-                        <div class="progress xs">
-                            <div class="progress-bar progress-bar-green" style="width: 60%;"></div>
-                        </div>
-
-                        <div class="clearfix">
-                            <span class="pull-left">Task #4</span>
-                            <small class="pull-right">40%</small>
-                        </div>
-                        <div class="progress xs">
-                            <div class="progress-bar progress-bar-green" style="width: 40%;"></div>
-                        </div>
-                    </div><!-- /.col -->
-                </div><!-- /.row -->
+                <h3 class="box-title">Projects Status</h3>
             </div>
-        </div><!-- /.box -->
+            <div class="box-body">
+                <?php for($i=1; $i<=$$runningProjects; $i++){?>
+                <?php }?>
+                <div class="row"><div class="col-lg-12"><h3>Project 1</h3></div></div>
+                <div class="col-lg-6">
+                    <canvas id="project1s1" style="height:250px"></canvas>
+                    <script>
+                        $(function () {
+                            var areaChartData = {
+                                labels: ["Total", "Completed", "Sprint Plan", "Not Yet Completed"],
+                                datasets: [
+                                    {
+                                        label: "Sprint1",
+                                        fillColor: "rgba(210, 214, 222, 1)",
+                                        strokeColor: "rgba(210, 214, 222, 1)",
+                                        pointColor: "rgba(210, 214, 222, 1)",
+                                        pointStrokeColor: "#c1c7d1",
+                                        pointHighlightFill: "#fff",
+                                        pointHighlightStroke: "rgba(220,220,220,1)",
+                                        data: [10, 6, 8, 9]
+                                    },
+                                    {
+                                        label: "Sprint2",
+                                        fillColor: "rgba(60,141,188,0.9)",
+                                        strokeColor: "rgba(60,141,188,0.8)",
+                                        pointColor: "#3b8bba",
+                                        pointStrokeColor: "rgba(60,141,188,1)",
+                                        pointHighlightFill: "#fff",
+                                        pointHighlightStroke: "rgba(60,141,188,1)",
+                                        data: [10, 6, 8, 9]
+                                    }
+                                ]
+                            };
 
-    </section><!-- right col -->
-</div><!-- /.row (main row) -->
+                            var barChartCanvas = $("#project1s1").get(0).getContext("2d");
+                            var barChart = new Chart(barChartCanvas);
+                            var barChartData = areaChartData;
+                            //        barChartData.datasets[1].fillColor = "#00a65a";
+                            //        barChartData.datasets[1].strokeColor = "#00a65a";
+                            //        barChartData.datasets[1].pointColor = "#00a65a";
+                            var barChartOptions = {
+                                //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
+                                scaleBeginAtZero: true,
+                                //Boolean - Whether grid lines are shown across the chart
+                                scaleShowGridLines: true,
+                                //String - Colour of the grid lines
+                                scaleGridLineColor: "rgba(0,0,0,.05)",
+                                //Number - Width of the grid lines
+                                scaleGridLineWidth: 1,
+                                //Boolean - Whether to show horizontal lines (except X axis)
+                                scaleShowHorizontalLines: true,
+                                //Boolean - Whether to show vertical lines (except Y axis)
+                                scaleShowVerticalLines: true,
+                                //Boolean - If there is a stroke on each bar
+                                barShowStroke: true,
+                                //Number - Pixel width of the bar stroke
+                                barStrokeWidth: 2,
+                                //Number - Spacing between each of the X value sets
+                                barValueSpacing: 5,
+                                //Number - Spacing between data sets within X values
+                                barDatasetSpacing: 1,
+                                //String - A legend template
+                                legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].fillColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>",
+                                //Boolean - whether to make the chart responsive
+                                responsive: true,
+                                maintainAspectRatio: true
+                            };
+
+                            barChartOptions.datasetFill = false;
+                            barChart.Bar(barChartData, barChartOptions);
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<div class="row">
+    <section class="col-lg-12 connectedSortable">
+        <div class="box box-primary">
+            <div class="box-header">
+                <i class="fa fa-calendar"></i>
+                <h3 class="box-title">Todays Task</h3>
+            </div>
+            <div class="box-body">
+                <table class="table table-bordered table-striped" cellpadding="0" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Project</th>
+                            <th>Task</th>
+                            <th>Assigned To</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Project</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>4</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</div>
+
+<div class="row">
+    <section class="col-lg-12 connectedSortable">
+        <div class="box box-primary">
+            <div class="box-header">
+                <i class="fa fa-calendar"></i>
+                <h3 class="box-title">Todays Scrum Report</h3>
+            </div>
+            <div class="box-body">
+                <table class="table table-bordered table-striped" cellpadding="0" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Project</th>
+                            <th>Downlaod</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Project</td>
+                            <td>Downlaod</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+<script>
+    $(function () {
+
+        /* initialize the calendar
+         -----------------------------------------------------------------*/
+        //Date for the calendar events (dummy data)
+        var date = new Date();
+        var d = date.getDate(),
+                m = date.getMonth(),
+                y = date.getFullYear();
+        $('#calendar').fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay'
+            },
+            buttonText: {
+                today: 'today',
+                month: 'month',
+                week: 'week',
+                day: 'day'
+            },
+            //Random default events
+            events: [
+                {
+                    title: 'All Day Event',
+                    start: new Date(y, m, 1),
+                    backgroundColor: "#f56954", //red
+                    borderColor: "#f56954" //red
+                },
+                {
+                    title: 'Long Event',
+                    start: new Date(y, m, d - 5),
+                    end: new Date(y, m, d - 2),
+                    backgroundColor: "#f39c12", //yellow
+                    borderColor: "#f39c12" //yellow
+                },
+                {
+                    title: 'Meeting',
+                    start: new Date(y, m, d, 10, 30),
+                    allDay: false,
+                    backgroundColor: "#0073b7", //Blue
+                    borderColor: "#0073b7" //Blue
+                },
+                {
+                    title: 'Lunch',
+                    start: new Date(y, m, d, 12, 0),
+                    end: new Date(y, m, d, 14, 0),
+                    allDay: false,
+                    backgroundColor: "#00c0ef", //Info (aqua)
+                    borderColor: "#00c0ef" //Info (aqua)
+                },
+                {
+                    title: 'Birthday Party',
+                    start: new Date(y, m, d + 1, 19, 0),
+                    end: new Date(y, m, d + 1, 22, 30),
+                    allDay: false,
+                    backgroundColor: "#00a65a", //Success (green)
+                    borderColor: "#00a65a" //Success (green)
+                },
+                {
+                    title: 'Click for Google',
+                    start: new Date(y, m, 28),
+                    end: new Date(y, m, 29),
+                    url: 'http://google.com/',
+                    backgroundColor: "#3c8dbc", //Primary (light-blue)
+                    borderColor: "#3c8dbc" //Primary (light-blue)
+                }
+            ],
+        });
+
+
+    });
+</script>
