@@ -63,7 +63,7 @@ class SprintsController extends AppController {
                 
                 $taskStatusQuery = $connection->execute("
                                SELECT COUNT(b.`id`) total,
-                               (SELECT COUNT(id) FROM sprints WHERE is_completed = 1 AND `project_id` = $projectId AND `sprint` = $sprintId) completed,
+                               (SELECT COUNT(id) FROM sprints WHERE is_completed = 1 AND `project_id` = $projectId AND `sprint` = $sprintId) completed
                                FROM sprints a
                                INNER JOIN tasks b
                                ON a.`project_id` = b.`project_id` AND a.`task_id` = b.`id`
