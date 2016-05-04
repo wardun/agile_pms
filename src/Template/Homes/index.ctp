@@ -1,53 +1,62 @@
 <!-- Small boxes (Stat box) -->
 <div class="row">
-    <div class="col-lg-3 col-xs-6">
-        <!-- small box -->
-        <div class="small-box bg-aqua">
-            <div class="inner">
-                <h3>150</h3>
-                <p>New Orders</p>
-            </div>
-            <div class="icon">
-                <i class="ion ion-bag"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-        </div>
-    </div><!-- ./col -->
-    <div class="col-lg-3 col-xs-6">
-        <!-- small box -->
-        <div class="small-box bg-green">
-            <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
-                <p>Bounce Rate</p>
-            </div>
-            <div class="icon">
-                <i class="ion ion-stats-bars"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-        </div>
-    </div><!-- ./col -->
+
     <div class="col-lg-3 col-xs-6">
         <!-- small box -->
         <div class="small-box bg-yellow">
             <div class="inner">
-                <h3>44</h3>
-                <p>User Registrations</p>
+                <h3><?= $totalEmployee ?></h3>
+                <p>Total Employee</p>
             </div>
             <div class="icon">
-                <i class="ion ion-person-add"></i>
+                <i class="ion ion-person"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <?php if ($userInfo['role'] == 1 || $userInfo['role'] == 2): ?>
+                <a href="<?php echo $this->Url->build(["controller" => "users", "action" => "index"]) ?>" class="small-box-footer">View All <i class="fa fa-arrow-circle-right"></i></a>
+            <?php endif; ?>
         </div>
     </div><!-- ./col -->
+    
+    <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-green">
+            <div class="inner">
+                <h3><?=$runningProjects?></h3>
+                <p>Running Projects</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-stats-bars"></i>
+            </div>
+            <?php if ($userInfo['role'] == 1 || $userInfo['role'] == 2): ?>
+                <a href="<?php echo $this->Url->build(["controller" => "projects", "action" => "index"]) ?>" class="small-box-footer">View All <i class="fa fa-arrow-circle-right"></i></a>
+            <?php endif; ?>
+        </div>
+    </div><!-- ./col -->
+
+    <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-aqua">
+            <div class="inner">
+                <h3><?=$notices?></h3>
+                <p>New Notices</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-easel"></i>
+            </div>
+            <a href="<?php echo $this->Url->build(["controller" => "notices", "action" => "index"]) ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+    </div><!-- ./col -->
+    
+
     <div class="col-lg-3 col-xs-6">
         <!-- small box -->
         <div class="small-box bg-red">
             <div class="inner">
-                <h3>65</h3>
-                <p>Unique Visitors</p>
+                <h3><?=$birthdayInfo?></h3>
+                <p>Birthday</p>
             </div>
             <div class="icon">
-                <i class="ion ion-pie-graph"></i>
+                <i class="ion ion-calendar"></i>
             </div>
             <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
         </div>
