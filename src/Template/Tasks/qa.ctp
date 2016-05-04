@@ -6,7 +6,8 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="form-group">
-                    <?php echo $this->Form->input('task_name', ['class' => 'form-control']); ?>
+                    <label>Task Name:</label>
+                    <?=$task->task_name;?>
                 </div>
             </div>
             <div class="col-lg-12">

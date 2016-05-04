@@ -208,9 +208,8 @@ class TasksController extends AppController {
     }
     
     public function qa($id = null){
-        /*  $task = $this->Tasks->get($id, [
-            'contain' => ['Projects']
-        ]);*/
+        $task = $this->Tasks->get($id);
+        
         /*
         $task = $this->TaskBugs->newEntity();
         if ($this->request->is('post')) {
@@ -225,8 +224,8 @@ class TasksController extends AppController {
                 $this->Flash->error(__('The task could not be saved. Please, try again.'));
             }
         }
-        
-        $this->set('task', $task);*/
+        */
+        $this->set(compact('task'));
     }
 
 }
