@@ -28,6 +28,17 @@
                     <span>Employee's Information</span>
                 </a>
             </li>
+            <li class="treeview <?php echo ($this->request->params['controller']) == 'Notices' ? 'active' : ''; ?>">
+                <a href="#">
+                    <i class="fa fa-sticky-note"></i>
+                    <span>Notices</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="<?php echo $this->Url->build(["controller" => "notices", "action" => "add"]) ?>">Add Notice</a></li>
+                    <li><a href="<?php echo $this->Url->build(["controller" => "notices", "action" => "index"]) ?>">Notices</a></li>
+                </ul>
+            </li>
             <li class="treeview <?php echo ($this->request->params['controller']) == 'Projects' ? 'active' : ''; ?>">
                 <a href="#">
                     <i class="fa fa-life-ring"></i>

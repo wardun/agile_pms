@@ -11,8 +11,9 @@
         <?php
             echo $this->Form->input('title');
             echo $this->Form->input('notice_description');
-            echo $this->Form->input('created_at');
-            echo $this->Form->input('created_by');
+            echo $this->Form->input('action_date');
+            //echo $this->Form->input('created_at');
+            //echo $this->Form->input('created_by');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

@@ -11,8 +11,8 @@
             <tr>
                 <th><?= $this->Paginator->sort('id') ?></th>
                 <th><?= $this->Paginator->sort('title') ?></th>
-                <th><?= $this->Paginator->sort('created_at') ?></th>
-                <th><?= $this->Paginator->sort('created_by') ?></th>
+                <th><?= $this->Paginator->sort('notice_description') ?></th>
+                <th><?= $this->Paginator->sort('action_date') ?></th>
                 <th class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -21,8 +21,8 @@
             <tr>
                 <td><?= $this->Number->format($notice->id) ?></td>
                 <td><?= h($notice->title) ?></td>
-                <td><?= h($notice->created_at) ?></td>
-                <td><?= $this->Number->format($notice->created_by) ?></td>
+                <td><?= h($notice->notice_description) ?></td>
+                <td><?= h($notice->action_date) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $notice->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $notice->id]) ?>
