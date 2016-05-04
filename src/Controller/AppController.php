@@ -67,7 +67,9 @@ class AppController extends Controller {
      */
     public function beforeRender(Event $event) {
         $userInfo = $this->Auth->user();
-        $this->set(compact('userInfo'));
+        $this->loadModel('Notices');
+        $noticeBoard = $this->Notices->find('all', ['limit' => 10]);
+        $this->set(compact('userInfo', 'noticeBoard'));
 
         if (!array_key_exists('_serialize', $this->viewVars) &&
                 in_array($this->response->type(), ['application/json', 'application/xml'])

@@ -110,6 +110,12 @@
                     <span>My Profile</span>
                 </a>
             </li>
+            <li class="treeview <?php echo ($this->request->params['controller']) == 'Notices' ? 'active' : ''; ?>">
+                <a href="<?php echo $this->Url->build(["controller" => "notices", "action" => "index"]) ?>">
+                    <i class="fa fa-sticky-note"></i>
+                    <span>Notice Board</span>
+                </a>
+            </li>
             <li class="treeview <?php echo ($this->request->params['controller']) == 'Tasks' ? 'active' : ''; ?>">
                 <a href="<?php echo $this->Url->build(["controller" => "tasks", "action" => "index"]) ?>">
                     <i class="fa fa-tasks"></i>
@@ -135,6 +141,12 @@
                 <a href="<?php echo $this->Url->build(["controller" => "users", "action" => "index"]) ?>">
                     <i class="fa fa-user"></i>
                     <span>My Profile</span>
+                </a>
+            </li>
+            <li class="treeview <?php echo ($this->request->params['controller']) == 'Notices' ? 'active' : ''; ?>">
+                <a href="<?php echo $this->Url->build(["controller" => "notices", "action" => "index"]) ?>">
+                    <i class="fa fa-sticky-note"></i>
+                    <span>Notice Board</span>
                 </a>
             </li>
             <li class="treeview <?php echo ($this->request->params['controller']) == 'Attachments' ? 'active' : ''; ?>">
