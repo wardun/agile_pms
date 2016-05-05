@@ -70,7 +70,18 @@ class HomesController extends AppController {
                          ")
                         ->fetchAll('assoc');
         
-
+        //calendar info
+        $calendarInfo = $this->Tasks->find()->select(['Projects.title', 'Tasks.task_name','Tasks.start_date', 'Tasks.end_date'])->contain(['Projects']);
+        if($calendarInfo){
+            foreach ($calendarInfo as $calendar){
+                $dashboardCalendar[]['start']=$calendar->start_date;
+                $dashboardCalendar[]['end']=$calendar->end_date;
+            }
+            unset($calendar);
+        }
+        
+        //debug(json_encode($dashboardCalendar));
+        //exit;
         $this->set(compact('totalEmployee', 'runningProjects', 'notices', 'birthdayInfo', 'proejcts', 'sprintStatus', 'todaysTasks', 'todaysScrums'));
     }
 

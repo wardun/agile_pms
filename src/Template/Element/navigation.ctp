@@ -39,6 +39,17 @@
                     <li><a href="<?php echo $this->Url->build(["controller" => "notices", "action" => "index"]) ?>">Notices</a></li>
                 </ul>
             </li>
+            <li class="treeview <?php echo ($this->request->params['controller']) == 'Payments' ? 'active' : ''; ?>">
+                <a href="#">
+                    <i class="fa fa-dollar"></i>
+                    <span>Payments</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="<?php echo $this->Url->build(["controller" => "payments", "action" => "add"]) ?>">Add Payment</a></li>
+                    <li><a href="<?php echo $this->Url->build(["controller" => "payments", "action" => "index"]) ?>">Payment Information</a></li>
+                </ul>
+            </li>
             <li class="treeview <?php echo ($this->request->params['controller']) == 'Projects' ? 'active' : ''; ?>">
                 <a href="#">
                     <i class="fa fa-life-ring"></i>
