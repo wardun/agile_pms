@@ -177,14 +177,14 @@
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <!--<img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">-->
+                            <img src="img/defaultavatar.jpg" class="img-circle" alt="User Image">
                             <p>
                                 <?php echo $userInfo['first_name'] . ' ' . $userInfo['last_name'] ?> - <?= $userInfo['designation'] ?>
                                 <small>Member since <?= date('F, Y', strtotime($userInfo['joindate'])) ?></small>
                             </p>
                         </li>
                         <!-- Menu Body -->
-                        <li class="user-body">
+<!--                        <li class="user-body">
                             <div class="col-xs-4 text-center">
                                 <a href="#">Followers</a>
                             </div>
@@ -194,7 +194,7 @@
                             <div class="col-xs-4 text-center">
                                 <a href="#">Friends</a>
                             </div>
-                        </li>
+                        </li>-->
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-right">

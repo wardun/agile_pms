@@ -127,12 +127,22 @@
                     <span>Notice Board</span>
                 </a>
             </li>
+            <?php if($userInfo['role'] == 3){ // for dev?>
             <li class="treeview <?php echo ($this->request->params['controller']) == 'Tasks' ? 'active' : ''; ?>">
                 <a href="<?php echo $this->Url->build(["controller" => "tasks", "action" => "index"]) ?>">
                     <i class="fa fa-tasks"></i>
                     <span>Tasks</span>
                 </a>
             </li>
+            <?php }?>
+            <?php if($userInfo['role'] == 4){ // for dev?>
+            <li class="treeview <?php echo ($this->request->params['controller']) == 'Tasks' ? 'active' : ''; ?>">
+                <a href="<?php echo $this->Url->build(["controller" => "tasks", "action" => "index"]) ?>">
+                    <i class="fa fa-tasks"></i>
+                    <span>QA Tasks</span>
+                </a>
+            </li>
+            <?php }?>
             <li class="treeview <?php echo ($this->request->params['controller']) == 'Sprints' ? 'active' : ''; ?>">
                 <a href="<?php echo $this->Url->build(["controller" => "sprints", "action" => "index"]) ?>">
                     <i class="fa fa-database"></i>

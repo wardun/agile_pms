@@ -32,33 +32,26 @@
     </div><!-- /.box-body -->
 
     <div class="box-body">
-         <?php if ($Buglists): ?>
-        <table class="table table-bordered table-striped" cellpadding="0" cellspacing="0">
-            <thead>
-                <tr>
-                    <th>Task Name</th>
-                    <th>Bug Lists</th>
-                </tr>
-            </thead>
-            <tbody>
-                 <?php foreach ($Buglists as $task): ?>
-                <tr>
-                    <td><?= h($task->task_name) ?></td>
-                    <td><?= h($task->bug_detail) ?></td>
-                </tr>
-                <?php
+        <?php if ($bugLists): ?>
+            <table class="table table-bordered table-striped" cellpadding="0" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Task Name</th>
+                        <th>Bug Lists</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($bugLists as $task): ?>
+                        <tr>
+                            <td><?= h($task->task_name) ?></td>
+                            <td><?= h($task->bug_detail) ?></td>
+                        </tr>
+                        <?php
                     endforeach;
                     ?>
-            </tbody>
-        </table>
-            <div class="paginator">
-                <ul class="pagination">
-                    <?= $this->Paginator->prev('< ' . __('previous')) ?>
-                    <?= $this->Paginator->numbers() ?>
-                    <?= $this->Paginator->next(__('next') . ' >') ?>
-                </ul>
-                <p><?= $this->Paginator->counter() ?></p>
-            </div>
+                </tbody>
+            </table>
+
         <?php endif; ?>
     </div><!-- /.box-body -->
 </div>

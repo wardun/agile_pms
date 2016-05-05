@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\Datasource\ConnectionManager;
+use Cake\I18n\Time;
 
 /**
  * Tasks Controller
@@ -31,14 +32,20 @@ class TasksController extends AppController {
         }
 
         //if submit 
-        if (isset($this->request->query['project_id'])) {
-            $projectId = $this->request->query['project_id'];
+        if (isset($this->request->query['projectid'])) {
+            $projectId = $this->request->query['projectid'];
 
             $this->paginate = [
-                'contain' => ['Projects']
+                'contain' => ['Projects', 'Sprints']
             ];
 
-            $tasks = $this->paginate($this->Tasks->find()->where(['Tasks.project_id' => $projectId]));
+            if ($this->Auth->user('role') == 1 || $this->Auth->user('role') == 2) {
+                $tasks = $this->paginate($this->Tasks->find()->where(['Tasks.project_id' => $projectId]));
+            } else if ($this->Auth->user('role') == 3) {
+                $tasks = $this->paginate($this->Tasks->find()->where(['Tasks.project_id' => $projectId, 'Tasks.assgined_to' => $this->Auth->user('id')]));
+            } else if ($this->Auth->user('role') == 4) {
+                $tasks = $this->paginate($this->Tasks->find()->where(['Tasks.project_id' => $projectId, 'Tasks.is_completed' => 2]));
+            }
         }
 
         $this->set(compact('tasks', 'projects'));
@@ -213,32 +220,72 @@ class TasksController extends AppController {
         $this->loadModel('TaskBugs');
         $taskBug = $this->TaskBugs->newEntity();
         if ($this->request->is('post')) {
+            if (isset($this->request->data['is_completed'])) {
+                $this->request->data['bug_free'] = 1;
+            }
             $taskbug = $this->TaskBugs->patchEntity($taskBug, $this->request->data);
             if ($this->TaskBugs->save($taskbug)) {
-                if(isset($this->request->data['is_completed'])){
-                    $data = array('id' => $id, 'is_completed' => 1);
+                if (isset($this->request->data['is_completed'])) {
                     $this->loadModel('Sprints');
-                    $this->Sprints->save($data);
+                    $sprint = $this->Sprints->find()->where(['task_id' => $id])->first();
+                    $data['is_completed'] = 1;
+                    $sprint = $this->Sprints->patchEntity($sprint, $data);
+                    $this->Sprints->save($sprint);
+
+                    $taskData['is_completed'] = 1;
+                    $taskData['actual_end_date'] = Time::createFromTimestamp(time());
+                    $task = $this->Tasks->patchEntity($task, $taskData);
+                    $this->Tasks->save($task);
                 }
-                $this->Flash->success(__('The task has been saved.'));
-                return $this->redirect(['action' => 'index']);
+
+                $this->loadModel('Notifications');
+                $notification = $this->Notifications->newEntity();
+                $notificationData['receiverid'] = $task->assgined_to;
+                $notificationData['message'] = 'You have a new QA report';
+                $notificationData['link'] = 'tasks/view/' . $id;
+                $notificationData['status'] = 0;
+
+                $notification = $this->Notifications->patchEntity($notification, $notificationData);
+
+                $this->Notifications->save($notification);
+
+                $this->Flash->success(__('The QA report has been submitted.'));
+                return $this->redirect(['action' => 'index?projectid=' . $task->project_id]);
             } else {
                 $this->Flash->error(__('The task could not be saved. Please, try again.'));
             }
         }
-        /*
-          $Buglists = [];
+
 
         $this->loadModel('TaskBugs');
-        $BugData = $this->TaskBugs->find()->where(['Tasks.id' => 'TaskBugs.task_id']);
-        if ($BugData) {
-            foreach ($BugData as $project) {
-                $Buglists[$project->id] = $project->title;
-            }
-            unset($project);
+        $bugLists = $this->TaskBugs->find()->where(['task_id' => $id]);
+
+        $this->set(compact('task', 'taskBug', 'bugLists'));
+    }
+
+    public
+            function taskComplete($id = null) {
+        $task = $this->Tasks->get($id);
+        $data['is_completed'] = 2;
+        $task = $this->Tasks->patchEntity($task, $data);
+        if ($this->Tasks->save($task)) {
+            $this->loadModel('Notifications');
+            $notification = $this->Notifications->newEntity();
+            $notificationData['receiverid'] = 13;
+            $notificationData['message'] = 'You have a new QA report';
+            $notificationData['link'] = 'tasks/view/' . $id;
+            $notificationData['status'] = 0;
+
+            $notification = $this->Notifications->patchEntity($notification, $notificationData);
+
+            $this->Notifications->save($notification);
+
+            $this->Flash->success(__('The task report has been sucessfully updated.'));
+            return $this->redirect(['action' => 'index?projectid=' . $task->project_id]);
+        } else {
+            $this->Flash->error(__('The task report could not be saved. Please, try again.'));
         }
-*/
-        $this->set(compact('task', 'taskBug'));
+        exit;
     }
 
 }

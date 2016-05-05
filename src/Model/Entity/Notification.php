@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
@@ -14,7 +15,11 @@ use Cake\ORM\Entity;
  * @property int $created_by
  * @property \Cake\I18n\Time $created
  */
-class Notification extends Entity
-{
+class Notification extends Entity {
+
+    protected $_accessible = [
+        '*' => true,
+        'id' => false,
+    ];
 
 }

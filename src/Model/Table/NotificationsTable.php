@@ -25,8 +25,11 @@ class NotificationsTable extends Table
         parent::initialize($config);
 
         $this->table('notifications');
+        $this->displayField('id');
+        $this->primaryKey('id');
 
-        $this->addBehavior('Timestamp');
+
+//        $this->addBehavior('Timestamp');
     }
 
     /**
@@ -39,8 +42,7 @@ class NotificationsTable extends Table
     {
         $validator
             ->integer('id')
-            ->requirePresence('id', 'create')
-            ->notEmpty('id');
+            ->allowEmpty('id', 'create');
 
         $validator
             ->integer('receiverid')
@@ -54,15 +56,15 @@ class NotificationsTable extends Table
         $validator
             ->allowEmpty('link');
 
-        $validator
-            ->integer('status')
-            ->requirePresence('status', 'create')
-            ->notEmpty('status');
+//        $validator
+//            ->integer('status')
+//            ->requirePresence('status', 'create')
+//            ->notEmpty('status');
 
-        $validator
-            ->integer('created_by')
-            ->requirePresence('created_by', 'create')
-            ->notEmpty('created_by');
+//        $validator
+//            ->integer('created_by')
+//            ->requirePresence('created_by', 'create')
+//            ->notEmpty('created_by');
 
         return $validator;
     }
