@@ -3,6 +3,10 @@
     #calendar .datepicker{
         display: none !important;
     }
+    .fc-day-grid-event > .fc-content {
+        overflow: visible !important;
+        white-space: pre-line !important;
+    }
 </style>
 <div class="row">
 
@@ -53,19 +57,19 @@
     </div><!-- ./col -->
 
 
-<!--    <div class="col-lg-3 col-xs-6">
-         small box 
-        <div class="small-box bg-red">
-            <div class="inner">
-                <h3><?= $birthdayInfo ?></h3>
-                <p>Birthday</p>
+    <!--    <div class="col-lg-3 col-xs-6">
+             small box 
+            <div class="small-box bg-red">
+                <div class="inner">
+                    <h3><?= $birthdayInfo ?></h3>
+                    <p>Birthday</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-calendar"></i>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
             </div>
-            <div class="icon">
-                <i class="ion ion-calendar"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-        </div>
-    </div> ./col -->
+        </div> ./col -->
 </div><!-- /.row -->
 
 <div class="row">
@@ -238,9 +242,9 @@
                             foreach ($todaysScrums as $scrum) {
                                 ?>
                                 <tr>
-                                    <td><?=$scrum['title']?></td>
-                                    <td><?=$scrum['file_name']?></td>
-                                    <td><?php echo $this->Html->link('<i class="fa fa-download"></i>', array('controller' => 'attachments','action' => 'download', '', $scrum['id']), array('class' => 'btn btn-sm btn-primary ', 'title' => 'Download', 'escape' => false)); ?></td>
+                                    <td><?= $scrum['title'] ?></td>
+                                    <td><?= $scrum['file_name'] ?></td>
+                                    <td><?php echo $this->Html->link('<i class="fa fa-download"></i>', array('controller' => 'attachments', 'action' => 'download', '', $scrum['id']), array('class' => 'btn btn-sm btn-primary ', 'title' => 'Download', 'escape' => false)); ?></td>
                                 </tr>
                                 <?php
                             }
@@ -277,7 +281,7 @@
                 day: 'day'
             },
             //Random default events
-            events: <?=json_encode($dashboardCalendar)?>
+            events: <?= json_encode($dashboardCalendar) ?>,
         });
 
 
