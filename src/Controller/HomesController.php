@@ -46,19 +46,19 @@ class HomesController extends AppController {
                                 "
                         )
                         ->fetchAll('assoc');
-                
-                if($sprintQuery){
-                    foreach($sprintQuery as $sprint){
-                        $sprintStatus[$project->id][] = json_encode(['sprint' => $sprint['sprint'],'total' => $sprint['total'], 'completed' => $sprint['completed'], 'pending' => ($sprint['total'] - $sprint['completed'])]);
+
+                if ($sprintQuery) {
+                    foreach ($sprintQuery as $sprint) {
+                        $sprintStatus[$project->id][] = json_encode(['sprint' => $sprint['sprint'], 'total' => $sprint['total'], 'completed' => $sprint['completed'], 'pending' => ($sprint['total'] - $sprint['completed'])]);
                     }
                 }
             }
         }
-        
+
         //todays tasks
         $this->loadModel('Tasks');
         $todaysTasks = $this->Tasks->find()->where(['DATE(Tasks.start_date) <=' => 'DATE(NOW()', 'Tasks.actual_end_date' => '0000-00-00 00:00:00'])->contain(['AssignedUser', 'Projects']);
-        
+
         //todays scrum report
         $todaysScrums = $connection->execute("
                         SELECT b.`title`, a.`file_name`, a.`origiginal_file_name`,a.`id`
@@ -68,21 +68,25 @@ class HomesController extends AppController {
                         WHERE a.attachment_type_id = 3 
                           AND DATE(a.created_at) = DATE(NOW())
                          ")
-                        ->fetchAll('assoc');
-        
+                ->fetchAll('assoc');
+
         //calendar info
-        $calendarInfo = $this->Tasks->find()->select(['Projects.title', 'Tasks.task_name','Tasks.start_date', 'Tasks.end_date'])->contain(['Projects']);
-        if($calendarInfo){
-            foreach ($calendarInfo as $calendar){
-                $dashboardCalendar[]['start']=$calendar->start_date;
-                $dashboardCalendar[]['end']=$calendar->end_date;
+        $calendarInfo = $this->Tasks->find()->select(['Projects.title', 'Tasks.task_name', 'Tasks.start_date', 'Tasks.end_date'])->contain(['Projects']);
+        if ($calendarInfo) {
+            $i=0;
+            foreach ($calendarInfo as $calendar) {
+                $dashboardCalendar[$i]['title'] = $calendar->project->title . ' : ' . $calendar->task_name;
+                $dashboardCalendar[$i]['start'] = date('Y-m-d', strtotime($calendar->start_date));
+                $dashboardCalendar[$i]['end'] = date('Y-m-d', strtotime($calendar->end_date));
+                $dashboardCalendar[$i]['backgroundColor'] = '#f39c12';
+                $dashboardCalendar[$i]['borderColor'] = '#f39c12';
+                $i++;
             }
             unset($calendar);
         }
         
-        //debug(json_encode($dashboardCalendar));
-        //exit;
-        $this->set(compact('totalEmployee', 'runningProjects', 'notices', 'birthdayInfo', 'proejcts', 'sprintStatus', 'todaysTasks', 'todaysScrums'));
+        
+        $this->set(compact('totalEmployee', 'runningProjects', 'notices', 'birthdayInfo', 'proejcts', 'sprintStatus', 'todaysTasks', 'todaysScrums', 'dashboardCalendar'));
     }
 
 }
