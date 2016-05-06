@@ -54,7 +54,7 @@ if (isset($_POST['end_date'])) {
         </div>
         <div class="form-group">
             <label>
-                <input type="checkbox" name="" value="1"> Force assign to this sprint
+                <input type="checkbox" name="force_assign" value="1"> Force assign to this sprint
             </label>
         </div>
     </div><!-- /.box-body -->

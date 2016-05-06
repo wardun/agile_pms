@@ -36,7 +36,7 @@ class TasksController extends AppController {
             $projectId = $this->request->query['projectid'];
 
             $this->paginate = [
-                'contain' => ['Projects', 'Sprints']
+                'contain' => ['Projects', 'Sprints', 'AssignedUser']
             ];
 
             if ($this->Auth->user('role') == 1 || $this->Auth->user('role') == 2) {
@@ -161,6 +161,7 @@ class TasksController extends AppController {
         if ($this->request->is(['patch', 'post', 'put'])) {
             $tasks['start_date'] = $this->request->data['assign_date'] . ' ' . $this->request->data['start_time'];
             $tasks['end_date'] = $this->request->data['delivery_date'] . ' ' . $this->request->data['end_time'];
+
             $tasks = $this->Tasks->patchEntity($tasks, $this->request->data);
             if ($this->Tasks->save($tasks)) {
                 // sprint calculation start
@@ -174,11 +175,45 @@ class TasksController extends AppController {
                         $sprint->sprint = 1;
                         $sprint->project_id = $tasks->project_id;
                         $sprint->task_id = $id;
+                        if (isset($this->request->data['force_assign'])) {
+                            $sprint->is_new = 1;
+                        }
                         $sprint = $this->Sprints->patchEntity($sprint, $this->request->data);
                         $this->Sprints->save($sprint);
                     } else {
                         $sprint = $this->Sprints->newEntity();
-                        $sprint->sprint = $this->get_sprint_info($tasks->project_id, $tasks->task_duration);
+
+                        $sprintInfo = $this->Sprints->find()->where(['project_id' => $tasks->project_id])->select(['sprint'])->last();
+                        $currentSprint = $sprintInfo->sprint;
+
+                        $firstTaskOfSprint = $this->Sprints->find()->where(['project_id' => $tasks->project_id, 'sprint' => $currentSprint])->select(['task_id'])->first();
+
+                        $taskInfo = $this->Tasks->get($firstTaskOfSprint->task_id);
+                        $startDate = date('Y-m-d', strtotime($taskInfo->start_date));
+
+                        $this->loadModel('Settings');
+                        $setting = $this->Settings->find()->first();
+
+                        $sprintStartDate = new \DateTime($startDate);
+                        $sprintStartDate->modify("+$setting->sprint_duration day");
+                        $sprintEndDate = $sprintStartDate->format('Y-m-d');
+
+                        $datetime1 = new \DateTime($tasks['end_date']);
+                        $datetime2 = new \DateTime($sprintEndDate);
+                        $interval = $datetime1->diff($datetime2);
+
+                        if (isset($this->request->data['force_assign'])) {
+                            $sprint->sprint = $currentSprint;
+                            $sprint->is_new = 1;
+                        } else {
+                            if ($interval->format('%R%a') > 0) {
+                                $sprint->sprint = $currentSprint;
+                            } else {
+                                $sprint->sprint = $currentSprint + 1;
+                            }
+                        }
+
+                        //$sprint->sprint = $this->get_sprint_info($tasks->project_id, $tasks->task_duration);
                         $sprint->project_id = $tasks->project_id;
                         $sprint->task_id = $id;
                         $sprint = $this->Sprints->patchEntity($sprint, $this->request->data);

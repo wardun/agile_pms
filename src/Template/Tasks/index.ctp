@@ -31,7 +31,8 @@
                     <th><?= $this->Paginator->sort('start_date') ?></th>
                     <th><?= $this->Paginator->sort('end_date') ?></th>
                     <th><?= $this->Paginator->sort('actual_end_date') ?></th>
-                    <th><?= $this->Paginator->sort('created_at') ?></th>
+                    <th><?= $this->Paginator->sort('status') ?></th>
+                    <th><?= $this->Paginator->sort('update_spec') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
                 </thead>
@@ -41,11 +42,12 @@
                         <td><?= $this->Number->format($task->id) ?></td>
                         <td><?= h($task->task_name) ?></td>
                         <td><?= h($task->task_duration) ?></td>
-                        <td><?= $this->Number->format($task->assgined_to) ?></td>
+                        <td><?= isset($task->assigned_user) ? $task->assigned_user->first_name.' '.$task->assigned_user->last_name : ''; ?></td>
                         <td><?= h($task->start_date) ?></td>
                         <td><?= h($task->end_date) ?></td>
                         <td><?= h($task->actual_end_date) ?></td>
-                        <td><?= h($task->created_at) ?></td>
+                        <td><?= ($task->is_completed == 1) ? 'Completed' : '' ?></td>
+                        <td><?= ($task->is_new == 1) ? 'Yes' : '-' ?></td>
                         <td class="actions">
                             <?php echo !empty ($task->assgined_to) ? '' : $this->Html->link('<i class="fa fa-tag"></i>', array('action' => 'assign_task', '', $task->id), array('class' => 'btn btn-sm btn-primary', 'title' => 'Assign Task', 'escape' => false)); ?>
                             <?php echo ($userInfo['role'] != 3) ? $this->Html->link('<i class="fa fa-files-o"></i>', array('action' => 'qa', '', $task->id), array('class' => 'btn btn-sm btn-warning', 'title' => 'QA', 'escape' => false)) : ''; ?>
