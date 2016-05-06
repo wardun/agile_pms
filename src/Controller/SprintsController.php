@@ -86,7 +86,7 @@ class SprintsController extends AppController {
                 }
                 
                 $userTaskDetail = $connection->execute("
-                                SELECT b.`task_name`, b.`start_date`, b.`assgined_to`, HOUR(b.`actual_end_date` - b.`start_date`) hours, a.`is_completed`, (SELECT COUNT(*) FROM task_bugs WHERE task_id = b.id) bugs
+                                SELECT b.`task_name`, b.`start_date`, b.`assgined_to`, HOUR(b.`actual_end_date` - b.`start_date`) hours, a.`is_completed`, (SELECT COUNT(*) FROM task_bugs WHERE task_id = b.id AND bug_free = 0) bugs
                                 FROM sprints a
                                 INNER JOIN tasks b
                                 ON a.`project_id` = b.`project_id` AND a.`task_id` = b.`id`
@@ -95,7 +95,12 @@ class SprintsController extends AppController {
                 
                 $userTaskStatus = $connection->execute("
                                 SELECT b.`assgined_to`, COUNT(*) total,
-                                (SELECT COUNT(*) FROM sprints WHERE a.`project_id` = $projectId AND a.`sprint` = $sprintId AND is_completed = 1) completed
+                                (
+                                SELECT COUNT(*) FROM sprints 
+                                INNER JOIN tasks 
+                                ON sprints.`project_id` = tasks.`project_id` AND sprints.`task_id` = tasks.`id`
+                                WHERE sprints.`project_id` = $projectId AND sprints.`sprint` = $sprintId AND tasks.is_completed = 1 AND tasks.`assgined_to` = b.`assgined_to`
+                                ) completed
                                 FROM sprints a
                                 INNER JOIN tasks b
                                 ON a.`project_id` = b.`project_id` AND a.`task_id` = b.`id`
