@@ -37,7 +37,7 @@ class ProjectsController extends AppController {
         
         $this->loadModel('Tasks');
         $totalTask = $this->Tasks->find()->where(['project_id' => $id])->count();
-        $completedTask = $this->Tasks->find()->where(['project_id' => $id, 'is_completed' => 0])->count();
+        $completedTask = $this->Tasks->find()->where(['project_id' => $id, 'is_completed' => 1])->count();
                 
         $query = $this->Tasks->find()->where(['project_id' => $id,'is_new' => 0]);
         $hourBeforeProejctStart = $query->select(['task_hour' => $query->func()->sum('HOUR(TIMEDIFF(end_date, start_date))')])->first();
