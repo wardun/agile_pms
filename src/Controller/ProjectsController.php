@@ -40,24 +40,24 @@ class ProjectsController extends AppController {
         $completedTask = $this->Tasks->find()->where(['project_id' => $id, 'is_completed' => 1])->count();
                 
         $query = $this->Tasks->find()->where(['project_id' => $id,'is_new' => 0]);
-        $hourBeforeProejctStart = $query->select(['task_hour' => $query->func()->sum('HOUR(TIMEDIFF(end_date, start_date))')])->first();
+        $hourBeforeProejctStart = $query->select(['task_hour' => $query->func()->sum('TIMESTAMPDIFF(DAY, start_date, end_date) + 1')])->first();
         
         $query1 = $this->Tasks->find()->where(['project_id' => $id,'is_completed' => 1]);
-        $hoursCompleted = $query1->select(['task_hour' => $query->func()->sum('HOUR(TIMEDIFF(end_date, start_date))')])->first();
+        $hoursCompleted = $query1->select(['task_hour' => $query->func()->sum('TIMESTAMPDIFF(DAY, start_date, end_date) + 1')])->first();
         
         $query3 = $this->Tasks->find()->where(['project_id' => $id, 'DATE(end_date) <=' => date('Y-m-d')]);
         $hoursWhenPlanned = $query3->select(['task_hour' => $query->func()->sum('HOUR(TIMEDIFF(end_date, start_date))')])->first();
         
         if($project->actual_end_date == '0000-00-00 00:00:00'){
             $query4 = $this->Tasks->find()->where(['project_id' => $id]);
-            $hourAfterProejct = $query4->select(['task_hour' => $query->func()->sum('HOUR(TIMEDIFF(actual_end_date, start_date))')])->first();
+            $hourAfterProejct = $query4->select(['task_hour' => $query->func()->sum('TIMESTAMPDIFF(DAY, start_date, actual_end_date) + 1')])->first();
         }else{
             $query4 = $this->Tasks->find()->where(['project_id' => $id]);
-            $hourAfterProejct = $query4->select(['task_hour' => $query->func()->sum('HOUR(TIMEDIFF(end_date, start_date))')])->first();
+            $hourAfterProejct = $query4->select(['task_hour' => $query->func()->sum('TIMESTAMPDIFF(DAY, start_date, actual_end_date) + 1')])->first();
         }
         
-        $startHour = $hourBeforeProejctStart->task_hour;
-        $completedHour = $hoursCompleted->task_hour;
+        $startHour = $hourBeforeProejctStart->task_hour * 8;
+        $completedHour = $hoursCompleted->task_hour * 8;
         $planedHour = $hoursWhenPlanned->task_hour;
         $finaldHour = $hourAfterProejct->task_hour;
         
