@@ -110,4 +110,18 @@ class PaymentsController extends AppController
         }
         return $this->redirect(['action' => 'index']);
     }
+    
+     public function sprint() {
+        $projectId = $this->request->data['projectId'];
+        $this->loadModel('Sprints');
+        $teams = $this->Sprints->find()->where(['project_id' => $projectId])->group(['sprint']);
+        if ($teams) {
+            foreach ($teams as $t) {
+                echo '<option value="' . $t->sprint . '"> Sprint ' . $t->sprint . '</option>';
+            }
+            unset($t);
+        }
+        exit;
+        $this->set(compact('teams'));
+    }
 }
