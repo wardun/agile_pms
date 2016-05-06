@@ -25,7 +25,7 @@
                         <td><?= h($setting->logo) ?></td>
                         <td><?= h($setting->phone) ?></td>
                         <td><?= h($setting->website) ?></td>
-                        <td><?= $this->Number->format($setting->sprint_duration) ?></td>
+                        <td><?= $this->Number->format($setting->sprint_duration) ?> Days</td>
                         <td class="actions">
                             <?php // echo $this->Html->link('<i class="fa fa-eye"></i>', array('action' => 'view', '', $setting->id), array('class' => 'btn btn-small btn-success view', 'title' => 'View', 'escape' => false)); ?>
                             <?php echo $this->Html->link('<i class="fa fa-pencil"></i>', array('action' => 'edit', '', $setting->id), array('class' => 'btn btn-sm btn-warning', 'title' => 'Edit', 'escape' => false)); ?>

@@ -6,20 +6,17 @@
         <table class="table table-bordered table-striped" cellpadding="0" cellspacing="0">
             <thead>
                 <tr>
-                    <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('title') ?></th>
+                    <td><?= h($notice->title) ?></td>  
                 </tr>
             </thead>
             <tbody>
                     <tr>
-                        <td><?= $this->Number->format($notice->id) ?></td>
-                        <td><?= h($notice->title) ?></td>                        
+                        <th><?= $this->Paginator->sort('notice_description') ?></th>
+                        <td><?= $this->Text->autoParagraph(h($notice->notice_description)); ?></td>
+                                              
                     </tr>
             </tbody>
         </table>
-   <div class="row" style="margin-left: 15px;">
-        <h4><?= __('Notice Description') ?></h4>
-        <?= $this->Text->autoParagraph(h($notice->notice_description)); ?>
-    </div>
     </div><!-- /.box-body -->
 </div>
