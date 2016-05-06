@@ -150,7 +150,7 @@ class TasksController extends AppController {
                                 FROM team_details a
                                 INNER JOIN users b
                                 ON a.`user_id` = b.`id`
-                                WHERE a.`team_id` = 1')
+                                WHERE a.`team_id` = '.$teamId)
                 ->fetchAll('assoc');
         if ($teamMembers) {
             foreach ($teamMembers as $member) {
