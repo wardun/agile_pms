@@ -17,8 +17,6 @@
                     <th><?= $this->Paginator->sort('duration_hours') ?></th>
                     <th><?= $this->Paginator->sort('current_status') ?></th>
                     <th><?= $this->Paginator->sort('achieve_status') ?></th>
-                    <th><?= $this->Paginator->sort('created_at') ?></th>
-                    <th><?= $this->Paginator->sort('created_by') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
@@ -36,9 +34,8 @@
                             <td><?= h($project->duration_hours) ?></td>
                             <td><?= h($project->current_status) ?></td>
                             <td><?= h($project->achieve_status) ?></td>
-                            <td><?= h($project->created_at) ?></td>
-                            <td><?= $this->Number->format($project->created_by) ?></td>
                             <td class="actions">
+                                <?php echo $this->Html->link('<i class="fa fa-align-justify"></i>', array('action' => 'view', '', $project->id), array('class' => 'btn btn-sm btn-info', 'title' => 'View', 'escape' => false)); ?>
                                 <?php echo $this->Html->link('<i class="fa fa-pencil"></i>', array('action' => 'edit', '', $project->id), array('class' => 'btn btn-sm btn-warning', 'title' => 'Edit', 'escape' => false)); ?>
                                 <?= $this->Form->postLink($this->Html->tag('i', '', array('class' => 'fa fa-times')), ['action' => 'delete', $project->id], ['class' => 'btn btn-sm btn-danger delete', 'title' => 'Delete', 'escape' => false, 'confirm' => __('Are you sure you want to delete # {0}?', $project->first_name)]); ?>
 

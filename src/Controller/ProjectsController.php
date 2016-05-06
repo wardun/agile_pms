@@ -32,7 +32,7 @@ class ProjectsController extends AppController {
      */
     public function view($id = null) {
         $project = $this->Projects->get($id, [
-            'contain' => ['Attachments', 'Sprints', 'Tasks', 'Teams']
+            'contain' => ['Attachments', 'Sprints', 'Tasks']
         ]);
 
         $this->set('project', $project);
