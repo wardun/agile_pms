@@ -89,13 +89,13 @@
                     <span>Settings</span>
                 </a>
             </li>
-            <li class="treeview <?php echo ($this->request->params['controller']) == 'Sprints' ? 'active' : ''; ?>">
+            <li class="treeview <?php echo (($this->request->params['controller'] == 'Sprints' && $this->request->params['action'] == 'index')) ? 'active' : ''; ?>">
                 <a href="<?php echo $this->Url->build(["controller" => "sprints", "action" => "index"]) ?>">
                     <i class="fa fa-database"></i>
                     <span>Sprints</span>
                 </a>
             </li>
-             <li class="treeview <?php echo ($this->request->params['controller']) == 'Sprints' ? 'active' : ''; ?>">
+             <li class="treeview <?php echo (($this->request->params['controller'] == 'Sprints' && $this->request->params['action'] == 'userStories')) ? 'active' : ''; ?>">
                 <a href="<?php echo $this->Url->build(["controller" => "sprints", "action" => "userStories"]) ?>">
                     <i class="fa fa-book"></i>
                     <span>User Story</span>
@@ -143,13 +143,13 @@
                 </a>
             </li>
             <?php }?>
-            <li class="treeview <?php echo ($this->request->params['controller']) == 'Sprints' ? 'active' : ''; ?>">
+            <li class="treeview <?php echo (($this->request->params['controller'] == 'Sprints' && $this->request->params['action'] == 'index')) ? 'active' : ''; ?>">
                 <a href="<?php echo $this->Url->build(["controller" => "sprints", "action" => "index"]) ?>">
                     <i class="fa fa-database"></i>
                     <span>Sprints</span>
                 </a>
             </li>
-             <li class="treeview <?php echo ($this->request->params['controller']) == 'Sprints' ? 'active' : ''; ?>">
+             <li class="treeview <?php echo (($this->request->params['controller'] == 'Sprints' && $this->request->params['action'] == 'userStories')) ? 'active' : ''; ?>">
                 <a href="<?php echo $this->Url->build(["controller" => "sprints", "action" => "userStories"]) ?>">
                     <i class="fa fa-book"></i>
                     <span>User Story</span>
@@ -181,13 +181,13 @@
                     <li><a href="<?php echo $this->Url->build(["controller" => "attachments", "action" => "index"]) ?>">View All Information</a></li>
                 </ul>
             </li>
-            <li class="treeview <?php echo ($this->request->params['controller']) == 'Sprints' ? 'active' : ''; ?>">
+            <li class="treeview <?php echo (($this->request->params['controller'] == 'Sprints' && $this->request->params['action'] == 'index')) ? 'active' : ''; ?>">
                 <a href="<?php echo $this->Url->build(["controller" => "sprints", "action" => "index"]) ?>">
                     <i class="fa fa-database"></i>
                     <span>Sprints</span>
                 </a>
             </li>
-             <li class="treeview <?php echo ($this->request->params['controller']) == 'Sprints' ? 'active' : ''; ?>">
+             <li class="treeview <?php echo (($this->request->params['controller'] == 'Sprints' && $this->request->params['action'] == 'userStories')) ? 'active' : ''; ?>">
                 <a href="<?php echo $this->Url->build(["controller" => "sprints", "action" => "userStories"]) ?>">
                     <i class="fa fa-book"></i>
                     <span>User Story</span>
