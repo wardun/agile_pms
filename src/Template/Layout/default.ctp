@@ -124,6 +124,5 @@ $pageTitle = isset($pageTitle) ? $pageTitle : $this->fetch('title');
     <script src="<?php echo $this->request->webroot ?>assets/dist/js/app.min.js"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="<?php echo $this->request->webroot ?>assets/dist/js/pages/dashboard.js"></script>
-    <!--<script src="<?php //echo $this->request->webroot ?>assets/dist/js/custom.js"></script>-->
 
 </html>
