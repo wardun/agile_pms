@@ -11,3 +11,10 @@
     margin: 0 20px 20px 0;
     padding: 25px;
 }
+
+.dev-hours {
+  background: #CCC;
+  font-size: 26px;
+  padding: 40px;
+  text-align: center;
+}

@@ -29,7 +29,7 @@
                             <td><?= h($project->start_date) ?></td>
                             <td><?= h($project->end_date) ?></td>
                             <td><?= h($project->actual_end_date) ?></td>
-                            <td><?= $this->Generic->userLabel($project->amount) ?></td>
+                            <td><?= $project->amount ?> TK</td>
                             <td><?= h($project->duration) ?></td>
                             <td><?= h($project->duration_hours) ?></td>
                             <td><?= h($project->current_status) ?></td>

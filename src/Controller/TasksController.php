@@ -161,6 +161,9 @@ class TasksController extends AppController {
         if ($this->request->is(['patch', 'post', 'put'])) {
             $tasks['start_date'] = $this->request->data['assign_date'] . ' ' . $this->request->data['start_time'];
             $tasks['end_date'] = $this->request->data['delivery_date'] . ' ' . $this->request->data['end_time'];
+            if (isset($this->request->data['force_assign'])) {
+                $this->request->data['is_new'] = 1;
+            }
 
             $tasks = $this->Tasks->patchEntity($tasks, $this->request->data);
             if ($this->Tasks->save($tasks)) {

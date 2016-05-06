@@ -34,8 +34,37 @@ class ProjectsController extends AppController {
         $project = $this->Projects->get($id, [
             'contain' => ['Attachments', 'Sprints', 'Tasks']
         ]);
-
-        $this->set('project', $project);
+        
+        $this->loadModel('Tasks');
+        $totalTask = $this->Tasks->find()->where(['project_id' => $id])->count();
+        $completedTask = $this->Tasks->find()->where(['project_id' => $id, 'is_completed' => 0])->count();
+                
+        $query = $this->Tasks->find()->where(['project_id' => $id,'is_new' => 0]);
+        $hourBeforeProejctStart = $query->select(['task_hour' => $query->func()->sum('HOUR(TIMEDIFF(end_date, start_date))')])->first();
+        
+        $query1 = $this->Tasks->find()->where(['project_id' => $id,'is_completed' => 1]);
+        $hoursCompleted = $query1->select(['task_hour' => $query->func()->sum('HOUR(TIMEDIFF(end_date, start_date))')])->first();
+        
+        $query3 = $this->Tasks->find()->where(['project_id' => $id, 'DATE(end_date) <=' => date('Y-m-d')]);
+        $hoursWhenPlanned = $query3->select(['task_hour' => $query->func()->sum('HOUR(TIMEDIFF(end_date, start_date))')])->first();
+        
+        if($project->actual_end_date == '0000-00-00 00:00:00'){
+            $query4 = $this->Tasks->find()->where(['project_id' => $id]);
+            $hourAfterProejct = $query4->select(['task_hour' => $query->func()->sum('HOUR(TIMEDIFF(actual_end_date, start_date))')])->first();
+        }else{
+            $query4 = $this->Tasks->find()->where(['project_id' => $id]);
+            $hourAfterProejct = $query4->select(['task_hour' => $query->func()->sum('HOUR(TIMEDIFF(end_date, start_date))')])->first();
+        }
+        
+        $startHour = $hourBeforeProejctStart->task_hour;
+        $completedHour = $hoursCompleted->task_hour;
+        $planedHour = $hoursWhenPlanned->task_hour;
+        $finaldHour = $hourAfterProejct->task_hour;
+        
+        $allTasks = $this->Tasks->find()->where(['project_id' => $id]);
+        
+        
+        $this->set(compact('project', 'startHour', 'completedHour', 'planedHour', 'finaldHour', 'totalTask', 'completedTask', 'allTasks'));
         $this->set('_serialize', ['project']);
     }
 
