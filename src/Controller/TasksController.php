@@ -280,7 +280,7 @@ class TasksController extends AppController {
                 $notification = $this->Notifications->newEntity();
                 $notificationData['receiverid'] = $task->assgined_to;
                 $notificationData['message'] = 'You have a new QA report';
-                $notificationData['link'] = 'tasks/view/' . $id;
+                $notificationData['link'] = 'tasks/qa_bugs/' . $id;
                 $notificationData['status'] = 0;
 
                 $notification = $this->Notifications->patchEntity($notification, $notificationData);
@@ -301,8 +301,7 @@ class TasksController extends AppController {
         $this->set(compact('task', 'taskBug', 'bugLists'));
     }
 
-    public
-            function taskComplete($id = null) {
+    public function taskComplete($id = null) {
         $task = $this->Tasks->get($id);
         $data['is_completed'] = 2;
         $task = $this->Tasks->patchEntity($task, $data);
@@ -310,8 +309,8 @@ class TasksController extends AppController {
             $this->loadModel('Notifications');
             $notification = $this->Notifications->newEntity();
             $notificationData['receiverid'] = 13;
-            $notificationData['message'] = 'You have a new QA report';
-            $notificationData['link'] = 'tasks/view/' . $id;
+            $notificationData['message'] = 'Task has been completed. Ready for QA';
+            $notificationData['link'] = 'tasks/qa_bugs/' . $id;
             $notificationData['status'] = 0;
 
             $notification = $this->Notifications->patchEntity($notification, $notificationData);
@@ -324,6 +323,13 @@ class TasksController extends AppController {
             $this->Flash->error(__('The task report could not be saved. Please, try again.'));
         }
         exit;
+    }
+
+    public function qaBugs($id = null) {
+        $task = $this->Tasks->get($id);
+        $this->loadModel('TaskBugs');
+        $bugLists = $this->TaskBugs->find()->where(['task_id' => $id, 'bug_free' => 0])->order(['id' => 'DESC'])->first();
+        $this->set(compact('task', 'bugLists'));
     }
 
 }
