@@ -12,9 +12,13 @@ $pageTitle = isset($pageTitle) ? $pageTitle : $this->fetch('title');
         <!-- Bootstrap 3.3.5 -->
         <link rel="stylesheet" href="<?php echo $this->request->webroot ?>assets/bootstrap/css/bootstrap.min.css">
         <!-- Font Awesome -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+        <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">-->
+        <link rel="stylesheet" href="<?php echo $this->request->webroot ?>assets/font-awesome/css/font-awesome.min.css">
+        
         <!-- Ionicons -->
-        <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+        <!--<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">-->
+        <link rel="stylesheet" href="<?php echo $this->request->webroot ?>assets/ionicons/css/ionicons.min.css">
+        
         <!-- Theme style -->
         <link rel="stylesheet" href="<?php echo $this->request->webroot ?>assets/dist/css/AdminLTE.min.css">
         <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -84,7 +88,8 @@ $pageTitle = isset($pageTitle) ? $pageTitle : $this->fetch('title');
     <!-- Bootstrap 3.3.5 -->
     <script src="<?php echo $this->request->webroot ?>assets/bootstrap/js/bootstrap.min.js"></script>
     <!-- Morris.js charts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>-->
+    <script src="<?php echo $this->request->webroot ?>assets/dist/js/raphael-min.js"></script>
     <script src="<?php echo $this->request->webroot ?>assets/plugins/morris/morris.min.js"></script>
     <!-- Sparkline -->
     <script src="<?php echo $this->request->webroot ?>assets/plugins/sparkline/jquery.sparkline.min.js"></script>
@@ -94,7 +99,8 @@ $pageTitle = isset($pageTitle) ? $pageTitle : $this->fetch('title');
     <!-- jQuery Knob Chart -->
     <script src="<?php echo $this->request->webroot ?>assets/plugins/knob/jquery.knob.js"></script>
     <!-- daterangepicker -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>-->
+    <script src="<?php echo $this->request->webroot ?>assets/dist/js/moment.min.js"></script>
     <script src="<?php echo $this->request->webroot ?>assets/plugins/daterangepicker/daterangepicker.js"></script>
     <!-- datepicker -->
     <script src="<?php echo $this->request->webroot ?>assets/plugins/datepicker/bootstrap-datepicker.js"></script>
