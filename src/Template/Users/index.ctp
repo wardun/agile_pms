@@ -46,7 +46,6 @@
                            <?php echo $this->Html->link('<i class="fa fa-pencil"></i>', array('action' => 'edit', '', $user->id), array('class' => 'btn btn-sm btn-warning', 'title' => 'Edit', 'escape' => false)); ?>
                            <?php echo $this->Html->link('<i class="fa fa-edit"></i>', array('action' => 'changepassword', '', $user->id), array('class' => 'btn btn-sm btn-success view', 'title' => 'Change Password', 'escape' => false)); ?>
                             <?= $this->Form->postLink($this->Html->tag('i', '', array('class' => 'fa fa-times')), ['action' => 'delete', $user->id], ['class' => 'btn btn-sm btn-danger delete', 'title' => 'Delete', 'escape' => false, 'confirm' => __('Are you sure you want to delete # {0}?', $user->first_name)]); ?>
-
                         </td>
                     </tr>
                 <?php endforeach; ?>

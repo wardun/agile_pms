@@ -1,21 +1,38 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List Notices'), ['action' => 'index']) ?></li>
-    </ul>
-</nav>
-<div class="notices form large-9 medium-8 columns content">
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Add Notice</h3>
+    </div><!-- /.box-header -->
+    <!-- form start -->
     <?= $this->Form->create($notice) ?>
-    <fieldset>
-        <legend><?= __('Add Notice') ?></legend>
-        <?php
-            echo $this->Form->input('title');
-            echo $this->Form->input('notice_description');
-            echo $this->Form->input('action_date');
-            //echo $this->Form->input('created_at');
-            //echo $this->Form->input('created_by');
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
-</div>
+    <div class="box-body">
+        <div class="form-group">
+            <?php echo $this->Form->input('title', ['class' => 'form-control']); ?>
+        </div>
+        <div class="form-group">
+            <label>Description</label>
+            <textarea name="notice_description" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+            <label>Action Date:</label>
+            <div class="input-group">
+                <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </div>
+                <input type="text" name="action_date" class="form-control pull-right datepicker">
+            </div>
+        </div>
+
+    </div><!-- /.box-body -->
+
+    <div class="box-footer">
+        <?= $this->Form->button(__('Submit'), array('class' => 'btn btn-primary')); ?>
+    </div>
+</div><!-- /.box -->
+
+<script>
+    $(function () {
+        $('.datepicker').datepicker({
+            format: "yyyy-mm-dd"
+        });
+        });
+</script>
