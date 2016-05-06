@@ -254,44 +254,6 @@
                     </div>
                 </div>
 
-                <div class="box-body">
-                    <div class="row">
-                        <div class="box-header with-border">
-                            <h5 class="box-title">Daily Scrum Meeting Reports</h5>
-                        </div>
-                        <div class="box-body">
-                            <div class="col-lg-12">
-                                <table class="table table-striped table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>Title</th>
-                                            <th>Date</th>
-                                            <th>Download</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Task 1</td>
-                                            <td>2016-04-15</td>
-                                            <td>Completed</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Task 1</td>
-                                            <td>2016-04-15</td>
-                                            <td>Completed</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Task 1</td>
-                                            <td>2016-04-15</td>
-                                            <td>Completed</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div><!-- /.box-body -->
-                    </div>
-                </div>
-
                 <script>
                     $(function () {
                         //-------------
