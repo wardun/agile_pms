@@ -57,18 +57,18 @@ class PaymentsTable extends Table
             ->requirePresence('amound', 'create')
             ->notEmpty('amound');
 
-        $validator
-            ->date('payment_receive_date')
-            ->allowEmpty('payment_receive_date');
+//        $validator
+//            ->date('payment_receive_date')
+//            ->allowEmpty('payment_receive_date');
 
-        $validator
-            ->integer('created_by')
-            ->allowEmpty('created_by');
-
-        $validator
-            ->dateTime('created_at')
-            ->requirePresence('created_at', 'create')
-            ->notEmpty('created_at');
+//        $validator
+//            ->integer('created_by')
+//            ->allowEmpty('created_by');
+//
+//        $validator
+//            ->dateTime('created_at')
+//            ->requirePresence('created_at', 'create')
+//            ->notEmpty('created_at');
 
         return $validator;
     }

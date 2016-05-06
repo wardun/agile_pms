@@ -48,6 +48,7 @@
                 <ul class="treeview-menu">
                     <li><a href="<?php echo $this->Url->build(["controller" => "payments", "action" => "add"]) ?>">Add Payment</a></li>
                     <li><a href="<?php echo $this->Url->build(["controller" => "payments", "action" => "index"]) ?>">Payment Information</a></li>
+                    <li><a href="<?php echo $this->Url->build(["controller" => "payments", "action" => "month_wise_payment"]) ?>">Month Wise Payment</a></li>
                 </ul>
             </li>
             <li class="treeview <?php echo ($this->request->params['controller']) == 'Projects' ? 'active' : ''; ?>">
