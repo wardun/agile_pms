@@ -70,7 +70,7 @@ class AppController extends Controller {
         $this->loadModel('Notices');
         $noticeBoard = $this->Notices->find('all', ['limit' => 10]);
         $this->loadModel('Notifications');
-        $totalNotification = $this->Notifications->find('all')->where(['receiverid' => $this->Auth->user('id'), 'status' => 0])->count();
+        $totalNotification = $this->Notifications->find('all', ['limit' => 10])->where(['receiverid' => $this->Auth->user('id'), 'status' => 0])->count();
         $notifications = $this->Notifications->find('all')->where(['receiverid' => $this->Auth->user('id'), 'status' => 0]);
         $this->set(compact('userInfo', 'noticeBoard', 'notifications', 'totalNotification'));
 
