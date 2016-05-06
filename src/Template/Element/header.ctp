@@ -104,7 +104,7 @@
                                     foreach ($notifications as $notification) {
                                         ?>
                                         <li>
-                                            <a href="<?php echo $notification->link?>">
+                                            <a href="<?php echo $this->Url->build('/'.$notification->link, true)?>">
                                                <?php echo $notification->message?>
                                             </a>
                                         </li>
@@ -115,7 +115,6 @@
                                 ?>
                             </ul>
                         </li>
-                        <li class="footer"><a href="#">View all</a></li>
                     </ul>
                 </li>
 

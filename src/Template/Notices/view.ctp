@@ -18,14 +18,6 @@
             <th><?= __('Id') ?></th>
             <td><?= $this->Number->format($notice->id) ?></td>
         </tr>
-        <tr>
-            <th><?= __('Created By') ?></th>
-            <td><?= $this->Number->format($notice->created_by) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Created At') ?></th>
-            <td><?= h($notice->created_at) ?></td>
-        </tr>
     </table>
     <div class="row">
         <h4><?= __('Notice Description') ?></h4>
