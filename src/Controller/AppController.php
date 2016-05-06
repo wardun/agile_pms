@@ -69,7 +69,10 @@ class AppController extends Controller {
         $userInfo = $this->Auth->user();
         $this->loadModel('Notices');
         $noticeBoard = $this->Notices->find('all', ['limit' => 10]);
-        $this->set(compact('userInfo', 'noticeBoard'));
+        $this->loadModel('Notifications');
+        $totalNotification = $this->Notifications->find('all')->where(['receiverid' => $this->Auth->user('id'), 'status' => 0])->count();
+        $notifications = $this->Notifications->find('all')->where(['receiverid' => $this->Auth->user('id'), 'status' => 0]);
+        $this->set(compact('userInfo', 'noticeBoard', 'notifications', 'totalNotification'));
 
         if (!array_key_exists('_serialize', $this->viewVars) &&
                 in_array($this->response->type(), ['application/json', 'application/xml'])
